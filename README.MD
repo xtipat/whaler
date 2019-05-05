@@ -1,6 +1,7 @@
 # **Whaler** - CS374 Project
 
 ## **Update**
+* 19/05/05 Add Circular Action Button Dependencies
 * 19/04/30 Initial Construction & add README.MD
 
 ## **Index**
@@ -86,6 +87,7 @@ you can also find the list in `package.json` file
 - [react-fontawesome](https://fontawesome.com)
 - [react-router](https://reacttraining.com/react-router/core/guides/philosophy)
 - [redux](https://redux.js.org)
+- [react-native-circular-action-menu](https://github.com/geremih/react-native-circular-action-menu)
 
 ---
 ### Assets
