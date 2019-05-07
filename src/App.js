@@ -4,6 +4,11 @@ import "react-bootstrap/dist/react-bootstrap.min.js"
 import './assets/scss/_base.scss';
 import GoogleMapReact from 'google-map-react';
 import MapPage from './MapPage.js'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faTrash);
 
 function App() {
   return (

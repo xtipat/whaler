@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const markerStyle = {
   position: 'absolute',
@@ -10,11 +11,10 @@ const markerStyle = {
 
   border: '5px solid #f44336',
   borderRadius: 40,
-  backgroundColor: 'white',
+  backgroundColor: '#f44336',
   textAlign: 'center',
-  color: '#3f51b5',
+  color: 'white',
   fontSize: 16,
-  fontWeight: 'bold',
   padding: 4
 };
 
@@ -25,7 +25,7 @@ class BinMarker extends Component {
   render(){
     return(
       <div style={markerStyle}>
-        {this.props.text}
+        <FontAwesomeIcon icon='trash'/>
       </div>
     );
   }
@@ -50,8 +50,7 @@ class MapPage extends Component {
         >
           <BinMarker
             lat={59.955413}
-            lng={30.337844}
-            text='test'/>
+            lng={30.337844}/>
         </GoogleMapReact>
       </div>
     );
