@@ -3,8 +3,17 @@ $primary: #FEC93F;
 $dark: #17181F;
 $gray-background: #E9E8E9;
 
+// Font
+$defaultfont: OpenSans;
+$boldfont: OpenSans-Bold;
+$semiboldfont: OpenSans-SemiBold;
+$titlefont: Lato;
+$titlboldfont: Lato-Bold;
 
 //page class
+body {
+  font-family: $defaultfont;
+}
 
 .outer-wrap {
   background: white;
