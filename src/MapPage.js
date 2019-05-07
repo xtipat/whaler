@@ -12,21 +12,14 @@ class MapPage extends Component {
     zoom: 11
   };
 
-  static a = function() {
+  render() {
     return (
-      // Important! Always set the container height explicitly
       <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyBV--BI28Lr4QnRR9lEkFH36haRqp0H_2Y' }}
+          bootstrapURLKeys={{ key: 'AIzaSyCv7aQ0qD19jSxd954UZSZVQSDXZr1cNLs'}}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
-        >
-          <AnyReactComponent
-            lat={59.955413}
-            lng={30.337844}
-            text="My Marker"
-          />
-        </GoogleMapReact>
+        ></GoogleMapReact>
       </div>
     );
   }
