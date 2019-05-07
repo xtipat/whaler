@@ -2,13 +2,34 @@
 
 .menu-wrap {
   background: white;
-  width: 100%
+  width: 100%;
   height: 60px;
   position: absolute;
   bottom: 0;
   left: 0;
+  box-shadow: 0 -1px 20px 0 rgba(105,99,99,0.25);
+  padding:0  15px;
+}
+
+.circle-wrap {
+  width: 95px;
+  height: 95px;
+  border-radius: 100%;
+  background: white;
+  position: absolute;
+  bottom: 20px;
+  padding: 0;
+  padding-top: 7px;
+  box-shadow: 0 -15px 20px -5px rgba(105,99,99,0.25), 0 -1px 20px 0 rgba(256,256,256, 0.1);
 }
 
 .icon-wrap {
+  transform: translateY(50%);
+}
 
+.icon-default {
+}
+
+.icon-active {
+  color: $primary;
 }
