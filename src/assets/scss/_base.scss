@@ -1,6 +1,7 @@
 // color palette
 $primary: #FEC93F;
 $dark: #17181F;
+$gray: #ccc;
 $gray-background: #E9E8E9;
 
 // Font
@@ -8,7 +9,7 @@ $defaultfont: OpenSans;
 $boldfont: OpenSans-Bold;
 $semiboldfont: OpenSans-SemiBold;
 $titlefont: Lato;
-$titlboldfont: Lato-Bold;
+$titleboldfont: Lato-Bold;
 
 //page class
 body {
@@ -27,4 +28,28 @@ body {
   -webkit-box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.41);
   -moz-box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.41);
   box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.41);
+}
+
+@keyframes rotateClockwise {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(45deg); }
+}
+
+@keyframes rotateBounceCounter {
+  0% { transform: rotate(135deg); }
+  50% { transform: rotate(10deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes rotateZoomOut {
+  0% {
+    transform: scale(1);
+    transform: rotate(0deg);
+    display: block;
+  }
+  100% {
+    transform: scale(0);
+    transform: rotate(180deg);
+    display: none;
+  }
 }

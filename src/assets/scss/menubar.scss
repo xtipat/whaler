@@ -18,9 +18,69 @@
   background: white;
   position: absolute;
   bottom: 20px;
+  align-items: center;
   padding: 0;
   padding-top: 7px;
   box-shadow: 0 -15px 20px -5px rgba(105,99,99,0.25), 0 -1px 20px 0 rgba(256,256,256, 0.1);
+}
+
+.plus-button-wrap {
+  background: transparent;
+  border-radius: 100%;
+  border: none;
+}
+
+.plus-icon {
+  animation: 0.25s rotateBounceCounter;
+  color: $dark;
+  cursor: pointer;
+}
+
+.plus-icon-active {
+  animation: 0.3s rotateClockwise;
+  color: $dark;
+  transform: rotate(45deg);
+}
+
+.extended-menu-wrap {
+  height: 72px;
+  width: 72px;
+  position: absolute;
+  bottom: 60px;
+  background: white;
+  border-radius: 100%;
+  box-shadow: 0 -1px 20px 0 rgba(105,99,99,0.25);
+  cursor: pointer;
+}
+
+.extended-menu-icon {
+  transform: translateY(45%);
+  color: $primary;
+}
+
+.extended-menu-label {
+  font-family: $titleboldfont;
+  font-size: 12px;
+  color: $dark;
+  text-align: center;
+  text-transform: lowercase;
+  letter-spacing: 1px;
+  transform: translateY(60%);
+}
+
+.cancel-icon {
+  transform: translateY(45%);
+  color: $gray;
+}
+
+.cancel-label {
+  font-family: $titleboldfont;
+  font-size: 12px;
+  color: $gray;
+  text-align: center;
+  text-transform: lowercase;
+  letter-spacing: 1px;
+  transform: translateY(60%);
 }
 
 .icon-wrap {
@@ -28,6 +88,12 @@
 }
 
 .icon-default {
+  color: $dark;
+  transition: all 0.2s ease-out;
+
+  &:hover {
+    color: $primary;
+  }
 }
 
 .icon-active {

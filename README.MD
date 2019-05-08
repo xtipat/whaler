@@ -1,6 +1,9 @@
 # **Whaler** - CS374 Project
 
 ## **Update**
+* 19/05/09
+  * Remove Circular Action Button (Not compatible with react web)
+  * Add react-animations
 * 19/05/05 Add Circular Action Button Dependencies
 * 19/04/30 Initial Construction & add README.MD
 
@@ -15,9 +18,9 @@
 
 ## **TO-DO List**
 
-- [ ] Discuss about design choices
-  - [ ] Primary Color
-  - [ ] Fonts
+- [x] Discuss about design choices
+  - [x] Primary Color
+  - [x] Fonts
 
 -
 
@@ -87,7 +90,7 @@ you can also find the list in `package.json` file
 - [react-fontawesome](https://fontawesome.com)
 - [react-router](https://reacttraining.com/react-router/core/guides/philosophy)
 - [redux](https://redux.js.org)
-- [react-native-circular-action-menu](https://github.com/geremih/react-native-circular-action-menu)
+- [react-animations](https://github.com/FormidableLabs/react-animations)
 
 ---
 ### Assets
