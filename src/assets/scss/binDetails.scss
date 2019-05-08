@@ -1,0 +1,13 @@
+@import './_base.scss';
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  background: $primary;
+  color: white;
+}
+a{
+  color: black;
+}
+
+a:hover {
+  color: $dark;
+}

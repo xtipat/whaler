@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { Component } from 'react';
+import BinDetails from './Modal.js';
 
 const markerStyle = {
   position: 'absolute',
@@ -18,13 +19,26 @@ const markerStyle = {
 };
 
 class BinMarker extends Component {
+  constructor () {
+  super();
+  this.state = {modalShow: false};
 
+  }
   static defaultProps = {};
 
+
   render(){
+    let modalClose = () => this.setState({ modalShow: false });
+
     return(
-      <div style={markerStyle}>
+      <div>
+      <button style={markerStyle} onClick={() => this.setState({ modalShow: true })}>
         <FontAwesomeIcon icon='trash'/>
+      </button>
+      <BinDetails
+        show={this.state.modalShow}
+        onHide={modalClose}
+      />
       </div>
     );
   }
