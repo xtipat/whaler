@@ -9,20 +9,23 @@
 
 ## **Index**
 1. [Description](#description)
-2. [TO-DO List](#TO-DO-List)
+2. [TO-DO List](#to-do-List)
 3. [Codebase](#codebase)
 4. [Dev Instructions](#dev-instructions)
 5. [Appendix](#Appendix)
 
 ## **Description**
-
-## **TO-DO List**
+![](https://img.shields.io/badge/npm-6.4.1-green.svg)
+![](https://img.shields.io/badge/react-16.8.6-red.svg)
+![](https://img.shields.io/badge/firebase-5.10.1-blue.svg)
+## **To-do List**
 
 - [x] Discuss about design choices
   - [x] Primary Color
   - [x] Fonts
+- [ ] Complete Router Link
+- [ ] Considering Redux Integration (Use or Remove)
 
--
 
 ## **Codebase**
 * This project is implemented with ReactJS framework with SASS/SCSS stylesheet. All the JavaScript file can be found in `/src/` folder, and assets such as fonts and third-party js/css are put in `/public/`. The base directory from here on will refer to `/src/`
@@ -94,8 +97,8 @@ you can also find the list in `package.json` file
 
 ---
 ### Assets
-
----
+- **Title Font**: [Lato](https://fonts.google.com/specimen/Lato)
+- **Default, Context Font**: [Open Sans](https://fonts.google.com/specimen/Open+Sans)
 ## React Command Guide
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
