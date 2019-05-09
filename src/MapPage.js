@@ -75,7 +75,7 @@ class MapPage extends Component {
       </div>
       );
     }
-    else 
+    else
     {
       //REPLACE <div/> WITH LOADING SCREEN
         return(<div/>);
