@@ -1,0 +1,18 @@
+@import './_base.scss';
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  background: $primary;
+  color: white;
+}
+.nav-pills, .nav-link{
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+a{
+  color: black;
+}
+
+a:hover {
+  color: $dark;
+}

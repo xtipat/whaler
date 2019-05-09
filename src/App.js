@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import Menubar from './Menubar.js';
 import Profile from './Profile.js'
 import 'react-bootstrap/dist/react-bootstrap.min.js';
 import './assets/scss/_base.scss';
+//import GoogleMapReact from 'google-map-react';
+import MapPage from './MapPage.js'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faTimesCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faTrash,faTimesCircle,faCheckCircle);
 
 function App() {
   return (
@@ -21,7 +28,7 @@ function App() {
 
 const Page = () => (
   <Switch>
-      <Route exact path='/' component={Profile} />
+      <Route exact path='/' component={MapPage} />
       <Route path='/redeem' component={Profile} />
       <Route path='/profile' component={Profile} />
   </Switch>
