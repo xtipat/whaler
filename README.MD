@@ -1,5 +1,4 @@
 # **Whaler** - CS374 Project
-
 ## **Update**
 * 19/05/09
   * Remove Circular Action Button (Not compatible with react web)
@@ -9,25 +8,48 @@
 
 ## **Index**
 1. [Description](#description)
-2. [TO-DO List](#to-do-List)
-3. [Codebase](#codebase)
-4. [Dev Instructions](#dev-instructions)
-5. [Appendix](#Appendix)
+2. [To-do List](#to-do-List)
+3. [Progress](#progress)
+4. [Coding Guides](#coding-guides)
+5. [Dev Instructions](#dev-instructions)
+6. [Appendix](#Appendix)
 
 ## **Description**
-![](https://img.shields.io/badge/npm-6.4.1-green.svg)
+![](https://img.shields.io/badge/status-work%20in%20progress-green.svg)
+
+**Codebase** : ![](https://img.shields.io/badge/npm-6.4.1-yellow.svg)
 ![](https://img.shields.io/badge/react-16.8.6-red.svg)
 ![](https://img.shields.io/badge/firebase-5.10.1-blue.svg)
-## **To-do List**
+**Live Demo** : https://whaler.netlify.com
 
+## **To-do List**
+- [ ] Make decisions about minor styles
+  - [ ] hover action
+- [ ] Complete Router Link
+- [ ] Considering Redux Integration (Use or Remove)
 - [x] Discuss about design choices
   - [x] Primary Color
   - [x] Fonts
-- [ ] Complete Router Link
-- [ ] Considering Redux Integration (Use or Remove)
 
+## **Progress**
+- [ ] Map Page
+  - [x] add Google Map
+  - [ ] Bin Details Modal
+  - [ ] Add Bin Modal
+- [ ] Explore
+- [ ] Redeem Page
+  - [ ] Reward List
+  - [ ] Redeem Reward
+- [ ] Profile Page
+  - [ ] Profile Display
+  - [ ] Statistics
+  - [ ] Edit Profile
+- [ ] Menu Bar
+  - [ ] Extended Menu Trigger
+  - [x] Layout
+  - [x] Router Link on main menu
 
-## **Codebase**
+## **Coding Guides**
 * This project is implemented with ReactJS framework with SASS/SCSS stylesheet. All the JavaScript file can be found in `/src/` folder, and assets such as fonts and third-party js/css are put in `/public/`. The base directory from here on will refer to `/src/`
 
 * Each page component can be found in the directory. This include `index.js` which calls render, `Map.js` for rendering map page, `Redeem.js` for rendering redeem page, and so on.
