@@ -21,29 +21,35 @@ class MapPage extends Component {
         markers: [],
         lat: this.props.center.lat,
         lng: this.props.center.lng,
-        gotLoc: false
+        locLoaded: false
     };
   };
+
   getGeoLocation(){
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-          position => {
-          this.setState({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-            gotLoc: true
-          });
-        }
+      position => {
+      this.setState({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+        locLoaded: true
+      })
+      }, 
+      error => {
+        this.setState({locLoaded: true});
+        alert("Can't get your current position, try enable your GPS");
+      }
       )
-    } else {
-      console.log(1)
-      this.setState({gotLoc: true});
+    }
+    else{
+      alert("We can't detect GPS on your device!");
+      this.setState({locLoaded: true});
     }
   }
+
   fetchAllBinsData(){
-    this.getGeoLocation()
     this.setState({
-      loaded: false,
+      binsLoaded: false,
       loading: true
     });
     if(!this.props.isMini)
@@ -55,17 +61,18 @@ class MapPage extends Component {
             markers: this.state.markers.concat(a)
           });
         });
-        this.setState({loading: false,loaded: true})
+        this.setState({loading: false,binsLoaded: true})
         }
       );
     else
     {
-      this.setState({loading: false,loaded: true});
+      this.setState({loading: false,binsLoaded: true});
     }
   }
 
   componentDidMount() {
     this.fetchAllBinsData();
+    this.getGeoLocation();
   }
 
   markAllBins(){
@@ -83,7 +90,7 @@ class MapPage extends Component {
   }
 
   render() {
-    if(this.state.loaded && this.state.gotLoc)
+    if(this.state.binsLoaded && this.state.locLoaded)
     {
       return (
       <div style={this.props.divSize}>
