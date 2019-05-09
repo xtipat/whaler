@@ -1,5 +1,6 @@
 # **Whaler** - CS374 Project
 ## **Update**
+* 19/05/10 Add Live Demo Link
 * 19/05/09
   * Remove Circular Action Button (Not compatible with react web)
   * Add react-animations
@@ -8,21 +9,22 @@
 
 ## **Index**
 1. [Description](#description)
-2. [To-do List](#to-do-List)
-3. [Progress](#progress)
-4. [Coding Guides](#coding-guides)
-5. [Dev Instructions](#dev-instructions)
-6. [Appendix](#Appendix)
+2. [Progress](#progress)
+3. [Coding Guides](#coding-guides)
+4. [Dev Instructions](#dev-instructions)
+5. [Appendix](#Appendix)
+6. [React Command Guide](#React-Command-Guide)
 
 ## **Description**
 ![](https://img.shields.io/badge/status-work%20in%20progress-green.svg)
 
 **Codebase** : ![](https://img.shields.io/badge/npm-6.4.1-yellow.svg)
 ![](https://img.shields.io/badge/react-16.8.6-red.svg)
-![](https://img.shields.io/badge/firebase-5.10.1-blue.svg)
+![](https://img.shields.io/badge/firebase-5.10.1-blue.svg)<br>
 **Live Demo** : https://whaler.netlify.com
 
-## **To-do List**
+## **Progress**
+### To-do List
 - [ ] Make decisions about minor styles
   - [ ] hover action
 - [ ] Complete Router Link
@@ -31,7 +33,7 @@
   - [x] Primary Color
   - [x] Fonts
 
-## **Progress**
+### Implementation
 - [ ] Map Page
   - [x] add Google Map
   - [ ] Bin Details Modal
@@ -88,25 +90,11 @@ Here, we are using **ReactJS** and **CSS/SCSS** stylesheet.
 
 7. **In the last, all the files in this repository will be packed using webpack to get `bundle.js` and `bundle.css`**, but we will wait until front-end and API are finished before packing.
 
-### Guide
-- Please add the comment with keyword `TODO:` and include a short tag/category in [] before describing the task. For example:
-`TODO: [API] request ___ from the server`
-
-
-### Tag List
-- `API`: request/pushing of information between front-end to back-end
-- `mockup`: fake information used to preview the website, to be changed/deleted when the corresponding API part is finished.
-- `frontend`: interface/design
-- `general`
-- `optional`
-- `unidentified` : priority to be decided.
-
 ## **Appendix**
 
 ### **Index**
 1. [Appendix: Additionally Installed Library & Framework](#Libraries-and-Framework)
 2. [Appendix: Public Assets](#Assets)
-3. [React Command Guide](#React-Command-Guide)
 
 ### Libraries and Framework
 you can also find the list in `package.json` file
@@ -117,10 +105,12 @@ you can also find the list in `package.json` file
 - [redux](https://redux.js.org)
 - [react-animations](https://github.com/FormidableLabs/react-animations)
 
----
 ### Assets
 - **Title Font**: [Lato](https://fonts.google.com/specimen/Lato)
 - **Default, Context Font**: [Open Sans](https://fonts.google.com/specimen/Open+Sans)
+
+---
+
 ## React Command Guide
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
