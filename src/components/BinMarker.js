@@ -19,17 +19,14 @@ const markerStyle = {
 };
 
 class BinMarker extends Component {
-  constructor () {
-  super();
-  this.state = {modalShow: false};
-
+  constructor (props) {
+    super(props);
+    this.state = {modalShow: false};
   }
   static defaultProps = {};
 
-
   render(){
     let modalClose = () => this.setState({ modalShow: false });
-
     return(
       <div>
       <button style={markerStyle} onClick={() => this.setState({ modalShow: true })}>
@@ -38,6 +35,7 @@ class BinMarker extends Component {
       <BinDetails
         show={this.state.modalShow}
         onHide={modalClose}
+        fbkey={this.props.fbkey}
       />
       </div>
     );

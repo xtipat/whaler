@@ -20,37 +20,40 @@ class MapPage extends Component {
     };
   };
 
-  fetchBinsData(){
+  fetchAllBinsData(){
     this.setState({
       loaded: false,
       loading: true
     });
     db.ref(`bins`).once('value').then(snapshot => {
       snapshot.forEach((child) => {
+        var a = child.val().location;
+        a.key = child.key;
         this.setState({
-          markers: this.state.markers.concat(child.val().location)
+          markers: this.state.markers.concat(a)
         });
       });
       this.setState({
-      loading: false,
-      loaded: true
+        loading: false,
+        loaded: true
       })
       }
     );
   }
 
   componentDidMount() {
-    this.fetchBinsData();
+    this.fetchAllBinsData();
   }
 
-  markBins(){
+  markAllBins(){
     let markers = [];
     for(let i = 0;i<this.state.markers.length;i++)
     {
       markers.push(
         <BinMarker
         lat={this.state.markers[i].lat}
-        lng={this.state.markers[i].lng}/>
+        lng={this.state.markers[i].lng}
+        fbkey={this.state.markers[i].key}/>
       );
     }
     return markers
@@ -67,7 +70,7 @@ class MapPage extends Component {
           defaultZoom={this.props.zoom}
           options={{styles :this.props.exampleMapStyles}}
         >
-        {this.markBins()}
+        {this.markAllBins()}
         </GoogleMapReact>
       </div>
       );
