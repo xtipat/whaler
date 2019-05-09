@@ -24,14 +24,25 @@ class BinMarker extends Component {
     this.state = {modalShow: false};
   }
   static defaultProps = {};
-
+  checkClickable(){
+    if(!this.props.isMini)
+      return(
+      <button style={markerStyle} onClick={() => this.setState({ modalShow: true })}>
+        <FontAwesomeIcon icon='trash'/>
+      </button>
+      );
+    else
+      return(
+      <button style={markerStyle}>
+        <FontAwesomeIcon icon='trash'/>
+      </button>
+      );
+  }
   render(){
     let modalClose = () => this.setState({ modalShow: false });
     return(
       <div>
-      <button style={markerStyle} onClick={() => this.setState({ modalShow: true })}>
-        <FontAwesomeIcon icon='trash'/>
-      </button>
+      {this.checkClickable()}
       <BinDetails
         show={this.state.modalShow}
         onHide={modalClose}
