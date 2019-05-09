@@ -50,12 +50,19 @@
   background: white;
   border-radius: 100%;
   box-shadow: 0 -1px 20px 0 rgba(105,99,99,0.25);
+  transition: all 0.2s ease-out;
   cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 -1px 20px 0 rgba(255,255,255,0.75);
+  }
+
 }
 
 .extended-menu-icon {
   transform: translateY(45%);
   color: $primary;
+  transition: all 0.2s ease-out;
 }
 
 .extended-menu-label {
@@ -71,6 +78,7 @@
 .cancel-icon {
   transform: translateY(45%);
   color: $gray;
+  transition: all 0.2s ease-out;
 }
 
 .cancel-label {
@@ -81,6 +89,7 @@
   text-transform: lowercase;
   letter-spacing: 1px;
   transform: translateY(60%);
+
 }
 
 .icon-wrap {
@@ -93,6 +102,7 @@
 
   &:hover {
     color: $primary;
+    background-color: white !important;
   }
 }
 

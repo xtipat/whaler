@@ -7,12 +7,19 @@
 .nav-pills, .nav-link{
   font-size: 0.8rem;
   font-weight: bold;
+
+  &:focus {
+    outline: none !important;
+    outline-offset: none !important;
+  }
 }
 
 a{
   color: black;
-}
+  transition: all 0.2s ease-out;
 
-a:hover {
-  color: $dark;
+  &:hover {
+    background-color: $dark;
+    color: white;
+  }
 }

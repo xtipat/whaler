@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import BinMarker from './components/BinMarker.js';
-import {db} from './firebase/firebase.js';
+import Loader from './components/Loader.js'
+import { db } from './firebase/firebase.js';
+
 class MapPage extends Component {
   static defaultProps = {
     isMini: false,
-    divSize: { height: '91vh', width: '100%' },
+    divSize: { height: '100vh', width: '100%'},
     center: {
       lat: 59.95,
       lng: 30.33
@@ -34,7 +36,7 @@ class MapPage extends Component {
         lng: position.coords.longitude,
         locLoaded: true
       })
-      }, 
+      },
       error => {
         this.setState({locLoaded: true});
         alert("Can't get your current position, try enable your GPS");
@@ -108,7 +110,7 @@ class MapPage extends Component {
     else
     {
       //REPLACE <div/> WITH LOADING SCREEN
-        return(<div/>);
+        return(<Loader />);
     }
   }
 }

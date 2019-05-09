@@ -2,13 +2,9 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faMapMarkedAlt, faSearch, faGift, faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { zoomIn } from 'react-animations';
 import styled, {keyframes} from 'styled-components';
 import './assets/scss/menubar.scss';
-
-library.add(faMapMarkedAlt, faSearch, faGift, faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes)
 
 const styles = {
   exMenuL: {
@@ -37,7 +33,7 @@ class Menubar extends React.Component {
   }
 
   handlePlusClick(){
-    if(this.state.plusButtonClass == 'plus-icon'){
+    if(this.state.plusButtonClass === 'plus-icon'){
       this.setState({ plusButtonClass: 'plus-icon-active' })
     }
 
@@ -105,7 +101,7 @@ class Menubar extends React.Component {
                   size='5x'/>
               </button>
               {
-                this.state.plusButtonClass == 'plus-icon' ? <div />:
+                this.state.plusButtonClass === 'plus-icon' ? <div />:
                   <Row className='justify-content-center'>
                     <Zoom>
                       <div className='extended-menu-wrap' style={ styles.exMenuL }>

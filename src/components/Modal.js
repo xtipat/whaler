@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import {db} from '../firebase/firebase.js';
-import Modal from 'react-bootstrap/Modal'
-import Nav from 'react-bootstrap/Nav'
-import Tab from 'react-bootstrap/Tab'
-import Button from 'react-bootstrap/Button'
-import ProgressBar from 'react-bootstrap/ProgressBar'
-import MapPage from '../MapPage.js'
+import { db } from '../firebase/firebase.js';
+import { Modal, Nav, Tab, Button, ProgressBar } from 'react-bootstrap';
+import MapPage from '../MapPage.js';
 import BinMarker from './BinMarker.js';
 import GoogleMapReact from 'google-map-react';
+import Loader from './Loader.js';
 import '../assets/scss/binDetails.scss';
-import '../assets/scss/_base.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class BinDetails extends React.Component {
@@ -144,7 +140,15 @@ class BinDetails extends React.Component {
     }
     else{
       //TO BE REPLACED WITH LOADING SCREEN
-      return(<div/>);
+      if (this.props.show){
+        return(
+          <Modal size="sm" {...this.props} centered>
+            <Loader primary />
+          </Modal>
+        )
+      }
+      else
+        return(null)
     }
   }
 }
