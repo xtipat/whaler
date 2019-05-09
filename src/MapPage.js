@@ -63,7 +63,7 @@ class MapPage extends Component {
     if(this.state.loaded)
     {
       return (
-      <div style={{ height: '100vh', width: '100%' }}>
+      <div style={{ height: '91vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyCv7aQ0qD19jSxd954UZSZVQSDXZr1cNLs'}}
           defaultCenter={this.props.center}
