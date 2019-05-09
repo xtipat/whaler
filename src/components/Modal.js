@@ -3,6 +3,9 @@ import {db} from '../firebase/firebase.js';
 import Modal from 'react-bootstrap/Modal'
 import Nav from 'react-bootstrap/Nav'
 import Tab from 'react-bootstrap/Tab'
+import MapPage from '../MapPage.js'
+import BinMarker from './BinMarker.js';
+import GoogleMapReact from 'google-map-react';
 import '../assets/scss/binDetails.scss';
 import '../assets/scss/_base.scss';
 
@@ -23,6 +26,9 @@ class BinDetails extends React.Component {
       this.setState({
         binLat: bin.location.lat,
         binLng: bin.location.lng,
+        binType: bin.type,
+        binLocAcpt: bin.locationAccept,
+        binDetAcpt: bin.detailAccept,
         loaded: true
       });
     }
@@ -35,6 +41,59 @@ class BinDetails extends React.Component {
     if(this.props.show !== prevProps.show)
       this.fetchBinData();
   }
+
+  locationContents() {
+    return(
+      <div>
+        <div style={{ height: '50vh', width: '100%'}}>
+          <GoogleMapReact
+            bootstrapURLKeys={{ key: 'AIzaSyCv7aQ0qD19jSxd954UZSZVQSDXZr1cNLs'}}
+            defaultCenter={{lat: this.state.binLat,lng: this.state.binLng}}
+            defaultZoom={17}
+          >
+            <BinMarker
+              lat={this.state.binLat}
+              lng={this.state.binLng}
+              isMini={true}
+            />
+          </GoogleMapReact>
+        </div>
+        <button type="button" class="btn btn-primary">Accept</button>
+        <button type="button" class="btn btn-primary">Reject</button>
+      </div>
+    );
+  }
+
+  detailsContents(){
+    return(
+      <div>
+        <img src="http://placekitten.com/270/200" />
+        <p>Bin Type</p>
+        <nav class="mb-0 navbar navbar-light bg-dark">
+          <span class="navbar-brand mb-0 h1">{this.state.binType}</span>
+        </nav>
+        <button type="button" class="btn btn-primary" style={{margin: '5px' + 'em'}}>Accept</button>
+        <button type="button" class="btn btn-primary" style={{margin: '5px' + 'em'}}>Reject</button>
+      </div>
+    );
+  }
+
+  resultsContents(){
+    console.log(this.state.binLocAcpt);
+    return(
+      <div>
+        <span>Location</span>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style={{width: this.state.binLocAcpt}} aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <span>Detail</span>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style={{width: this.state.binDetAcpt}} aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     if(this.state.loaded){
       return (
@@ -60,13 +119,13 @@ class BinDetails extends React.Component {
             <Modal.Body>
               <Tab.Content>
                 <Tab.Pane eventKey="location">
-                  {this.state.binLat}
+                  {this.locationContents()}
                 </Tab.Pane>
                 <Tab.Pane eventKey="details">
-                  Det
+                  {this.detailsContents()}
                 </Tab.Pane>
                 <Tab.Pane eventKey="results">
-                  Res
+                  {this.resultsContents()}
                 </Tab.Pane>
               </Tab.Content>
             </Modal.Body>

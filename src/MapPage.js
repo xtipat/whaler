@@ -4,6 +4,8 @@ import BinMarker from './components/BinMarker.js';
 import {db} from './firebase/firebase.js';
 class MapPage extends Component {
   static defaultProps = {
+    isMini: false,
+    divSize: { height: '91vh', width: '100%' },
     center: {
       lat: 59.95,
       lng: 30.33
@@ -25,20 +27,22 @@ class MapPage extends Component {
       loaded: false,
       loading: true
     });
-    db.ref(`bins`).once('value').then(snapshot => {
-      snapshot.forEach((child) => {
-        var a = child.val().location;
-        a.key = child.key;
-        this.setState({
-          markers: this.state.markers.concat(a)
+    if(!this.props.isMini)
+      db.ref(`bins`).once('value').then(snapshot => {
+        snapshot.forEach((child) => {
+          var a = child.val().location;
+          a.key = child.key;
+          this.setState({
+            markers: this.state.markers.concat(a)
+          });
         });
-      });
-      this.setState({
-        loading: false,
-        loaded: true
-      })
-      }
-    );
+        this.setState({loading: false,loaded: true})
+        }
+      );
+    else
+    {
+      this.setState({loading: false,loaded: true});
+    }
   }
 
   componentDidMount() {
@@ -63,7 +67,7 @@ class MapPage extends Component {
     if(this.state.loaded)
     {
       return (
-      <div style={{ height: '91vh', width: '100%' }}>
+      <div style={this.props.divSize}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyCv7aQ0qD19jSxd954UZSZVQSDXZr1cNLs'}}
           defaultCenter={this.props.center}
