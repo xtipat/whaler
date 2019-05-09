@@ -9,9 +9,9 @@ import './assets/scss/_base.scss';
 import MapPage from './MapPage.js'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faTimesCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faTrash);
+library.add(faTrash,faTimesCircle,faCheckCircle);
 
 function App() {
   return (

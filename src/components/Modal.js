@@ -3,11 +3,14 @@ import {db} from '../firebase/firebase.js';
 import Modal from 'react-bootstrap/Modal'
 import Nav from 'react-bootstrap/Nav'
 import Tab from 'react-bootstrap/Tab'
+import Button from 'react-bootstrap/Button'
+import ProgressBar from 'react-bootstrap/ProgressBar'
 import MapPage from '../MapPage.js'
 import BinMarker from './BinMarker.js';
 import GoogleMapReact from 'google-map-react';
 import '../assets/scss/binDetails.scss';
 import '../assets/scss/_base.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class BinDetails extends React.Component {
 
@@ -58,8 +61,10 @@ class BinDetails extends React.Component {
             />
           </GoogleMapReact>
         </div>
-        <button type="button" class="btn btn-primary">Accept</button>
-        <button type="button" class="btn btn-primary">Reject</button>
+        <div style={{textAlign: 'right'}}>
+          <Button variant="yellow"><FontAwesomeIcon icon='check-circle'/> Accept</Button>
+          <Button variant="black"><FontAwesomeIcon icon='times-circle'/> Reject</Button>
+        </div>
       </div>
     );
   }
@@ -72,8 +77,10 @@ class BinDetails extends React.Component {
         <nav class="mb-0 navbar navbar-light bg-dark">
           <span class="navbar-brand mb-0 h1">{this.state.binType}</span>
         </nav>
-        <button type="button" class="btn btn-primary" style={{margin: '5px' + 'em'}}>Accept</button>
-        <button type="button" class="btn btn-primary" style={{margin: '5px' + 'em'}}>Reject</button>
+        <div style={{textAlign: 'right'}}>
+          <Button variant="yellow"><FontAwesomeIcon icon='check-circle'/> Accept</Button>
+          <Button variant="black"><FontAwesomeIcon icon='times-circle'/> Reject</Button>
+        </div>
       </div>
     );
   }
@@ -83,13 +90,15 @@ class BinDetails extends React.Component {
     return(
       <div>
         <span>Location</span>
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" style={{width: this.state.binLocAcpt}} aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
+        <ProgressBar>
+          <ProgressBar striped variant="success" now={35} key={1} />
+          <ProgressBar striped variant="danger" now={20} key={2} />
+        </ProgressBar>
         <span>Detail</span>
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" style={{width: this.state.binDetAcpt}} aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
+        <ProgressBar>
+          <ProgressBar striped variant="success" now={50} key={1} />
+          <ProgressBar striped variant="danger" now={20} key={2} />
+        </ProgressBar>
       </div>
     );
   }
