@@ -25,16 +25,16 @@ class BinMarker extends Component {
   }
   static defaultProps = {};
   checkClickable(){
-    if(!this.props.isMini)
+    if(this.props.clickable)
       return(
       <button style={markerStyle} onClick={() => this.setState({ modalShow: true })}>
-        <FontAwesomeIcon icon='trash'/>
+        <FontAwesomeIcon icon={this.props.icon}/>
       </button>
       );
     else
       return(
       <button style={markerStyle}>
-        <FontAwesomeIcon icon='trash'/>
+        <FontAwesomeIcon icon={this.props.icon}/>
       </button>
       );
   }

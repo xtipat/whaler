@@ -5,10 +5,10 @@ import MapPage from '../MapPage.js';
 import BinMarker from './BinMarker.js';
 import GoogleMapReact from 'google-map-react';
 import Loader from './Loader.js';
-import '../assets/scss/modal.scss';
+import '../assets/scss/binDetails.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default class BinDetails extends React.Component {
+class BinDetails extends React.Component {
 
   constructor(props){
     super(props);
@@ -49,15 +49,12 @@ export default class BinDetails extends React.Component {
             bootstrapURLKeys={{ key: 'AIzaSyCv7aQ0qD19jSxd954UZSZVQSDXZr1cNLs'}}
             defaultCenter={{lat: this.state.binLat,lng: this.state.binLng}}
             defaultZoom={17}
-            options={{
-              fullscreenControl: false,
-              zoomControl: false
-            }}
           >
             <BinMarker
               lat={this.state.binLat}
               lng={this.state.binLng}
-              isMini={true}
+              clickable={false}
+              icon="trash"
             />
           </GoogleMapReact>
         </div>
@@ -97,7 +94,7 @@ export default class BinDetails extends React.Component {
         <span>Detail</span>
         <ProgressBar>
           <ProgressBar striped variant="success" now={50} key={1} />
-          <ProgressBar striped variant="danger" now={20} key={2} />
+          <ProgresBar striped variant="danger" now={20} key={2} />
         </ProgressBar>
       </div>
     );
@@ -156,3 +153,6 @@ export default class BinDetails extends React.Component {
     }
   }
 }
+
+
+export default BinDetails;

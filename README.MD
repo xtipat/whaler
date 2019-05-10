@@ -1,6 +1,6 @@
 # **Whaler** - CS374 Project
-
 ## **Update**
+* 19/05/10 Add Live Demo Link
 * 19/05/09
   * Remove Circular Action Button (Not compatible with react web)
   * Add react-animations
@@ -9,25 +9,49 @@
 
 ## **Index**
 1. [Description](#description)
-2. [TO-DO List](#to-do-List)
-3. [Codebase](#codebase)
+2. [Progress](#progress)
+3. [Coding Guides](#coding-guides)
 4. [Dev Instructions](#dev-instructions)
 5. [Appendix](#Appendix)
+6. [React Command Guide](#React-Command-Guide)
 
 ## **Description**
-![](https://img.shields.io/badge/npm-6.4.1-green.svg)
-![](https://img.shields.io/badge/react-16.8.6-red.svg)
-![](https://img.shields.io/badge/firebase-5.10.1-blue.svg)
-## **To-do List**
+![](https://img.shields.io/badge/status-work%20in%20progress-green.svg)
 
+**Codebase** : ![](https://img.shields.io/badge/npm-6.4.1-yellow.svg)
+![](https://img.shields.io/badge/react-16.8.6-red.svg)
+![](https://img.shields.io/badge/firebase-5.10.1-blue.svg)<br>
+**Live Demo** : https://whaler.netlify.com
+
+## **Progress**
+### To-do List
+- [ ] Make decisions about minor styles
+  - [ ] hover action
+- [ ] Complete Router Link
+- [ ] Considering Redux Integration (Use or Remove)
 - [x] Discuss about design choices
   - [x] Primary Color
   - [x] Fonts
-- [ ] Complete Router Link
-- [ ] Considering Redux Integration (Use or Remove)
 
+### Implementation
+- [ ] Map Page
+  - [x] add Google Map
+  - [ ] Bin Details Modal
+  - [ ] Add Bin Modal
+- [ ] Explore
+- [ ] Redeem Page
+  - [ ] Reward List
+  - [ ] Redeem Reward
+- [ ] Profile Page
+  - [ ] Profile Display
+  - [ ] Statistics
+  - [ ] Edit Profile
+- [ ] Menu Bar
+  - [ ] Extended Menu Trigger
+  - [x] Layout
+  - [x] Router Link on main menu
 
-## **Codebase**
+## **Coding Guides**
 * This project is implemented with ReactJS framework with SASS/SCSS stylesheet. All the JavaScript file can be found in `/src/` folder, and assets such as fonts and third-party js/css are put in `/public/`. The base directory from here on will refer to `/src/`
 
 * Each page component can be found in the directory. This include `index.js` which calls render, `Map.js` for rendering map page, `Redeem.js` for rendering redeem page, and so on.
@@ -66,25 +90,11 @@ Here, we are using **ReactJS** and **CSS/SCSS** stylesheet.
 
 7. **In the last, all the files in this repository will be packed using webpack to get `bundle.js` and `bundle.css`**, but we will wait until front-end and API are finished before packing.
 
-### Guide
-- Please add the comment with keyword `TODO:` and include a short tag/category in [] before describing the task. For example:
-`TODO: [API] request ___ from the server`
-
-
-### Tag List
-- `API`: request/pushing of information between front-end to back-end
-- `mockup`: fake information used to preview the website, to be changed/deleted when the corresponding API part is finished.
-- `frontend`: interface/design
-- `general`
-- `optional`
-- `unidentified` : priority to be decided.
-
 ## **Appendix**
 
 ### **Index**
 1. [Appendix: Additionally Installed Library & Framework](#Libraries-and-Framework)
 2. [Appendix: Public Assets](#Assets)
-3. [React Command Guide](#React-Command-Guide)
 
 ### Libraries and Framework
 you can also find the list in `package.json` file
@@ -95,10 +105,12 @@ you can also find the list in `package.json` file
 - [redux](https://redux.js.org)
 - [react-animations](https://github.com/FormidableLabs/react-animations)
 
----
 ### Assets
 - **Title Font**: [Lato](https://fonts.google.com/specimen/Lato)
 - **Default, Context Font**: [Open Sans](https://fonts.google.com/specimen/Open+Sans)
+
+---
+
 ## React Command Guide
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

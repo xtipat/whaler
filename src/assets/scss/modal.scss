@@ -13,12 +13,19 @@
 
 .modal-header{
   font-weight: bold;
+
+  &:focus {
+    outline: none !important;
+    outline-offset: none !important;
+  }
 }
 
 a{
   color: black;
+  transition: all 0.2s ease-out;
 
   &:hover {
-    color: $dark;
+    background-color: $dark;
+    color: white;
   }
 }

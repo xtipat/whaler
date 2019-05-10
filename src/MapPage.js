@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import BinMarker from './components/BinMarker.js';
-import {db} from './firebase/firebase.js';
+import Loader from './components/Loader.js'
+import { db } from './firebase/firebase.js';
+
 class MapPage extends Component {
   static defaultProps = {
     isMini: false,
-    divSize: { height: '91vh', width: '100%' },
+    divSize: { height: '100vh', width: '100%'},
     center: {
       lat: 59.95,
       lng: 30.33
@@ -81,14 +83,26 @@ class MapPage extends Component {
     {
       markers.push(
         <BinMarker
-        lat={this.state.markers[i].lat}
-        lng={this.state.markers[i].lng}
-        fbkey={this.state.markers[i].key}/>
+          lat={this.state.markers[i].lat}
+          lng={this.state.markers[i].lng}
+          fbkey={this.state.markers[i].key}
+          clickable = {true}
+          icon="trash"
+        />
       );
     }
     return markers
   }
-
+  markCurPos(){
+    return(
+      <BinMarker
+        lat={this.state.lat}
+        lng={this.state.lng}
+        clickable={false}
+        icon="male"
+      />
+    );
+  }
   render() {
     if(this.state.binsLoaded && this.state.locLoaded)
     {
@@ -105,6 +119,7 @@ class MapPage extends Component {
           }}
         >
         {this.markAllBins()}
+        {this.markCurPos()}
         </GoogleMapReact>
       </div>
       );
@@ -112,7 +127,7 @@ class MapPage extends Component {
     else
     {
       //REPLACE <div/> WITH LOADING SCREEN
-        return(<div/>);
+        return(<Loader />);
     }
   }
 }

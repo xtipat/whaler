@@ -1,5 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { NavLink } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faMapMarkedAlt, faGift, faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes } from '@fortawesome/free-solid-svg-icons';
 import '../assets/scss/menubar.scss';
@@ -26,26 +27,21 @@ export default class MenuLocate extends React.Component{
   }
   static defaultProps = {};
   render(){
-    let modalClose = () => this.setState({ modalShow: false });
     return(
       <div>
-        <div
-        className='extended-menu-wrap'
-        style={ styles.exMenuM }
-        onClick={() => this.setState({ modalShow: true })}
-        >
-          <FontAwesomeIcon
-            icon='compass'
-            className='extended-menu-icon'
-            size='2x'
-          />
-          <div className='extended-menu-label'>here</div>
+        <NavLink to='/locate' className='icon-default' activeClassName='icon-active'>
+          <div
+          className='extended-menu-wrap'
+          style={ styles.exMenuM }
+          >
+            <FontAwesomeIcon
+              icon='compass'
+              className='extended-menu-icon'
+              size='2x'
+            />
+          <div className='extended-menu-label'>locate</div>
         </div>
-        <Locate
-          show={this.state.modalShow}
-          onHide={modalClose}
-          fbkey={this.props.fbkey}
-        />
+        </NavLink>
       </div>
     );
   }
