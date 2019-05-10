@@ -8,7 +8,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar'
 import MapPage from '../MapPage.js'
 import BinMarker from './BinMarker.js';
 import GoogleMapReact from 'google-map-react';
-import '../assets/scss/binDetails.scss';
+import '../assets/scss/modal.scss';
 import '../assets/scss/_base.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 

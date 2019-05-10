@@ -5,14 +5,20 @@
   color: white;
 }
 .nav-pills, .nav-link{
+}
+
+.modal{
   font-size: 0.8rem;
+}
+
+.modal-header{
   font-weight: bold;
 }
 
 a{
   color: black;
-}
 
-a:hover {
-  color: $dark;
+  &:hover {
+    color: $dark;
+  }
 }
