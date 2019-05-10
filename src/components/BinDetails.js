@@ -58,6 +58,7 @@ export default class BinDetails extends React.Component {
               lat={this.state.binLat}
               lng={this.state.binLng}
               isMini={true}
+              icon={this.props.icon}
             />
           </GoogleMapReact>
         </div>

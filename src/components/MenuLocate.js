@@ -29,7 +29,7 @@ export default class MenuLocate extends React.Component{
   render(){
     return(
       <div>
-        <NavLink to='/locate' className='icon-default' activeClassName='icon-active'>
+        <NavLink to='/locate' className='icon-default' activeClassName='icon-active' onClick={this.props.onClick}>
           <div
           className='extended-menu-wrap'
           style={ styles.exMenuM }

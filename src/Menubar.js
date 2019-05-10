@@ -107,11 +107,11 @@ class Menubar extends React.Component {
                   size='5x'/>
               </button>
               {
-                this.state.plusButtonClass == 'plus-icon' ? <div />:
+                this.state.plusButtonClass === 'plus-icon' ? <div />:
                   <Row className='justify-content-center'>
                     <Zoom>
-                      <MenuHere/>
-                      <MenuLocate/>
+                      <MenuHere onClick={ this.handleClose } />
+                      <MenuLocate onClick={ this.handleClose } />
                       <div className='extended-menu-wrap'
                         onClick={ this.handleClose }
                         style={ styles.exMenuR }>
