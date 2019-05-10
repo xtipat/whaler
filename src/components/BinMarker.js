@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { Component } from 'react';
-import BinDetails from './Modal.js';
+import BinDetails from './BinDetails.js';
 
 const markerStyle = {
   position: 'absolute',

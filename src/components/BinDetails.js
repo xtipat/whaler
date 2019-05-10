@@ -12,7 +12,7 @@ import '../assets/scss/binDetails.scss';
 import '../assets/scss/_base.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-class BinDetails extends React.Component {
+export default class BinDetails extends React.Component {
 
   constructor(props){
     super(props);
@@ -53,6 +53,10 @@ class BinDetails extends React.Component {
             bootstrapURLKeys={{ key: 'AIzaSyCv7aQ0qD19jSxd954UZSZVQSDXZr1cNLs'}}
             defaultCenter={{lat: this.state.binLat,lng: this.state.binLng}}
             defaultZoom={17}
+            options={{
+              fullscreenControl: false,
+              zoomControl: false
+            }}
           >
             <BinMarker
               lat={this.state.binLat}
@@ -148,6 +152,3 @@ class BinDetails extends React.Component {
     }
   }
 }
-
-
-export default BinDetails;

@@ -34,7 +34,7 @@ class MapPage extends Component {
         lng: position.coords.longitude,
         locLoaded: true
       })
-      }, 
+      },
       error => {
         this.setState({locLoaded: true});
         alert("Can't get your current position, try enable your GPS");
@@ -98,7 +98,11 @@ class MapPage extends Component {
           bootstrapURLKeys={{ key: 'AIzaSyCv7aQ0qD19jSxd954UZSZVQSDXZr1cNLs'}}
           defaultCenter={{lat:this.state.lat,lng:this.state.lng}}
           defaultZoom={this.props.zoom}
-          options={{styles :this.props.exampleMapStyles}}
+          options={{
+            styles :this.props.exampleMapStyles,
+            fullscreenControl: false,
+            zoomControl: false
+          }}
         >
         {this.markAllBins()}
         </GoogleMapReact>
