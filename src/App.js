@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import Menubar from './Menubar.js';
@@ -8,10 +8,14 @@ import './assets/scss/_base.scss';
 //import GoogleMapReact from 'google-map-react';
 import MapPage from './MapPage.js'
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faTimesCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import Locate from './components/Locate.js';
+import {
+  faTrash, faTimesCircle, faCheckCircle, faMapMarkedAlt, faSearch, faGift,
+  faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes, faCircleNotch, faMale
+} from '@fortawesome/free-solid-svg-icons';
 
-library.add(faTrash,faTimesCircle,faCheckCircle);
+library.add(faTrash, faTimesCircle, faCheckCircle, faMapMarkedAlt, faSearch,
+  faGift, faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes, faCircleNotch, faMale);
 
 function App() {
   return (
@@ -31,6 +35,7 @@ const Page = () => (
       <Route exact path='/' component={MapPage} />
       <Route path='/redeem' component={Profile} />
       <Route path='/profile' component={Profile} />
+      <Route path='/locate' component={Locate} />
   </Switch>
 )
 
