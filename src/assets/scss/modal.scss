@@ -4,8 +4,6 @@
   background: $primary;
   color: white;
 }
-.nav-pills, .nav-link{
-}
 
 .modal{
   font-size: 0.8rem;
@@ -18,6 +16,14 @@
     outline: none !important;
     outline-offset: none !important;
   }
+}
+
+.add-photo{
+  background: $gray;
+  border-radius: .25rem;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 a{

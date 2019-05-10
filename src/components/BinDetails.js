@@ -63,6 +63,7 @@ export default class BinDetails extends React.Component {
         </div>
         <div style={{textAlign: 'right'}}>
           <Button variant="yellow"><FontAwesomeIcon icon='check-circle'/> Accept</Button>
+          <div class="divider"></div>
           <Button variant="black"><FontAwesomeIcon icon='times-circle'/> Reject</Button>
         </div>
       </div>
@@ -79,6 +80,7 @@ export default class BinDetails extends React.Component {
         </nav>
         <div style={{textAlign: 'right'}}>
           <Button variant="yellow"><FontAwesomeIcon icon='check-circle'/> Accept</Button>
+          <div class="divider"></div>
           <Button variant="black"><FontAwesomeIcon icon='times-circle'/> Reject</Button>
         </div>
       </div>
