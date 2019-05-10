@@ -24,6 +24,7 @@ body {
 .page-wrap {
   background: $gray-background;
   text-align: center;
+  padding: 0;
   height: 100vh;
   -webkit-box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.41);
   -moz-box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.41);
@@ -60,12 +61,41 @@ body {
   margin-left: 10px;
   margin-top: 15px;
   color: white;
+
+  &:focus {
+    outline: none !important;
+    outline-offset: none !important;
+  }
 }
 
 .btn-yellow {
   background-color: $primary;
+  transition: all 0.2s ease-out;
+
+  &:hover {
+    color: $dark;
+  }
 }
 
 .btn-black {
-  background-color: black;
+  background-color: $dark;
+  transition: all 0.2s ease-out;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.vertical-center-wrap {
+  position: relative;
+  padding: 0;
+  height: 100%;
+}
+
+.loader {
+  background-color: transparent;
+  text-align: middle;
+  position: absolute;
+  bottom: 0; left: 0; right: 0; top: 0;
+  margin: auto;
 }
