@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import {db} from '../firebase/firebase.js';
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import MapPage from '../MapPage.js';
 import '../assets/scss/modal.scss';
@@ -23,8 +21,10 @@ export default class AddBinInfo extends Component {
         centered
       >
         <Modal.Header closeButton>
-          Add a New Bin
+          Add a New Bin: 
         </Modal.Header>
+        /* below lat,lng will be used */
+        <span> Lat={this.props.lat} Lng={this.props.lng} </span>
         <Modal.Body>
           <div style={{textAlign: 'center'}}>
             <div class="add-photo">
@@ -36,6 +36,7 @@ export default class AddBinInfo extends Component {
             <TagInput/>
             <br></br>
             <Button variant="yellow">Submit</Button>
+            <hr/>
           </div>
         </Modal.Body>
       </Modal>
