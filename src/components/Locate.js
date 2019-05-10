@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 
-export default class AddBinInfo extends Component {
+export default class Locate extends Component {
   constructor(props){
     super(props);
   };
