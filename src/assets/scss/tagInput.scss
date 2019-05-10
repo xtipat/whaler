@@ -1,0 +1,27 @@
+@import './_base.scss';
+
+.container {
+  border: 1px solid $gray;
+  padding: 5px;
+  border-radius: .25rem;
+  text-align: left;
+}
+
+.items {
+  display: inline-block;
+  background: $gray-background;
+  padding: 8px 15px 8px 15px;
+  border-radius: .25rem;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+input {
+  outline: none;
+  border: none;
+  width: auto;
+}
+
+ul{
+  list-style-type: none;
+}
