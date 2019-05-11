@@ -55,7 +55,7 @@ class MapPage extends Component {
       loading: true
     });
     if(!this.props.isMini)
-      db.ref(`bins`).once('value').then(snapshot => {
+      db.ref(`bins`).on('value' , snapshot => {
         snapshot.forEach((child) => {
           var a = child.val().location;
           a.key = child.key;
@@ -76,9 +76,7 @@ class MapPage extends Component {
     this.fetchAllBinsData();
     this.getGeoLocation();
   }
-  updateCenter(Component){
-    console.log(1)
-  }
+
   markAllBins(){
     let markers = [];
     for(let i = 0;i<this.state.markers.length;i++)

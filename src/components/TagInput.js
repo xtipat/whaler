@@ -13,12 +13,16 @@ export default class TagInput extends React.Component {
       focused: false,
       input: ''
     };
-
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleInputKeyDown = this.handleInputKeyDown.bind(this);
     this.handleRemoveItem = this.handleRemoveItem.bind(this);
   }
-
+  componentDidUpdate(prevProps,prevState){
+    if(prevState.items && this.state.items.length != prevState.items.length)
+    {
+      this.props.typesHandle(this.state.items);
+    }
+  }
   render() {
     return (
       <div>
@@ -45,13 +49,11 @@ export default class TagInput extends React.Component {
   handleInputKeyDown(evt) {
     if ( evt.keyCode === 13 ) {
       const {value} = evt.target;
-
       this.setState(state => ({
         items: [...state.items, value],
         input: ''
       }));
     }
-
     if ( this.state.items.length && evt.keyCode === 8 && !this.state.input.length ) {
       this.setState(state => ({
         items: state.items.slice(0, state.items.length - 1)
@@ -64,6 +66,7 @@ export default class TagInput extends React.Component {
       this.setState(state => ({
         items: state.items.filter((item, i) => i !== index)
       }));
+      
     }
   }
 }

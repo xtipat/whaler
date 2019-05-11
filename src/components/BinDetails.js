@@ -25,13 +25,12 @@ export default class BinDetails extends React.Component {
       this.setState({
         binLat: bin.location.lat,
         binLng: bin.location.lng,
-        binType: bin.type,
+        binTypes: bin.types,
         binLocAcpt: bin.locationAccept,
         binDetAcpt: bin.detailAccept,
         loaded: true
       });
     }
-
     );
   }
 
@@ -70,14 +69,26 @@ export default class BinDetails extends React.Component {
       </div>
     );
   }
-
+  writeAllBinTypes(){
+    if(this.state.loaded == true){
+      console.log(this.state.binLat)
+      let types = [];
+      for(let i = 0;i<this.state.binTypes.length;i++)
+      {
+        types.push(
+          <div class="alert alert-info">{this.state.binTypes[i]}</div>
+        );
+      }
+      return types
+    }
+  }
   detailsContents(){
     return(
       <div>
         <img src="http://placekitten.com/270/200" />
         <p>Bin Type</p>
         <nav class="mb-0 navbar navbar-light bg-dark">
-          <span class="navbar-brand mb-0 h1">{this.state.binType}</span>
+          {this.writeAllBinTypes()}
         </nav>
         <div style={{textAlign: 'right'}}>
           <Button variant="yellow"><FontAwesomeIcon icon='check-circle'/> Accept</Button>
@@ -89,7 +100,6 @@ export default class BinDetails extends React.Component {
   }
 
   resultsContents(){
-    console.log(this.state.binLocAcpt);
     return(
       <div>
         <span>Location</span>
