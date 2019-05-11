@@ -55,7 +55,7 @@ class MapPage extends Component {
       loading: true
     });
     if(!this.props.isMini)
-      db.ref(`bins`).on('value' , snapshot => {
+      db.ref(`bins`).once('value').then(snapshot => {
         snapshot.forEach((child) => {
           var a = child.val().location;
           a.key = child.key;
