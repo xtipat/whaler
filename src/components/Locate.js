@@ -46,9 +46,6 @@ export default class Locate extends Component {
   handleCenter(center){
     this.setState({lat:center.lat, lng:center.lng})
   }
-  componentDidUpdate() {
-    console.log(this.state.lat,this.state.lng);
-  }
   render(){
     let modalClose = () => this.setState({ modalShow: false });
     return(

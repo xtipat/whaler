@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { db } from '../firebase/firebase.js';
+import { db, storage } from '../firebase/firebase.js';
 import { Modal, Nav, Tab, Button, ProgressBar } from 'react-bootstrap';
 import MapPage from '../MapPage.js';
 import BinMarker from './BinMarker.js';
@@ -13,13 +13,13 @@ export default class BinDetails extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-        loaded: false,
-        show: false
+      picLoaded: false,
+      loaded: false,
+      show: false
     };
   };
 
   fetchBinData(){
-    //console.log('YO');
     db.ref(`bins/${this.props.fbkey}`).once('value').then(snapshot => {
       let bin = snapshot.val();
       this.setState({
@@ -35,6 +35,15 @@ export default class BinDetails extends React.Component {
       this.calculatePercent();
     }
     );
+    var strRef = storage.ref();
+    strRef.child(`${this.props.fbkey}`).getDownloadURL().then((url) => {
+      this.setState({
+        binPicSrc: url,
+        picLoaded: true
+      });
+    }).catch(function(error) {
+      console.log(error);
+    });
   }
 
   calculatePercent(){
@@ -83,7 +92,6 @@ export default class BinDetails extends React.Component {
   }
   writeAllBinTypes(){
     if(this.state.loaded == true){
-      console.log(this.state.binLat)
       let types = [];
       for(let i = 0;i<this.state.binTypes.length;i++)
       {
@@ -94,10 +102,16 @@ export default class BinDetails extends React.Component {
       return types
     }
   }
+  checkPicture(){
+    if(this.state.picLoaded == false)
+      return <img src="http://placekitten.com/270/200"/>
+    else
+      return <img src={this.state.binPicSrc} width='100%' height='100%'/>
+  }
   detailsContents(){
     return(
       <div>
-        <img src="http://placekitten.com/270/200" />
+        {this.checkPicture()}
         <p>Bin Type</p>
         <nav class="mb-0 navbar navbar-light bg-dark">
           {this.writeAllBinTypes()}

@@ -11,10 +11,13 @@ import {faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import TagInput from './TagInput';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Redirect } from 'react-router-dom';
+
 export default class AddBinInfo extends Component {
   constructor(props){
     super(props);
     this.state = {
+      redirect: false,
       picExists: false,
       imgsrc: "http://placekitten.com/270/200",
       imgfile: null,
@@ -36,7 +39,11 @@ export default class AddBinInfo extends Component {
       'locationReject': 0,
       'types': this.state.types
     });
-
+    var strRef = storage.ref().child(newRef.key);
+    strRef.put(this.state.imgfile).then((snapshot) => {
+      console.log("Uploaded Pic",newRef.key);
+      this.props.onHide();
+    });
   }
   checkImage(){
     if(this.state.picExists){
@@ -68,9 +75,15 @@ export default class AddBinInfo extends Component {
     }
   }
   typesHandle(items){
-    console.log("Yay",items);
     this.setState({types:items});
   }
+
+  renderRedirect(){
+    if (this.state.redirect) {
+      return <Redirect to='/' />
+    }
+  }
+
   render(){
     return(
       <Modal
@@ -90,6 +103,7 @@ export default class AddBinInfo extends Component {
             <div style={{display: 'flex', justifyContent: 'flex-start'}}>Bin Types</div>
             <TagInput typesHandle={this.typesHandle}/>
             <br></br>
+            {this.renderRedirect()}
             <Button variant="yellow" onClick={this.submitHandle}>Submit</Button>
           </div>
         </Modal.Body>
