@@ -57,7 +57,6 @@ class Menubar extends React.Component {
               <NavLink exact to='/' className='icon-default' activeClassName='icon-active'>
                 <FontAwesomeIcon
                   icon='map-marked-alt'
-                  size="2x"
                   onClick={ this.handleClose }
                   />
               </NavLink>
@@ -66,7 +65,6 @@ class Menubar extends React.Component {
               <NavLink to='/explore' className='icon-default'activeClassName='icon-active'>
                 <FontAwesomeIcon
                   icon='search'
-                  size="2x"
                   onClick={ this.handleClose }
                   />
               </NavLink>
@@ -77,7 +75,6 @@ class Menubar extends React.Component {
               <NavLink to='/redeem' className='icon-default' activeClassName='icon-active'>
                 <FontAwesomeIcon
                   icon='gift'
-                  size="2x"
                   onClick={ this.handleClose }
                   />
               </NavLink>
@@ -86,7 +83,6 @@ class Menubar extends React.Component {
               <NavLink to='/profile' className='icon-default' activeClassName='icon-active'>
                 <FontAwesomeIcon
                   icon='user-circle'
-                  size='2x'
                   onClick={ this.handleClose }
                   />
               </NavLink>
@@ -100,7 +96,7 @@ class Menubar extends React.Component {
                 <FontAwesomeIcon
                   icon='plus-circle'
                   className= {this.state.plusButtonClass}
-                  size='5x'/>
+                  />
               </button>
               {
                 this.state.plusButtonClass === 'plus-icon' ? <div />:
@@ -114,7 +110,6 @@ class Menubar extends React.Component {
                         <FontAwesomeIcon
                           icon='times'
                           className='cancel-icon'
-                          size='2x'
                           />
                         <div className='cancel-label'>cancel</div>
                       </div>
