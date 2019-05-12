@@ -23,6 +23,7 @@ export default class BinDetails extends React.Component {
     db.ref(`bins/${this.props.fbkey}`).once('value').then(snapshot => {
       let bin = snapshot.val();
       this.setState({
+        binKey: this.props.fbkey,
         binLat: bin.location.lat,
         binLng: bin.location.lng,
         binTypes: bin.types,
@@ -44,6 +45,22 @@ export default class BinDetails extends React.Component {
     }).catch(function(error) {
       console.log(error);
     });
+  }
+
+  updateLocAcpt(){
+    db.ref(`bins/${this.state.binKey}/locationAccept`).transaction(locationAccept => locationAccept++);
+  }
+
+  updateLocRjct(){
+    db.ref(`bins/${this.state.binKey}/locationReject`).transaction(locationReject => locationReject++);
+  }
+
+  updateDetAcpt(){
+    db.ref(`bins/${this.state.binKey}/detailAccept`).transaction(detailAccept => detailAccept++);
+  }
+
+  updateDetRjct(){
+    db.ref(`bins/${this.state.binKey}/detailReject`).transaction(detailReject => detailReject++);
   }
 
   calculatePercent(){
@@ -83,9 +100,9 @@ export default class BinDetails extends React.Component {
           </GoogleMapReact>
         </div>
         <div style={{textAlign: 'right'}}>
-          <Button variant="yellow"><FontAwesomeIcon icon='check-circle'/> Accept</Button>
+          <Button variant="yellow" onClick={this.updateLocAcpt.bind(this)}><FontAwesomeIcon icon='check-circle'/> Accept</Button>
           <div class="divider"></div>
-          <Button variant="black"><FontAwesomeIcon icon='times-circle'/> Reject</Button>
+          <Button variant="black" onClick={this.updateLocRjct.bind(this)}><FontAwesomeIcon icon='times-circle'/> Reject</Button>
         </div>
       </div>
     );
@@ -117,9 +134,9 @@ export default class BinDetails extends React.Component {
           {this.writeAllBinTypes()}
         </nav>
         <div style={{textAlign: 'right'}}>
-          <Button variant="yellow"><FontAwesomeIcon icon='check-circle'/> Accept</Button>
+          <Button variant="yellow" onClick={this.updateDetAcpt.bind(this)}><FontAwesomeIcon icon='check-circle'/> Accept</Button>
           <div class="divider"></div>
-          <Button variant="black"><FontAwesomeIcon icon='times-circle'/> Reject</Button>
+          <Button variant="black" onClick={this.updateDetRjct.bind(this)}><FontAwesomeIcon icon='times-circle'/> Reject</Button>
         </div>
       </div>
     );

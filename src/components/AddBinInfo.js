@@ -97,7 +97,6 @@ export default class AddBinInfo extends Component {
             <div style={{display: 'flex', justifyContent: 'flex-start'}}>Bin Types</div>
             <TagInput typesHandle={this.typesHandle}/>
             <br></br>
-            {this.renderRedirect()}
             <Button variant="yellow" onClick={this.submitHandle}>Submit</Button>
           </div>
         </Modal.Body>
