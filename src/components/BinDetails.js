@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { db, storage } from '../firebase/firebase.js';
+import { db, storage, firebaseConfig } from '../firebase/firebase.js';
 import { Modal, Nav, Tab, Button, ProgressBar } from 'react-bootstrap';
 import MapPage from '../MapPage.js';
 import BinMarker from './BinMarker.js';
@@ -7,6 +7,8 @@ import GoogleMapReact from 'google-map-react';
 import Loader from './Loader.js';
 import '../assets/scss/modal.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import firebase from "firebase/app";
+import { FirebaseDatabaseProvider, FirebaseDatabaseTransaction } from "@react-firebase/database";
 
 export default class BinDetails extends React.Component {
 
@@ -23,7 +25,6 @@ export default class BinDetails extends React.Component {
     db.ref(`bins/${this.props.fbkey}`).once('value').then(snapshot => {
       let bin = snapshot.val();
       this.setState({
-        binKey: this.props.fbkey,
         binLat: bin.location.lat,
         binLng: bin.location.lng,
         binTypes: bin.types,
@@ -47,33 +48,12 @@ export default class BinDetails extends React.Component {
     });
   }
 
-  updateLocAcpt(){
-    db.ref(`bins/${this.state.binKey}/locationAccept`).transaction(function(locationAccept) {
-    if (locationAccept) {
-    locationAccept = locationAccept + 1;
-  }
-  return locationAccept;
-});;
-  }
-
-  updateLocRjct(){
-    db.ref(`bins/${this.state.binKey}/locationReject`).transaction(locationReject => locationReject++);
-  }
-
-  updateDetAcpt(){
-    db.ref(`bins/${this.state.binKey}/detailAccept`).transaction(detailAccept => detailAccept++);
-  }
-
-  updateDetRjct(){
-    db.ref(`bins/${this.state.binKey}/detailReject`).transaction(detailReject => detailReject++);
-  }
-
   calculatePercent(){
     this.setState({
-      binLocAcptPer: Math.round(10*this.state.binLocAcpt/100),
-      binDetAcptPer: Math.round(10*this.state.binDetAcpt/100),
-      binLocRjctPer: Math.round(10*this.state.binLocRjct/100),
-      binDetRjctPer: Math.round(10*this.state.binDetRjct/100)
+      binLocAcptPer: Math.round(100*this.state.binLocAcpt/50),
+      binDetAcptPer: Math.round(100*this.state.binDetAcpt/50),
+      binLocRjctPer: Math.round(100*this.state.binLocRjct/50),
+      binDetRjctPer: Math.round(100*this.state.binDetRjct/50)
     });
   }
 
@@ -105,9 +85,32 @@ export default class BinDetails extends React.Component {
           </GoogleMapReact>
         </div>
         <div style={{textAlign: 'right'}}>
-          <Button variant="yellow" onClick={this.updateLocAcpt.bind(this)}><FontAwesomeIcon icon='check-circle'/> Accept</Button>
-          <div class="divider"></div>
-          <Button variant="black" onClick={this.updateLocRjct.bind(this)}><FontAwesomeIcon icon='times-circle'/> Reject</Button>
+          <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
+            <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/locationAccept`}>
+              {({ runTransaction }) => {
+                return (
+                  <Button variant="yellow" onClick={() => {
+                    runTransaction({reducer: val => {return val + 1;}});
+                  }}>
+                    <FontAwesomeIcon icon='check-circle'/> Accept
+                  </Button>
+                );
+              }}
+            </FirebaseDatabaseTransaction>
+            <div class="divider"></div>
+            <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/locationReject`}>
+              {({ runTransaction }) => {
+                return (
+                  <Button variant="black" onClick={() => {
+                    runTransaction({reducer: val => {return val + 1;}});
+                  }}>
+                    <FontAwesomeIcon icon='times-circle'/> Reject
+                  </Button>
+                );
+              }}
+            </FirebaseDatabaseTransaction>
+            <div class="divider"></div>
+          </FirebaseDatabaseProvider>
         </div>
       </div>
     );
@@ -139,9 +142,32 @@ export default class BinDetails extends React.Component {
           {this.writeAllBinTypes()}
         </nav>
         <div style={{textAlign: 'right'}}>
-          <Button variant="yellow" onClick={this.updateDetAcpt.bind(this)}><FontAwesomeIcon icon='check-circle'/> Accept</Button>
+        <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
+          <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/detailAccept`}>
+            {({ runTransaction }) => {
+              return (
+                <Button variant="yellow" onClick={() => {
+                  runTransaction({reducer: val => {return val + 1;}});
+                }}>
+                  <FontAwesomeIcon icon='check-circle'/> Accept
+                </Button>
+              );
+            }}
+          </FirebaseDatabaseTransaction>
           <div class="divider"></div>
-          <Button variant="black" onClick={this.updateDetRjct.bind(this)}><FontAwesomeIcon icon='times-circle'/> Reject</Button>
+          <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/detailReject`}>
+            {({ runTransaction }) => {
+              return (
+                <Button variant="black" onClick={() => {
+                  runTransaction({reducer: val => {return val + 1;}});
+                }}>
+                  <FontAwesomeIcon icon='times-circle'/> Reject
+                </Button>
+              );
+            }}
+          </FirebaseDatabaseTransaction>
+          <div class="divider"></div>
+        </FirebaseDatabaseProvider>
         </div>
       </div>
     );
