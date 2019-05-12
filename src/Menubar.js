@@ -88,13 +88,8 @@ class Menubar extends React.Component {
                 <FontAwesomeIcon
                   icon='plus-circle'
                   className= {this.state.plusButtonClass}
-<<<<<<< HEAD
                   size='5x'/>
               </div>
-=======
-                  />
-              </button>
->>>>>>> 4f6494a3a02c91c8f532772d4099aede7d360dd3
               {
                 this.state.plusButtonClass === 'plus-icon' ? <div />:
                   <Row className='justify-content-center'>
