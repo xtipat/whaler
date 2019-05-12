@@ -13,7 +13,7 @@ export class ProductList extends Component {
 	render() {
 		return (
 				<div className='wrap '>
-					<div style={{ overflowY: 'scroll', height: '90vh' }}>
+					<div style={{ overflowY: 'scroll', height: '90vh'}}>
 						<ProductConsumer>
 							{(value)=>{
 								return (<Title name="Redeem" title={value.user_point}/>)
@@ -21,7 +21,7 @@ export class ProductList extends Component {
 							}}
 						</ProductConsumer>
 						<div className="row my-2">
-							<h4 className="col-12 text-capitalize my-2">Popular</h4>
+							<h4 className="col-11 mx-auto my-3 text-left font-weight-bold">Popular</h4>
 							<ProductConsumer>
 								{(value)=>{
 									return value.products.map( product => {
@@ -30,7 +30,7 @@ export class ProductList extends Component {
 									})
 								}}
 							</ProductConsumer>
-							<h4 className="col-12 text-capitalize my-2">more</h4>
+							<h4 className="col-11 mx-auto my-2 text-left font-weight-bold">more</h4>
 							<ProductConsumer>
 								{(value)=>{
 									return value.products.map( product => {

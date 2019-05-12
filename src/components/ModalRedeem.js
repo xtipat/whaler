@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import {ProductConsumer} from '../context';
-import {ButtonContainer} from './Button';
 import {Link} from 'react-router-dom'
+import { Modal, Nav, Tab, Button, ProgressBar } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 export default class ModalRedeem extends Component {
 	render() {
@@ -28,16 +30,21 @@ export default class ModalRedeem extends Component {
 											<h5>{title}</h5>
 											<h5 className="text-muted">available point : {user_point} points</h5>
 											<h5 className="text-muted">price : {price} points</h5>
-											<Link to='/'>
-												<ButtonContainer onClick={()=>closeModal(user_point)}>
-													Cancel 
-												</ButtonContainer>
-											</Link>
-											<Link to='/'>
-												<ButtonContainer cart onClick={()=>closeModal(user_point - price)}>
-													Confirm
-												</ButtonContainer>
-											</Link>
+											<div style={{textAlign: 'right'}}>
+												<Link to='/redeem'>
+											        <Button variant="yellow"
+											        		cart onClick={()=>closeModal(user_point - price)}>
+											        	<FontAwesomeIcon icon='check-circle'/> Confirm
+											        </Button>
+											    </Link>
+										        <Link to='/details'>
+											        <Button variant="black"
+											        		onClick={()=>closeModal(user_point)}>
+											        	<FontAwesomeIcon icon='times-circle'/> Cancel
+											        </Button>
+											    </Link>
+
+										    </div>
 										</div>
 									</div>
 								</div>
