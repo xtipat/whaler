@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import Menubar from './Menubar.js';
 import Profile from './Profile.js'
-import Redeem from './Redeem'
+import Redeem from './Redeem.js';
 import 'react-bootstrap/dist/react-bootstrap.min.js';
 import './assets/scss/_base.scss';
 //import GoogleMapReact from 'google-map-react';
