@@ -96,12 +96,12 @@ class Menubar extends React.Component {
         <div>
           <Row className='justify-content-center'>
             <Col xs={4} className='circle-wrap'>
-              <button className='plus-button-wrap' onClick={this.handlePlusClick}>
+              <div className='plus-button-wrap' onClick={this.handlePlusClick}>
                 <FontAwesomeIcon
                   icon='plus-circle'
                   className= {this.state.plusButtonClass}
                   size='5x'/>
-              </button>
+              </div>
               {
                 this.state.plusButtonClass === 'plus-icon' ? <div />:
                   <Row className='justify-content-center'>
