@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../assets/scss/tagInput.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -24,9 +24,9 @@ export default class TagInput extends React.Component {
   render() {
     return (
       <div>
-        <ul class="container">
+        <ul className="container">
           {this.state.items.map((item, i) =>
-            <li key={i} class="items" onClick={this.handleRemoveItem(i)}>
+            <li key={i} className="items" onClick={this.handleRemoveItem(i)}>
               {item}
               <FontAwesomeIcon icon='times' className='cancel-icon' size='1x'/>
             </li>

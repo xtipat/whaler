@@ -68,7 +68,7 @@ class MapPage extends Component {
           this.setState({markers: [...this.state.markers, a]});
         })
       });
-      this.setState({loading: false,binsLoaded: true})  
+      this.setState({loading: false,binsLoaded: true})
     }
     else
     {

@@ -12,18 +12,19 @@ class BinMarker extends Component {
   checkClickable(){
     if(this.props.clickable)
       return(
-      <div class="bin-marker-clickable" onClick={() => this.setState({ modalShow: true })}>
+      <div className="bin-marker-clickable" onClick={() => this.setState({ modalShow: true })}>
         <FontAwesomeIcon icon={this.props.icon}/>
       </div>
       );
     else{
       return(
-      <div class="bin-marker-not-clickable">
+      <div className="bin-marker-not-clickable">
         <FontAwesomeIcon icon={this.props.icon}/>
       </div>
       );
     }
   }
+
   render(){
     let modalClose = () => this.setState({ modalShow: false });
     return(

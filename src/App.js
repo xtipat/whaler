@@ -13,11 +13,13 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import Locate from './components/Locate.js';
 import {
   faTrash, faTimesCircle, faCheckCircle, faMapMarkedAlt, faSearch, faGift,
-  faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes, faCircleNotch, faMale
+  faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes, faCircleNotch,
+  faMale, faMapMarkerAlt, faInfoCircle, faPollH
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faTrash, faTimesCircle, faCheckCircle, faMapMarkedAlt, faSearch,
-  faGift, faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes, faCircleNotch, faMale);
+  faGift, faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes, faCircleNotch,
+  faMale, faMapMarkerAlt, faInfoCircle, faPollH);
 
 function App() {
   return (

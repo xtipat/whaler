@@ -2,6 +2,7 @@
 $primary: #FEC93F;
 $dark: #17181F;
 $gray: #ccc;
+$lightgray: #ddd;
 $gray-background: #E9E8E9;
 
 // Font
@@ -37,6 +38,16 @@ body {
 @keyframes rotateClockwise {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(45deg); }
+}
+
+@keyframes rotate90Clockwise {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(90deg); }
+}
+
+@keyframes rotate90Counter {
+  0% { transform: rotate(90deg); }
+  100% { transform: rotate(0deg); }
 }
 
 @keyframes rotateBounceCounter {
@@ -108,8 +119,29 @@ body {
   margin: auto;
 }
 
+.vertical-line {
+  color: $gray;
+  margin: 5px;
+  vertical-align: middle;
+  width: 1px;
+  background: $lightgray;
+  display: inline-block;
+}
+
+.horizontal-line {
+  color: $gray;
+  height: 1px;
+  width: 100%;
+  margin: 5px;
+  background: $lightgray;
+}
+
 .divider{
-  width: 10px;
+  width: 15px;
   height:auto;
   display:inline-block;
+}
+
+.progress-bar {
+  background-color: $primary !important;
 }
