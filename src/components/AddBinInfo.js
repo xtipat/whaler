@@ -41,6 +41,7 @@ export default class AddBinInfo extends Component {
     var strRef = storage.ref().child(newRef.key);
     strRef.put(this.state.imgfile).then((snapshot) => {
       console.log("Uploaded Pic",newRef.key);
+      this.setState({redirect: true});
       this.props.onHide();
     });
   }
@@ -67,7 +68,6 @@ export default class AddBinInfo extends Component {
     if(this.state.picExists && this.state.types.length>0)
     {
       this.writeToDatabase();
-      window.location = '/';
     }
     else
     {
@@ -77,7 +77,10 @@ export default class AddBinInfo extends Component {
   typesHandle(items){
     this.setState({types:items});
   }
-
+  redirect(){
+  	if(this.state.redirect)
+  		window.location = '/';
+  }
   render(){
     return(
       <Modal
@@ -97,6 +100,7 @@ export default class AddBinInfo extends Component {
             <div style={{display: 'flex', justifyContent: 'flex-start'}}>Bin Types</div>
             <TagInput typesHandle={this.typesHandle}/>
             <br></br>
+            {this.redirect()}
             <Button variant="yellow" onClick={this.submitHandle}>Submit</Button>
           </div>
         </Modal.Body>
