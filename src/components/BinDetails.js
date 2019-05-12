@@ -118,7 +118,7 @@ export default class BinDetails extends React.Component {
       for(let i = 0;i<this.state.binTypes.length;i++)
       {
         types.push(
-          <div class="alert alert-info">{this.state.binTypes[i]}</div>
+          <div class="alert alert-warning">{this.state.binTypes[i]}</div>
         );
       }
       return types
@@ -126,18 +126,18 @@ export default class BinDetails extends React.Component {
   }
   checkPicture(){
     if(this.state.picLoaded == false)
-      return <img src="http://placekitten.com/270/200"/>
+      return <img className="picframe" src="http://placekitten.com/270/200"/>
     else
-      return <img src={this.state.binPicSrc} width='100%' height='100%'/>
+      return <img className="picframe" src={this.state.binPicSrc}/ >
   }
   detailsContents(){
     return(
       <div>
         {this.checkPicture()}
-        <p>Bin Type</p>
-        <nav class="mb-0 navbar navbar-light bg-dark">
+        <div class="bintypes-container">
+          <span class='types-head'>Bin Type</span>
           {this.writeAllBinTypes()}
-        </nav>
+        </div>
         <div style={{textAlign: 'right'}}>
           <Button variant="yellow" onClick={this.updateDetAcpt.bind(this)}><FontAwesomeIcon icon='check-circle'/> Accept</Button>
           <div class="divider"></div>

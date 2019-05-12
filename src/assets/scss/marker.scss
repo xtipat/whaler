@@ -7,11 +7,11 @@
   left: -20px;
   top: -20px;
 
-  border: 5px solid #f44336;
+  border: 5px solid $primary;
   border-radius: 50%;
-  background: #f44336;
+  background: $primary;
   text-align: center;
-  color: white;
+  color: whitesmoke;
   font-size: 16px;
   padding: 4px;
 };
@@ -36,9 +36,9 @@
   position: relative;
   width: 40px;
   height: 40px;
-  border: 5px solid rgba(red($primary), green($primary), blue($primary), .3);
+  border: 5px solid rgba(red(grey), green(grey), blue(grey), .3);
   border-radius: 50%;
-  background: rgba(red($primary), green($primary), blue($primary), .3);
+  background: rgba(red(grey), green(grey), blue(grey), .3);
 }
 
 .inner-circle{
@@ -46,5 +46,5 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: $primary;
+  background: grey;
 }
