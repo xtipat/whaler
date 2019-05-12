@@ -4,14 +4,13 @@ import './App.css';
 
 import ProductList from './components/ProductList'
 import Details from './components/Details'
-//import ModalRedeem from './components/ModalRedeem'
 
 
 function Redeem() {
   return (
-     <React.Fragment>
-     	<ProductList/>
-     </React.Fragment>
+  	<div>
+	 	<ProductList/>
+	 </div>
   );
 }
 
