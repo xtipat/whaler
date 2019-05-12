@@ -99,11 +99,17 @@ Here, we are using **ReactJS** and **CSS/SCSS** stylesheet.
 ### Libraries and Framework
 you can also find the list in `package.json` file
 - [firebase](https://firebase.google.com/?gclid=Cj0KCQiAxNnfBRDwARIsAJlH29DkGiYpDh3s0DOPre_sJG9q66-aNFBNOoSL3MEp3OAXBUAlu4ejy_YaAly4EALw_wcB)
+- [google-map-react](https://github.com/google-map-react/google-map-react)
+- [node-sass](https://github.com/sass/node-sass)
+- [react](https://reactjs.org)
 - [react-bootstrap](https://react-bootstrap.netlify.com)
 - [react-fontawesome](https://fontawesome.com)
 - [react-router](https://reacttraining.com/react-router/core/guides/philosophy)
-- [redux](https://redux.js.org)
+- ~~[redux](https://redux.js.org)~~ *unused at the moment*
 - [react-animations](https://github.com/FormidableLabs/react-animations)
+- [react-tagsinput](https://github.com/olahol/react-tagsinput)
+- [react-toastify](https://fkhadra.github.io/react-toastify)
+- [styled-component](https://www.styled-components.com)
 
 ### Assets
 - **Title Font**: [Lato](https://fonts.google.com/specimen/Lato)
