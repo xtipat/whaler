@@ -3,6 +3,9 @@ import GoogleMapReact from 'google-map-react';
 import BinMarker from './components/BinMarker.js';
 import Loader from './components/Loader.js'
 import { db } from './firebase/firebase.js';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import CurPosMarker from './components/CurPosMarker.js';
 
 class MapPage extends Component {
   static defaultProps = {
@@ -12,6 +15,7 @@ class MapPage extends Component {
       lat: 59.95,
       lng: 30.33
     },
+    handleCenter: () => {},
     zoom: 15,
     exampleMapStyles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"color":"#000000"},{"lightness":13}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#144b53"},{"lightness":14},{"weight":1.4}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#08304b"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#0c4152"},{"lightness":5}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#0b434f"},{"lightness":25}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#0b3d51"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"}]},{"featureType":"transit","elementType":"all","stylers":[{"color":"#146474"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#021019"}]}]
   };
@@ -26,7 +30,6 @@ class MapPage extends Component {
         locLoaded: false
     };
   };
-
   getGeoLocation(){
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -39,12 +42,12 @@ class MapPage extends Component {
       },
       error => {
         this.setState({locLoaded: true});
-        alert("Can't get your current position, try enable your GPS");
+        toast.error("Can't get your current position, try enable your GPS");
       }
       )
     }
     else{
-      alert("We can't detect GPS on your device!");
+      toast.error("We can't detect GPS on your device!");
       this.setState({locLoaded: true});
     }
   }
@@ -57,7 +60,7 @@ class MapPage extends Component {
     if(!this.props.isMini)
       db.ref(`bins`).once('value').then(snapshot => {
         snapshot.forEach((child) => {
-          var a = child.val().location;
+          var a = child.val();
           a.key = child.key;
           this.setState({
             markers: this.state.markers.concat(a)
@@ -79,18 +82,42 @@ class MapPage extends Component {
 
   markAllBins(){
     let markers = [];
-    for(let i = 0;i<this.state.markers.length;i++)
-    {
-      markers.push(
-        <BinMarker
-        lat={this.state.markers[i].lat}
-        lng={this.state.markers[i].lng}
-        fbkey={this.state.markers[i].key}/>
-      );
+    for(let i = 0;i<this.state.markers.length;i++){
+      if(this.state.markers[i].locationAccept>=100){
+        markers.push(
+          <BinMarker
+            lat={this.state.markers[i].location.lat}
+            lng={this.state.markers[i].location.lng}
+            key={this.state.markers[i].key}
+            fbkey={this.state.markers[i].key}
+            clickable = {false}
+            icon="trash"
+          />
+        );
+      }
+      else{
+        markers.push(
+          <BinMarker
+            lat={this.state.markers[i].location.lat}
+            lng={this.state.markers[i].location.lng}
+            key={this.state.markers[i].key}
+            fbkey={this.state.markers[i].key}
+            clickable = {true}
+            icon="trash"
+          />
+        );
+      }
     }
     return markers
   }
-
+  markCurPos(){
+    return(
+      <CurPosMarker
+        lat={this.state.lat}
+        lng={this.state.lng}
+      />
+    );
+  }
   render() {
     if(this.state.binsLoaded && this.state.locLoaded)
     {
@@ -100,9 +127,15 @@ class MapPage extends Component {
           bootstrapURLKeys={{ key: 'AIzaSyCv7aQ0qD19jSxd954UZSZVQSDXZr1cNLs'}}
           defaultCenter={{lat:this.state.lat,lng:this.state.lng}}
           defaultZoom={this.props.zoom}
-          options={{styles :this.props.exampleMapStyles}}
+          onChange={({ center }) => this.props.handleCenter(center)}
+          options={{
+            styles :this.props.exampleMapStyles,
+            fullscreenControl: false,
+            zoomControl: false
+          }}
         >
         {this.markAllBins()}
+        {this.markCurPos()}
         </GoogleMapReact>
       </div>
       );
