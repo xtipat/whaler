@@ -5,6 +5,7 @@ import Loader from './components/Loader.js'
 import { db } from './firebase/firebase.js';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CurPosMarker from './components/CurPosMarker.js';
 
 class MapPage extends Component {
   static defaultProps = {
@@ -98,11 +99,9 @@ class MapPage extends Component {
   }
   markCurPos(){
     return(
-      <BinMarker
+      <CurPosMarker
         lat={this.state.lat}
         lng={this.state.lng}
-        clickable={false}
-        icon="male"
       />
     );
   }
