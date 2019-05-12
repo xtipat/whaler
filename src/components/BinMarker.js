@@ -1,22 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { Component } from 'react';
-import BinDetails from './Modal.js';
-
-const markerStyle = {
-  position: 'absolute',
-  width: 40,
-  height: 40,
-  left: -20,
-  top: -20,
-
-  border: '5px solid #f44336',
-  borderRadius: 40,
-  backgroundColor: '#f44336',
-  textAlign: 'center',
-  color: 'white',
-  fontSize: 16,
-  padding: 4
-};
+import BinDetails from './BinDetails.js';
+import '../assets/scss/marker.scss';
 
 class BinMarker extends Component {
   constructor (props) {
@@ -25,18 +10,19 @@ class BinMarker extends Component {
   }
   static defaultProps = {};
   checkClickable(){
-    if(!this.props.isMini)
+    if(this.props.clickable)
       return(
-      <button style={markerStyle} onClick={() => this.setState({ modalShow: true })}>
-        <FontAwesomeIcon icon='trash'/>
-      </button>
+      <div class="bin-marker-clickable" onClick={() => this.setState({ modalShow: true })}>
+        <FontAwesomeIcon icon={this.props.icon}/>
+      </div>
       );
-    else
+    else{
       return(
-      <button style={markerStyle}>
-        <FontAwesomeIcon icon='trash'/>
-      </button>
+      <div class="bin-marker-not-clickable">
+        <FontAwesomeIcon icon={this.props.icon}/>
+      </div>
       );
+    }
   }
   render(){
     let modalClose = () => this.setState({ modalShow: false });
@@ -47,6 +33,7 @@ class BinMarker extends Component {
         show={this.state.modalShow}
         onHide={modalClose}
         fbkey={this.props.fbkey}
+        icon={this.props.icon}
       />
       </div>
     );

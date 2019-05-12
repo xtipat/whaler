@@ -5,19 +5,25 @@
   color: white;
 }
 
-.nav-pills, .nav-link{
+.modal{
   font-size: 0.8rem;
+}
+
+.modal-header{
   font-weight: bold;
 
   &:focus {
     outline: none !important;
     outline-offset: none !important;
   }
+}
 
-  &:active {
-    outline: none !important;
-    outline-offset: none !important;
-  }
+.add-photo{
+  background: $gray;
+  border-radius: .25rem;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 a{
@@ -28,4 +34,10 @@ a{
     background-color: $dark;
     color: white;
   }
+}
+
+.hidden_input{
+  display: flex;
+  float: 100%;
+  height: 100%;
 }
