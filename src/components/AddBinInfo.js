@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import TagInput from './TagInput';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default class AddBinInfo extends Component {
   constructor(props){
     super(props);
@@ -59,7 +61,7 @@ export default class AddBinInfo extends Component {
     }
     else
     {
-      alert("Please fill all the information first :D");
+      toast.error("Please fill all the information first :D");
     }
   }
   typesHandle(items){
@@ -74,7 +76,7 @@ export default class AddBinInfo extends Component {
         centered
       >
         <Modal.Header closeButton>
-          Add a New Bin: 
+          Add a New Bin:
         </Modal.Header>
         <Modal.Body>
           <div style={{textAlign: 'center'}}>
@@ -82,7 +84,7 @@ export default class AddBinInfo extends Component {
               {this.checkImage()}
               <input type="file" name="file" onChange={this.picHandle} accept="image/*" className='hidden_input'/>
             </div>
-            <div style={{display: 'flex', justifyContent: 'flex-start'}}>Bin Types</div>           
+            <div style={{display: 'flex', justifyContent: 'flex-start'}}>Bin Types</div>
             <TagInput typesHandle={this.typesHandle}/>
             <br></br>
             <Button variant="yellow" onClick={this.submitHandle}>Submit</Button>

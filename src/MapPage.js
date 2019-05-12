@@ -3,6 +3,8 @@ import GoogleMapReact from 'google-map-react';
 import BinMarker from './components/BinMarker.js';
 import Loader from './components/Loader.js'
 import { db } from './firebase/firebase.js';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class MapPage extends Component {
   static defaultProps = {
@@ -39,12 +41,12 @@ class MapPage extends Component {
       },
       error => {
         this.setState({locLoaded: true});
-        alert("Can't get your current position, try enable your GPS");
+        toast.error("Can't get your current position, try enable your GPS");
       }
       )
     }
     else{
-      alert("We can't detect GPS on your device!");
+      toast.error("We can't detect GPS on your device!");
       this.setState({locLoaded: true});
     }
   }

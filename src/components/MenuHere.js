@@ -5,7 +5,8 @@ import { faMapMarkedAlt, faGift, faUserCircle, faPlusCircle, faMapPin, faCompass
 import '../assets/scss/menubar.scss';
 import AddBinInfo from './AddBinInfo.js';
 import MapPage from '../MapPage.js'
-import { Alert } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const styles = {
@@ -57,11 +58,11 @@ export default class MenuHere extends React.Component{
         this.setState({ modalShow: true });
       }
       else{
-        alert("Can't detect GPS");
+        toast.error("Can't detect GPS");
       }
     }
     else{
-      alert("Detecting your location...please try again in a second");
+      toast.error("Detecting your location...please try again in a second");
     }
   }
   render(){
