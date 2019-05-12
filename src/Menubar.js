@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { zoomIn } from 'react-animations';
 import styled, {keyframes} from 'styled-components';
 import './assets/scss/menubar.scss';
+import MenuHere from './components/MenuHere.js'
+import MenuLocate from './components/MenuLocate.js'
 
 const styles = {
   exMenuL: {
@@ -104,22 +106,8 @@ class Menubar extends React.Component {
                 this.state.plusButtonClass === 'plus-icon' ? <div />:
                   <Row className='justify-content-center'>
                     <Zoom>
-                      <div className='extended-menu-wrap' style={ styles.exMenuL }>
-                        <FontAwesomeIcon
-                          icon='map-pin'
-                          className='extended-menu-icon'
-                          size='2x'
-                          />
-                        <div className='extended-menu-label'>here</div>
-                      </div>
-                      <div className='extended-menu-wrap' style={ styles.exMenuM }>
-                        <FontAwesomeIcon
-                          icon='compass'
-                          className='extended-menu-icon'
-                          size='2x'
-                          />
-                        <div className='extended-menu-label'>locate</div>
-                      </div>
+                      <MenuHere onClick={ this.handleClose } />
+                      <MenuLocate onClick={ this.handleClose } />
                       <div className='extended-menu-wrap'
                         onClick={ this.handleClose }
                         style={ styles.exMenuR }>

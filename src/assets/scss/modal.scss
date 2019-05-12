@@ -1,0 +1,43 @@
+@import './_base.scss';
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  background: $primary;
+  color: white;
+}
+
+.modal{
+  font-size: 0.8rem;
+}
+
+.modal-header{
+  font-weight: bold;
+
+  &:focus {
+    outline: none !important;
+    outline-offset: none !important;
+  }
+}
+
+.add-photo{
+  background: $gray;
+  border-radius: .25rem;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 10px;
+}
+
+a{
+  color: black;
+  transition: all 0.2s ease-out;
+
+  &:hover {
+    background-color: $dark;
+    color: white;
+  }
+}
+
+.hidden_input{
+  display: flex;
+  float: 100%;
+  height: 100%;
+}
