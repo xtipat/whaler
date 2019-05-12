@@ -29,8 +29,10 @@ export default class AddBinInfo extends Component {
     newRef.set(
     {
       'detailAccept': 0,
+      'detailReject': 0,
       'location': {'lat': this.props.lat, 'lng': this.props.lng},
-      'locationAccept': 70,
+      'locationAccept': 0,
+      'locationReject': 0,
       'types': this.state.types
     });
 

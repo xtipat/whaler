@@ -27,11 +27,21 @@ export default class BinDetails extends React.Component {
         binLng: bin.location.lng,
         binTypes: bin.types,
         binLocAcpt: bin.locationAccept,
+        binLocRjct: bin.locationReject,
         binDetAcpt: bin.detailAccept,
+        binDetRjct: bin.detailReject,
         loaded: true
       });
+      this.calculatePercent();
     }
     );
+  }
+
+  calculatePercent(){
+    this.setState({
+      binLocAcptPer: Math.round(100*this.state.binLocAcpt/(this.state.binLocAcpt+this.state.binLocRjct)),
+      binDetAcptPer: Math.round(100*this.state.binDetAcpt/(this.state.binDetAcpt+this.state.binDetRjct))
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -104,13 +114,13 @@ export default class BinDetails extends React.Component {
       <div>
         <span>Location</span>
         <ProgressBar>
-          <ProgressBar striped variant="success" now={35} key={1} />
-          <ProgressBar striped variant="danger" now={20} key={2} />
+          <ProgressBar striped variant="success" now={this.state.binLocAcptPer} key={1} />
+          <ProgressBar striped variant="danger" now={100-this.state.binLocAcptPer} key={2} />
         </ProgressBar>
         <span>Detail</span>
         <ProgressBar>
-          <ProgressBar striped variant="success" now={50} key={1} />
-          <ProgressBar striped variant="danger" now={20} key={2} />
+          <ProgressBar striped variant="success" now={this.state.binDetAcptPer} key={1} />
+          <ProgressBar striped variant="danger" now={100-this.state.binDetAcptPer} key={2} />
         </ProgressBar>
       </div>
     );
