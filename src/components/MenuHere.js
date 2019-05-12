@@ -8,15 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const styles = {
   exMenuL: {
-    transform: 'translate(-180%, 0)'
-  },
-
-  exMenuM: {
-    transform: 'translate(-45%, -80%)'
-  },
-
-  exMenuR: {
-    transform: 'translate(90%, 0)'
+    transform: 'translate(-130%, 0)'
   },
 };
 

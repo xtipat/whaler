@@ -5,16 +5,8 @@ import '../assets/scss/menubar.scss';
 import Locate from './Locate.js';
 
 const styles = {
-  exMenuL: {
-    transform: 'translate(-180%, 0)'
-  },
-
   exMenuM: {
-    transform: 'translate(-45%, -80%)'
-  },
-
-  exMenuR: {
-    transform: 'translate(90%, 0)'
+    transform: 'translate(20%, -80%)'
   },
 };
 

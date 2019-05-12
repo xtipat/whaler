@@ -9,16 +9,8 @@ import MenuHere from './components/MenuHere.js'
 import MenuLocate from './components/MenuLocate.js'
 
 const styles = {
-  exMenuL: {
-    transform: 'translate(-180%, 0)'
-  },
-
-  exMenuM: {
-    transform: 'translate(-45%, -80%)'
-  },
-
   exMenuR: {
-    transform: 'translate(90%, 0)'
+    transform: 'translate(160%, 0)'
   },
 };
 
@@ -101,19 +93,21 @@ class Menubar extends React.Component {
               {
                 this.state.plusButtonClass === 'plus-icon' ? <div />:
                   <Row className='justify-content-center'>
-                    <Zoom>
-                      <MenuHere onClick={ this.handleClose } />
-                      <MenuLocate onClick={ this.handleClose } />
-                      <div className='extended-menu-wrap'
-                        onClick={ this.handleClose }
-                        style={ styles.exMenuR }>
-                        <FontAwesomeIcon
-                          icon='times'
-                          className='cancel-icon'
-                          />
-                        <div className='cancel-label'>cancel</div>
-                      </div>
-                    </Zoom>
+                    <Col>
+                      <Zoom>
+                        <MenuHere onClick={ this.handleClose } />
+                        <MenuLocate onClick={ this.handleClose } />
+                        <div className='extended-menu-wrap'
+                          onClick={ this.handleClose }
+                          style={ styles.exMenuR }>
+                          <FontAwesomeIcon
+                            icon='times'
+                            className='cancel-icon'
+                            />
+                          <div className='cancel-label'>cancel</div>
+                        </div>
+                      </Zoom>
+                    </Col>
                   </Row>
               }
             </Col>
