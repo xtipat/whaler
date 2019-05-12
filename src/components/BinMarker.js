@@ -12,15 +12,15 @@ class BinMarker extends Component {
   checkClickable(){
     if(this.props.clickable)
       return(
-      <button class="bin-marker-clickable" onClick={() => this.setState({ modalShow: true })}>
+      <div class="bin-marker-clickable" onClick={() => this.setState({ modalShow: true })}>
         <FontAwesomeIcon icon={this.props.icon}/>
-      </button>
+      </div>
       );
     else{
       return(
-      <button class="bin-marker-not-clickable">
+      <div class="bin-marker-not-clickable">
         <FontAwesomeIcon icon={this.props.icon}/>
-      </button>
+      </div>
       );
     }
   }

@@ -60,7 +60,7 @@ class MapPage extends Component {
     if(!this.props.isMini)
       db.ref(`bins`).once('value').then(snapshot => {
         snapshot.forEach((child) => {
-          var a = child.val().location;
+          var a = child.val();
           a.key = child.key;
           this.setState({
             markers: this.state.markers.concat(a)
@@ -82,18 +82,31 @@ class MapPage extends Component {
 
   markAllBins(){
     let markers = [];
-    for(let i = 0;i<this.state.markers.length;i++)
-    {
-      markers.push(
-        <BinMarker
-          lat={this.state.markers[i].lat}
-          lng={this.state.markers[i].lng}
-          key={this.state.markers[i].key}
-          fbkey={this.state.markers[i].key}
-          clickable = {true}
-          icon="trash"
-        />
-      );
+    for(let i = 0;i<this.state.markers.length;i++){
+      if(this.state.markers[i].locationAccept>=100){
+        markers.push(
+          <BinMarker
+            lat={this.state.markers[i].location.lat}
+            lng={this.state.markers[i].location.lng}
+            key={this.state.markers[i].key}
+            fbkey={this.state.markers[i].key}
+            clickable = {false}
+            icon="trash"
+          />
+        );
+      }
+      else{
+        markers.push(
+          <BinMarker
+            lat={this.state.markers[i].location.lat}
+            lng={this.state.markers[i].location.lng}
+            key={this.state.markers[i].key}
+            fbkey={this.state.markers[i].key}
+            clickable = {true}
+            icon="trash"
+          />
+        );
+      }
     }
     return markers
   }

@@ -39,8 +39,10 @@ export default class BinDetails extends React.Component {
 
   calculatePercent(){
     this.setState({
-      binLocAcptPer: Math.round(100*this.state.binLocAcpt/(this.state.binLocAcpt+this.state.binLocRjct)),
-      binDetAcptPer: Math.round(100*this.state.binDetAcpt/(this.state.binDetAcpt+this.state.binDetRjct))
+      binLocAcptPer: Math.round(100*this.state.binLocAcpt/100),
+      binDetAcptPer: Math.round(100*this.state.binDetAcpt/100),
+      binLocRjctPer: Math.round(100*this.state.binLocRjct/100),
+      binDetRjctPer: Math.round(100*this.state.binDetRjct/100)
     });
   }
 
@@ -113,15 +115,14 @@ export default class BinDetails extends React.Component {
     return(
       <div>
         <span>Location</span>
-        <ProgressBar>
-          <ProgressBar striped variant="success" now={this.state.binLocAcptPer} key={1} />
-          <ProgressBar striped variant="danger" now={100-this.state.binLocAcptPer} key={2} />
-        </ProgressBar>
+        <ProgressBar striped variant="success" now={this.state.binLocAcptPer} />
+        <br></br>
+        <ProgressBar striped variant="danger" now={this.state.binLocRjctPer} />
+        <br></br>
         <span>Detail</span>
-        <ProgressBar>
-          <ProgressBar striped variant="success" now={this.state.binDetAcptPer} key={1} />
-          <ProgressBar striped variant="danger" now={100-this.state.binDetAcptPer} key={2} />
-        </ProgressBar>
+        <ProgressBar striped variant="success" now={this.state.binDetAcptPer} />
+        <br></br>
+        <ProgressBar striped variant="danger" now={this.state.binDetRjctPer} />
       </div>
     );
   }

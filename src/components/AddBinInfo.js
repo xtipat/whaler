@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
 import {db, storage} from '../firebase/firebase.js';
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import MapPage from '../MapPage.js';
@@ -90,7 +91,6 @@ export default class AddBinInfo extends Component {
             <TagInput typesHandle={this.typesHandle}/>
             <br></br>
             <Button variant="yellow" onClick={this.submitHandle}>Submit</Button>
-            <hr/>
           </div>
         </Modal.Body>
       </Modal>
