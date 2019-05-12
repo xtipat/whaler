@@ -74,7 +74,6 @@ export default class MenuHere extends React.Component{
           <FontAwesomeIcon
             icon='map-pin'
             className='extended-menu-icon'
-            size='2x'
           />
           <div className='extended-menu-label'>here</div>
         </div>
