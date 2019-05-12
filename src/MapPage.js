@@ -68,7 +68,7 @@ class MapPage extends Component {
           this.setState({markers: [...this.state.markers, a]});
         })
       });
-      this.setState({loading: false,binsLoaded: true})  
+      this.setState({loading: false,binsLoaded: true})
     }
     else
     {
@@ -87,7 +87,7 @@ class MapPage extends Component {
     let markers = [];
     //console.log(this.state.markers)
     for(let i = 0;i<this.state.markers.length;i++){
-      if(this.state.markers[i].locationAccept>=100){
+      if(this.state.markers[i].locationAccept>=10){
         markers.push(
           <BinMarker
             lat={this.state.markers[i].location.lat}

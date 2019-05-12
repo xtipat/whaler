@@ -48,7 +48,12 @@ export default class BinDetails extends React.Component {
   }
 
   updateLocAcpt(){
-    db.ref(`bins/${this.state.binKey}/locationAccept`).transaction(locationAccept => locationAccept++);
+    db.ref(`bins/${this.state.binKey}/locationAccept`).transaction(function(locationAccept) {
+    if (locationAccept) {
+    locationAccept = locationAccept + 1;
+  }
+  return locationAccept;
+});;
   }
 
   updateLocRjct(){
@@ -65,10 +70,10 @@ export default class BinDetails extends React.Component {
 
   calculatePercent(){
     this.setState({
-      binLocAcptPer: Math.round(100*this.state.binLocAcpt/100),
-      binDetAcptPer: Math.round(100*this.state.binDetAcpt/100),
-      binLocRjctPer: Math.round(100*this.state.binLocRjct/100),
-      binDetRjctPer: Math.round(100*this.state.binDetRjct/100)
+      binLocAcptPer: Math.round(10*this.state.binLocAcpt/100),
+      binDetAcptPer: Math.round(10*this.state.binDetAcpt/100),
+      binLocRjctPer: Math.round(10*this.state.binLocRjct/100),
+      binDetRjctPer: Math.round(10*this.state.binDetRjct/100)
     });
   }
 
