@@ -11,7 +11,6 @@ import {faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import TagInput from './TagInput';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Redirect } from 'react-router-dom';
 
 export default class AddBinInfo extends Component {
   constructor(props){
@@ -68,6 +67,7 @@ export default class AddBinInfo extends Component {
     if(this.state.picExists && this.state.types.length>0)
     {
       this.writeToDatabase();
+      window.location = '/';
     }
     else
     {
@@ -76,12 +76,6 @@ export default class AddBinInfo extends Component {
   }
   typesHandle(items){
     this.setState({types:items});
-  }
-
-  renderRedirect(){
-    if (this.state.redirect) {
-      return <Redirect to='/' />
-    }
   }
 
   render(){
