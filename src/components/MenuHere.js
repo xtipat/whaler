@@ -5,6 +5,8 @@ import { faMapMarkedAlt, faGift, faUserCircle, faPlusCircle, faMapPin, faCompass
 import '../assets/scss/menubar.scss';
 import AddBinInfo from './AddBinInfo.js';
 import MapPage from '../MapPage.js'
+import { Alert } from 'react-bootstrap';
+
 
 const styles = {
   exMenuL: {
