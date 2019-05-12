@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { db } from '../firebase/firebase.js';
+import { db, storage } from '../firebase/firebase.js';
 import { Modal, Nav, Tab, Button, ProgressBar } from 'react-bootstrap';
 import MapPage from '../MapPage.js';
 import BinMarker from './BinMarker.js';
@@ -13,16 +13,17 @@ export default class BinDetails extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-        loaded: false,
-        show: false
+      picLoaded: false,
+      loaded: false,
+      show: false
     };
   };
 
   fetchBinData(){
-    //console.log('YO');
     db.ref(`bins/${this.props.fbkey}`).once('value').then(snapshot => {
       let bin = snapshot.val();
       this.setState({
+        binKey: this.props.fbkey,
         binLat: bin.location.lat,
         binLng: bin.location.lng,
         binTypes: bin.types,
@@ -35,6 +36,31 @@ export default class BinDetails extends React.Component {
       this.calculatePercent();
     }
     );
+    var strRef = storage.ref();
+    strRef.child(`${this.props.fbkey}`).getDownloadURL().then((url) => {
+      this.setState({
+        binPicSrc: url,
+        picLoaded: true
+      });
+    }).catch(function(error) {
+      console.log(error);
+    });
+  }
+
+  updateLocAcpt(){
+    db.ref(`bins/${this.state.binKey}/locationAccept`).transaction(locationAccept => locationAccept++);
+  }
+
+  updateLocRjct(){
+    db.ref(`bins/${this.state.binKey}/locationReject`).transaction(locationReject => locationReject++);
+  }
+
+  updateDetAcpt(){
+    db.ref(`bins/${this.state.binKey}/detailAccept`).transaction(detailAccept => detailAccept++);
+  }
+
+  updateDetRjct(){
+    db.ref(`bins/${this.state.binKey}/detailReject`).transaction(detailReject => detailReject++);
   }
 
   calculatePercent(){
@@ -74,16 +100,15 @@ export default class BinDetails extends React.Component {
           </GoogleMapReact>
         </div>
         <div style={{textAlign: 'right'}}>
-          <Button variant="yellow"><FontAwesomeIcon icon='check-circle'/> Accept</Button>
+          <Button variant="yellow" onClick={this.updateLocAcpt.bind(this)}><FontAwesomeIcon icon='check-circle'/> Accept</Button>
           <div class="divider"></div>
-          <Button variant="black"><FontAwesomeIcon icon='times-circle'/> Reject</Button>
+          <Button variant="black" onClick={this.updateLocRjct.bind(this)}><FontAwesomeIcon icon='times-circle'/> Reject</Button>
         </div>
       </div>
     );
   }
   writeAllBinTypes(){
     if(this.state.loaded == true){
-      console.log(this.state.binLat)
       let types = [];
       for(let i = 0;i<this.state.binTypes.length;i++)
       {
@@ -94,18 +119,24 @@ export default class BinDetails extends React.Component {
       return types
     }
   }
+  checkPicture(){
+    if(this.state.picLoaded == false)
+      return <img src="http://placekitten.com/270/200"/>
+    else
+      return <img src={this.state.binPicSrc} width='100%' height='100%'/>
+  }
   detailsContents(){
     return(
       <div>
-        <img src="http://placekitten.com/270/200" />
+        {this.checkPicture()}
         <p>Bin Type</p>
         <nav class="mb-0 navbar navbar-light bg-dark">
           {this.writeAllBinTypes()}
         </nav>
         <div style={{textAlign: 'right'}}>
-          <Button variant="yellow"><FontAwesomeIcon icon='check-circle'/> Accept</Button>
+          <Button variant="yellow" onClick={this.updateDetAcpt.bind(this)}><FontAwesomeIcon icon='check-circle'/> Accept</Button>
           <div class="divider"></div>
-          <Button variant="black"><FontAwesomeIcon icon='times-circle'/> Reject</Button>
+          <Button variant="black" onClick={this.updateDetRjct.bind(this)}><FontAwesomeIcon icon='times-circle'/> Reject</Button>
         </div>
       </div>
     );

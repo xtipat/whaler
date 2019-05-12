@@ -58,17 +58,18 @@ class MapPage extends Component {
       loading: true
     });
     if(!this.props.isMini)
-      db.ref(`bins`).once('value').then(snapshot => {
-        snapshot.forEach((child) => {
-          var a = child.val();
-          a.key = child.key;
-          this.setState({
-            markers: this.state.markers.concat(a)
-          });
-        });
-        this.setState({loading: false,binsLoaded: true})
-        }
-      );
+    {
+      db.ref(`bins`).on('value', (snapshot) => {
+        this.setState({markers: []});
+        let val = snapshot.val();
+        Object.keys(val).forEach( (item) => {
+          var a = val[item];
+          a.key = item;
+          this.setState({markers: [...this.state.markers, a]});
+        })
+      });
+      this.setState({loading: false,binsLoaded: true})  
+    }
     else
     {
       this.setState({loading: false,binsLoaded: true});
@@ -79,9 +80,12 @@ class MapPage extends Component {
     this.fetchAllBinsData();
     this.getGeoLocation();
   }
-
+  componentWillUnmount() {
+    db.ref(`bins`).off();
+  }
   markAllBins(){
     let markers = [];
+    //console.log(this.state.markers)
     for(let i = 0;i<this.state.markers.length;i++){
       if(this.state.markers[i].locationAccept>=100){
         markers.push(

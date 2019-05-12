@@ -9,10 +9,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TagInput from './TagInput';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 export default class AddBinInfo extends Component {
   constructor(props){
     super(props);
     this.state = {
+      redirect: false,
       picExists: false,
       imgsrc: "http://placekitten.com/270/200",
       imgfile: null,
@@ -34,7 +36,11 @@ export default class AddBinInfo extends Component {
       'locationReject': 0,
       'types': this.state.types
     });
-
+    var strRef = storage.ref().child(newRef.key);
+    strRef.put(this.state.imgfile).then((snapshot) => {
+      console.log("Uploaded Pic",newRef.key);
+      this.props.onHide();
+    });
   }
   checkImage(){
     if(this.state.picExists){
@@ -59,6 +65,7 @@ export default class AddBinInfo extends Component {
     if(this.state.picExists && this.state.types.length>0)
     {
       this.writeToDatabase();
+      window.location = '/';
     }
     else
     {
@@ -66,9 +73,9 @@ export default class AddBinInfo extends Component {
     }
   }
   typesHandle(items){
-    console.log("Yay",items);
     this.setState({types:items});
   }
+
   render(){
     return(
       <Modal
