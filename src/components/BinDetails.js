@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { db, storage } from '../firebase/firebase.js';
+import { db, storage, firebaseConfig } from '../firebase/firebase.js';
 import { Modal, Nav, Tab, Button, ProgressBar } from 'react-bootstrap';
 import MapPage from '../MapPage.js';
 import BinMarker from './BinMarker.js';
 import GoogleMapReact from 'google-map-react';
 import Loader from './Loader.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import firebase from "firebase/app";
+import { FirebaseDatabaseProvider, FirebaseDatabaseTransaction } from "@react-firebase/database";
 import '../assets/scss/modal.scss';
 
 
@@ -36,7 +38,6 @@ export default class BinDetails extends React.Component {
     db.ref(`bins/${this.props.fbkey}`).once('value').then(snapshot => {
       let bin = snapshot.val();
       this.setState({
-        binKey: this.props.fbkey,
         binLat: bin.location.lat,
         binLng: bin.location.lng,
         binTypes: bin.types,
@@ -57,22 +58,6 @@ export default class BinDetails extends React.Component {
     }).catch(function(error) {
       console.log(error);
     });
-  }
-
-  updateLocAcpt(){
-    db.ref(`bins/${this.state.binKey}/locationAccept`).transaction(locationAccept => locationAccept++);
-  }
-
-  updateLocRjct(){
-    db.ref(`bins/${this.state.binKey}/locationReject`).transaction(locationReject => locationReject++);
-  }
-
-  updateDetAcpt(){
-    db.ref(`bins/${this.state.binKey}/detailAccept`).transaction(detailAccept => detailAccept++);
-  }
-
-  updateDetRjct(){
-    db.ref(`bins/${this.state.binKey}/detailReject`).transaction(detailReject => detailReject++);
   }
 
   calculatePercent(){
@@ -135,9 +120,32 @@ export default class BinDetails extends React.Component {
           </GoogleMapReact>
         </div>
         <div style={{textAlign: 'center'}}>
-          <Button variant="yellow" onClick={this.updateLocAcpt.bind(this)}><FontAwesomeIcon icon='check-circle'/> Accept</Button>
-          <div className="divider"></div>
-          <Button variant="black" onClick={this.updateLocRjct.bind(this)}><FontAwesomeIcon icon='times-circle'/> Reject</Button>
+          <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
+            <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/locationAccept`}>
+              {({ runTransaction }) => {
+                return (
+                  <Button variant="yellow" onClick={() => {
+                    runTransaction({reducer: val => {return val + 1;}});
+                  }}>
+                    <FontAwesomeIcon icon='check-circle'/> Accept
+                  </Button>
+                );
+              }}
+            </FirebaseDatabaseTransaction>
+            <div className="divider"></div>
+            <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/locationReject`}>
+              {({ runTransaction }) => {
+                return (
+                  <Button variant="black" onClick={() => {
+                    runTransaction({reducer: val => {return val + 1;}});
+                  }}>
+                    <FontAwesomeIcon icon='times-circle'/> Reject
+                  </Button>
+                );
+              }}
+            </FirebaseDatabaseTransaction>
+            <div className="divider"></div>
+          </FirebaseDatabaseProvider>
         </div>
       </div>
     );
@@ -174,14 +182,39 @@ export default class BinDetails extends React.Component {
     return(
       <div>
         {this.checkPicture()}
-        <div className='modal-content-title'>Bin Type</div>
-        <div className='tag-wrap'>
-          {this.writeAllBinTypes()}
+        <div className="bintypes-container">
+          <div className='modal-content-title'>Bin Type</div>
+            <div className='tag-wrap'>
+              {this.writeAllBinTypes()}
+            </div>
         </div>
         <div style={{textAlign: 'center'}}>
-          <Button variant="yellow" onClick={this.updateDetAcpt.bind(this)}><FontAwesomeIcon icon='check-circle'/> Accept</Button>
+        <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
+          <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/detailAccept`}>
+            {({ runTransaction }) => {
+              return (
+                <Button variant="yellow" onClick={() => {
+                  runTransaction({reducer: val => {return val + 1;}});
+                }}>
+                  <FontAwesomeIcon icon='check-circle'/> Accept
+                </Button>
+              );
+            }}
+          </FirebaseDatabaseTransaction>
           <div className="divider"></div>
-          <Button variant="black" onClick={this.updateDetRjct.bind(this)}><FontAwesomeIcon icon='times-circle'/> Reject</Button>
+          <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/detailReject`}>
+            {({ runTransaction }) => {
+              return (
+                <Button variant="black" onClick={() => {
+                  runTransaction({reducer: val => {return val + 1;}});
+                }}>
+                  <FontAwesomeIcon icon='times-circle'/> Reject
+                </Button>
+              );
+            }}
+          </FirebaseDatabaseTransaction>
+          <div className="divider"></div>
+        </FirebaseDatabaseProvider>
         </div>
       </div>
     );

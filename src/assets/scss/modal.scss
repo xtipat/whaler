@@ -70,7 +70,7 @@
 }
 
 .custom-close-label {
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-family: $titleboldfont;
   display: inline;
   line-height: 1.5rem;
@@ -116,4 +116,28 @@ a{
   display: flex;
   float: 100%;
   height: 100%;
+}
+
+.bintypes-container{
+  position: relative;
+  padding: 1rem;
+  margin: 0rem -15px 0;
+}
+
+.alert {
+  margin-bottom: 4px;
+  height: 30px;
+  line-height:30px;
+  padding:0px 15px;
+}
+
+.picframe{
+  width: 100%;
+  height: 100%;
+  border-radius: 3%;
+}
+
+.types-head{
+  margin: 1px  0px 2rem 0px;
+  font-family: $semiboldfont;
 }
