@@ -66,6 +66,11 @@ body {
     outline: none !important;
     outline-offset: none !important;
   }
+
+  &:active {
+    outline: none !important;
+    outline-offset: none !important;
+  }
 }
 
 .btn-yellow {

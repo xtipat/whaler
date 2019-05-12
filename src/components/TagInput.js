@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import '../assets/scss/tagInput.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export default class TagInput extends React.Component {
   constructor(props) {
@@ -66,7 +64,7 @@ export default class TagInput extends React.Component {
       this.setState(state => ({
         items: state.items.filter((item, i) => i !== index)
       }));
-      
+
     }
   }
 }

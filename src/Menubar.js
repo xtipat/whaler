@@ -95,7 +95,7 @@ class Menubar extends React.Component {
         </div>
         <div>
           <Row className='justify-content-center'>
-            <Col xs={3} className='circle-wrap'>
+            <Col xs={4} className='circle-wrap'>
               <button className='plus-button-wrap' onClick={this.handlePlusClick}>
                 <FontAwesomeIcon
                   icon='plus-circle'

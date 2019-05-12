@@ -4,11 +4,17 @@
   background: $primary;
   color: white;
 }
+
 .nav-pills, .nav-link{
   font-size: 0.8rem;
   font-weight: bold;
 
   &:focus {
+    outline: none !important;
+    outline-offset: none !important;
+  }
+
+  &:active {
     outline: none !important;
     outline-offset: none !important;
   }
