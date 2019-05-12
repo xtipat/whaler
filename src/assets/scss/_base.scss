@@ -16,6 +16,9 @@ body {
   font-family: $defaultfont;
 }
 
+
+*:focus {outline:none !important}
+
 .outer-wrap {
   background: white;
   height: 100vh;

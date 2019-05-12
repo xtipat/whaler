@@ -9,16 +9,8 @@ import MenuHere from './components/MenuHere.js'
 import MenuLocate from './components/MenuLocate.js'
 
 const styles = {
-  exMenuL: {
-    transform: 'translate(-180%, 0)'
-  },
-
-  exMenuM: {
-    transform: 'translate(-45%, -80%)'
-  },
-
   exMenuR: {
-    transform: 'translate(90%, 0)'
+    transform: 'translate(160%, 0)'
   },
 };
 
@@ -57,7 +49,6 @@ class Menubar extends React.Component {
               <NavLink exact to='/' className='icon-default' activeClassName='icon-active'>
                 <FontAwesomeIcon
                   icon='map-marked-alt'
-                  size="2x"
                   onClick={ this.handleClose }
                   />
               </NavLink>
@@ -66,7 +57,6 @@ class Menubar extends React.Component {
               <NavLink to='/explore' className='icon-default'activeClassName='icon-active'>
                 <FontAwesomeIcon
                   icon='search'
-                  size="2x"
                   onClick={ this.handleClose }
                   />
               </NavLink>
@@ -77,7 +67,6 @@ class Menubar extends React.Component {
               <NavLink to='/redeem' className='icon-default' activeClassName='icon-active'>
                 <FontAwesomeIcon
                   icon='gift'
-                  size="2x"
                   onClick={ this.handleClose }
                   />
               </NavLink>
@@ -86,7 +75,6 @@ class Menubar extends React.Component {
               <NavLink to='/profile' className='icon-default' activeClassName='icon-active'>
                 <FontAwesomeIcon
                   icon='user-circle'
-                  size='2x'
                   onClick={ this.handleClose }
                   />
               </NavLink>
@@ -100,25 +88,31 @@ class Menubar extends React.Component {
                 <FontAwesomeIcon
                   icon='plus-circle'
                   className= {this.state.plusButtonClass}
+<<<<<<< HEAD
                   size='5x'/>
               </div>
+=======
+                  />
+              </button>
+>>>>>>> 4f6494a3a02c91c8f532772d4099aede7d360dd3
               {
                 this.state.plusButtonClass === 'plus-icon' ? <div />:
                   <Row className='justify-content-center'>
-                    <Zoom>
-                      <MenuHere onClick={ this.handleClose } />
-                      <MenuLocate onClick={ this.handleClose } />
-                      <div className='extended-menu-wrap'
-                        onClick={ this.handleClose }
-                        style={ styles.exMenuR }>
-                        <FontAwesomeIcon
-                          icon='times'
-                          className='cancel-icon'
-                          size='2x'
-                          />
-                        <div className='cancel-label'>cancel</div>
-                      </div>
-                    </Zoom>
+                    <Col>
+                      <Zoom>
+                        <MenuHere onClick={ this.handleClose } />
+                        <MenuLocate onClick={ this.handleClose } />
+                        <div className='extended-menu-wrap'
+                          onClick={ this.handleClose }
+                          style={ styles.exMenuR }>
+                          <FontAwesomeIcon
+                            icon='times'
+                            className='cancel-icon'
+                            />
+                          <div className='cancel-label'>cancel</div>
+                        </div>
+                      </Zoom>
+                    </Col>
                   </Row>
               }
             </Col>

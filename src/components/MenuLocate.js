@@ -5,16 +5,8 @@ import '../assets/scss/menubar.scss';
 import Locate from './Locate.js';
 
 const styles = {
-  exMenuL: {
-    transform: 'translate(-180%, 0)'
-  },
-
   exMenuM: {
-    transform: 'translate(-45%, -80%)'
-  },
-
-  exMenuR: {
-    transform: 'translate(90%, 0)'
+    transform: 'translate(20%, -80%)'
   },
 };
 
@@ -27,7 +19,7 @@ export default class MenuLocate extends React.Component{
   render(){
     return(
       <div>
-        <NavLink to='/locate' className='icon-default' activeClassName='icon-active' onClick={this.props.onClick}>
+        <NavLink to='/locate' onClick={this.props.onClick}>
           <div
           className='extended-menu-wrap'
           style={ styles.exMenuM }
@@ -35,7 +27,6 @@ export default class MenuLocate extends React.Component{
             <FontAwesomeIcon
               icon='compass'
               className='extended-menu-icon'
-              size='2x'
             />
           <div className='extended-menu-label'>locate</div>
         </div>

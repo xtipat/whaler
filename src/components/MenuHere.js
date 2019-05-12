@@ -8,15 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const styles = {
   exMenuL: {
-    transform: 'translate(-180%, 0)'
-  },
-
-  exMenuM: {
-    transform: 'translate(-45%, -80%)'
-  },
-
-  exMenuR: {
-    transform: 'translate(90%, 0)'
+    transform: 'translate(-130%, 0)'
   },
 };
 
@@ -74,7 +66,6 @@ export default class MenuHere extends React.Component{
           <FontAwesomeIcon
             icon='map-pin'
             className='extended-menu-icon'
-            size='2x'
           />
           <div className='extended-menu-label'>here</div>
         </div>
