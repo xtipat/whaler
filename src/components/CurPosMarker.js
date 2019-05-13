@@ -9,8 +9,8 @@ export default class CurPosMarker extends Component {
 
   render(){
     return(
-      <div class="outer-circle">
-        <div class="inner-circle"></div>
+      <div className="outer-circle">
+        <div className="inner-circle"></div>
       </div>
     );
   }

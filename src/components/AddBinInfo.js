@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import {db, storage} from '../firebase/firebase.js';
-import ProgressBar from 'react-bootstrap/ProgressBar'
 import MapPage from '../MapPage.js';
 import '../assets/scss/modal.scss';
 import { Modal, Nav, Button } from 'react-bootstrap';

@@ -5,10 +5,23 @@ import MapPage from '../MapPage.js';
 import BinMarker from './BinMarker.js';
 import GoogleMapReact from 'google-map-react';
 import Loader from './Loader.js';
-import '../assets/scss/modal.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import firebase from "firebase/app";
 import { FirebaseDatabaseProvider, FirebaseDatabaseTransaction } from "@react-firebase/database";
+import '../assets/scss/modal.scss';
+
+
+const styles = {
+  modalContentWrap: {
+    background: 'white',
+    width: '100%',
+    padding: '20px',
+  },
+
+  colors: {
+    primary: '#FEC93F'
+  }
+}
 
 export default class BinDetails extends React.Component {
 
@@ -33,8 +46,7 @@ export default class BinDetails extends React.Component {
         binDetAcpt: bin.detailAccept,
         binDetRjct: bin.detailReject,
         loaded: true
-      });
-      this.calculatePercent();
+      }, ()=>this.calculatePercent());
     }
     );
     var strRef = storage.ref();
@@ -49,12 +61,35 @@ export default class BinDetails extends React.Component {
   }
 
   calculatePercent(){
+    if(this.state.binLocAcpt === undefined)
+      this.setState({ binLocAcpt: 0})
+    if(this.state.binLocRjct === undefined)
+      this.setState({ binLocRjct: 0})
+    if(this.state.binDetAcpt === undefined)
+      this.setState({ binDetAcpt: 0})
+    if(this.state.binDetRjctAcpt === undefined)
+      this.setState({ binDetRjct: 0})
+
     this.setState({
-      binLocAcptPer: Math.round(100*this.state.binLocAcpt/50),
-      binDetAcptPer: Math.round(100*this.state.binDetAcpt/50),
-      binLocRjctPer: Math.round(100*this.state.binLocRjct/50),
-      binDetRjctPer: Math.round(100*this.state.binDetRjct/50)
+      binLocAcptPer: Math.round(100*this.state.binLocAcpt/(this.state.binLocAcpt+this.state.binLocRjct)),
+      binDetAcptPer: Math.round(100*this.state.binDetAcpt/(this.state.binDetAcpt + this.state.binDetRjct)),
+      binLocRjctPer: Math.round(100*this.state.binLocRjct/100),
+      binDetRjctPer: Math.round(100*this.state.binDetRjct/100)
     });
+
+    if(this.state.binLocAcpt + this.state.binLocRjct === 0)
+      this.setState({
+        binLocAcptPer: 0,
+        binLocRjctPer: 0
+      })
+
+    if(this.state.binDetAcpt + this.state.binDetRjct === 0)
+      this.setState({
+        binDetAcptPer: 0,
+        binDetRjctPer: 0
+      })
+
+    console.log(this.state.binLocAcptPer)
   }
 
   componentDidUpdate(prevProps) {
@@ -84,7 +119,7 @@ export default class BinDetails extends React.Component {
             />
           </GoogleMapReact>
         </div>
-        <div style={{textAlign: 'right'}}>
+        <div style={{textAlign: 'center'}}>
           <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
             <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/locationAccept`}>
               {({ runTransaction }) => {
@@ -97,7 +132,7 @@ export default class BinDetails extends React.Component {
                 );
               }}
             </FirebaseDatabaseTransaction>
-            <div class="divider"></div>
+            <div className="divider"></div>
             <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/locationReject`}>
               {({ runTransaction }) => {
                 return (
@@ -109,7 +144,7 @@ export default class BinDetails extends React.Component {
                 );
               }}
             </FirebaseDatabaseTransaction>
-            <div class="divider"></div>
+            <div className="divider"></div>
           </FirebaseDatabaseProvider>
         </div>
       </div>
@@ -121,27 +156,39 @@ export default class BinDetails extends React.Component {
       for(let i = 0;i<this.state.binTypes.length;i++)
       {
         types.push(
-          <div class="alert alert-warning">{this.state.binTypes[i]}</div>
+          <div className="tag-container">{this.state.binTypes[i]}</div>
         );
       }
       return types
     }
   }
+
   checkPicture(){
     if(this.state.picLoaded == false)
-      return <img className="picframe" src="http://placekitten.com/270/200"/>
+      return (
+        <div style={{ textAlign: 'center'}}>
+          <img src="http://placekitten.com/270/200"/>
+        </div>
+      )
     else
-      return <img className="picframe" src={this.state.binPicSrc}/ >
+      return (
+        <div style={{ textAlign: 'center'}}>
+          <img src={this.state.binPicSrc} width='100%' height='100%'/>
+        </div>
+      )
   }
+
   detailsContents(){
     return(
       <div>
         {this.checkPicture()}
-        <div class="bintypes-container">
-          <span class='types-head'>Bin Type</span>
-          {this.writeAllBinTypes()}
+        <div className="bintypes-container">
+          <div className='modal-content-title'>Bin Type</div>
+            <div className='tag-wrap'>
+              {this.writeAllBinTypes()}
+            </div>
         </div>
-        <div style={{textAlign: 'right'}}>
+        <div style={{textAlign: 'center'}}>
         <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
           <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/detailAccept`}>
             {({ runTransaction }) => {
@@ -154,7 +201,7 @@ export default class BinDetails extends React.Component {
               );
             }}
           </FirebaseDatabaseTransaction>
-          <div class="divider"></div>
+          <div className="divider"></div>
           <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/detailReject`}>
             {({ runTransaction }) => {
               return (
@@ -166,7 +213,7 @@ export default class BinDetails extends React.Component {
               );
             }}
           </FirebaseDatabaseTransaction>
-          <div class="divider"></div>
+          <div className="divider"></div>
         </FirebaseDatabaseProvider>
         </div>
       </div>
@@ -176,15 +223,11 @@ export default class BinDetails extends React.Component {
   resultsContents(){
     return(
       <div>
-        <span>Location</span>
+        <div className='modal-content-title'>Location Reliability</div>
         <ProgressBar striped variant="success" now={this.state.binLocAcptPer} />
-        <br></br>
-        <ProgressBar striped variant="danger" now={this.state.binLocRjctPer} />
-        <br></br>
-        <span>Detail</span>
+
+        <div className='modal-content-title'>Info Reliability</div>
         <ProgressBar striped variant="success" now={this.state.binDetAcptPer} />
-        <br></br>
-        <ProgressBar striped variant="danger" now={this.state.binDetRjctPer} />
       </div>
     );
   }
@@ -198,28 +241,43 @@ export default class BinDetails extends React.Component {
           centered
         >
           <Tab.Container defaultActiveKey="location">
-            <Modal.Header closeButton>
+            <Modal.Header style={{ background: styles.colors.primary, border: 'none' }}>
+              <div style={{ textAlign: 'right', width: '100%'}}>
+                <div className='custom-close-wrap' onClick={ this.props.onHide }>
+                  <div className='custom-close-label'>close</div>
+                  <FontAwesomeIcon icon='times-circle' className='custom-close-icon'/>
+                </div>
+              </div>
+            </Modal.Header>
+            <Modal.Body style={{ padding: 0, background: styles.colors.primary }}>
               <Nav fill variant="pills">
                 <Nav.Item>
-                  <Nav.Link eventKey="location">Location</Nav.Link>
+                  <Nav.Link eventKey="location">
+                    <FontAwesomeIcon icon='map-marked-alt' className='nav-icon' />
+                    <div className='nav-label'>location</div>
+                  </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="details">Details</Nav.Link>
+                  <Nav.Link eventKey="details">
+                    <FontAwesomeIcon icon='info-circle' className='nav-icon' />
+                    <div className='nav-label'>info</div>
+                  </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="results">Results</Nav.Link>
+                  <Nav.Link eventKey="results">
+                    <FontAwesomeIcon icon='poll-h' className='nav-icon' />
+                    <div className='nav-label'>statistics</div>
+                  </Nav.Link>
                 </Nav.Item>
               </Nav>
-            </Modal.Header>
-            <Modal.Body>
               <Tab.Content>
-                <Tab.Pane eventKey="location">
+                <Tab.Pane eventKey="location" style={ styles.modalContentWrap }>
                   {this.locationContents()}
                 </Tab.Pane>
-                <Tab.Pane eventKey="details">
+                <Tab.Pane eventKey="details" style={ styles.modalContentWrap }>
                   {this.detailsContents()}
                 </Tab.Pane>
-                <Tab.Pane eventKey="results">
+                <Tab.Pane eventKey="results" style={ styles.modalContentWrap }>
                   {this.resultsContents()}
                 </Tab.Pane>
               </Tab.Content>
