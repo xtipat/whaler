@@ -18,11 +18,13 @@ export default class AddBinInfo extends Component {
     this.state = {
       redirect: false,
       picExists: false,
+      inputValue: '',
       imgsrc: "http://placekitten.com/270/200",
       imgfile: null,
       types: []
     };
     this.myRef = React.createRef();
+    this.input = React.createRef();
     this.picHandle = this.picHandle.bind(this);
     this.typesHandle = this.typesHandle.bind(this);
     this.submitHandle = this.submitHandle.bind(this);
@@ -47,11 +49,11 @@ export default class AddBinInfo extends Component {
   }
   checkImage(){
     if(this.state.picExists){
-      return(<img src={this.state.imgsrc} style={{width:'100%',height:'100%'}} ref={this.myRef}/>);
+      return(<img src={this.state.imgsrc} className="picframe" ref={this.myRef}/>);
     }
     else{
       return(
-        <div>
+        <div style={{position: "absolute", left:"50%", top:"25%", marginLeft:"-43px"}}>
           <FontAwesomeIcon icon='plus-circle' size="2x"/>
           <br/>
           Attach a Photo
@@ -95,7 +97,7 @@ export default class AddBinInfo extends Component {
           <div style={{textAlign: 'center'}}>
             <div class="add-photo">
               {this.checkImage()}
-              <input type="file" name="file" onChange={this.picHandle} accept="image/*" className='hidden_input'/>
+              <input type="file" name="file" onChange={this.picHandle} accept="image/*" className='hidden_input' ref={this.state.inputValue}/>
             </div>
             <div style={{display: 'flex', justifyContent: 'flex-start'}}>Bin Types</div>
             <TagInput typesHandle={this.typesHandle}/>
