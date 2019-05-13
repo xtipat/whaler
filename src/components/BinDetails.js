@@ -6,6 +6,7 @@ import BinMarker from './BinMarker.js';
 import GoogleMapReact from 'google-map-react';
 import Loader from './Loader.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ToastContainer, toast } from 'react-toastify';
 import firebase from "firebase/app";
 import { FirebaseDatabaseProvider, FirebaseDatabaseTransaction } from "@react-firebase/database";
 import '../assets/scss/modal.scss';
@@ -124,8 +125,11 @@ export default class BinDetails extends React.Component {
             <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/locationAccept`}>
               {({ runTransaction }) => {
                 return (
-                  <Button variant="yellow" onClick={() => {
-                    runTransaction({reducer: val => {return val + 1;}});
+                  <Button ref="locAcptBtn" variant="yellow" onClick={() => {
+                    runTransaction({reducer: val => {return val + 1;}})
+                    .then(() => {
+                          toast.success("Location of this bin was accepted.");
+                        });
                   }}>
                     <FontAwesomeIcon icon='check-circle'/> Accept
                   </Button>
@@ -137,7 +141,10 @@ export default class BinDetails extends React.Component {
               {({ runTransaction }) => {
                 return (
                   <Button variant="black" onClick={() => {
-                    runTransaction({reducer: val => {return val + 1;}});
+                    runTransaction({reducer: val => {return val + 1;}})
+                    .then(() => {
+                          toast.warning("Location of this bin was rejected.");
+                        });
                   }}>
                     <FontAwesomeIcon icon='times-circle'/> Reject
                   </Button>
@@ -194,7 +201,10 @@ export default class BinDetails extends React.Component {
             {({ runTransaction }) => {
               return (
                 <Button variant="yellow" onClick={() => {
-                  runTransaction({reducer: val => {return val + 1;}});
+                  runTransaction({reducer: val => {return val + 1;}})
+                  .then(() => {
+                        toast.success("Details of this bin were accepted.");
+                      });
                 }}>
                   <FontAwesomeIcon icon='check-circle'/> Accept
                 </Button>
@@ -206,7 +216,10 @@ export default class BinDetails extends React.Component {
             {({ runTransaction }) => {
               return (
                 <Button variant="black" onClick={() => {
-                  runTransaction({reducer: val => {return val + 1;}});
+                  runTransaction({reducer: val => {return val + 1;}})
+                  .then(() => {
+                        toast.warning("Details of this bin were rejected.");
+                      });
                 }}>
                   <FontAwesomeIcon icon='times-circle'/> Reject
                 </Button>
