@@ -3,7 +3,9 @@ import React from 'react';
 class Profile extends React.Component {
   render(){
     return(
-      <div>Profile</div>
+      <div style={{ marginTop: '50px', fontSize: '1.5rem'}}>
+        <strong>Not Implemented</strong>
+      </div>
     )
   }
 }
