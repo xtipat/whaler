@@ -1,12 +1,16 @@
 @import './_base.scss';
 
-.redeem-wrap {
-  background: white;
+
+.redeem-outer-wrap {
   height: 100vh;
   overflow-y: scroll;
-  padding: 0px 20px 50px 20px;
+  background-color: white;
 }
 
+.redeem-wrap {
+  background: white;
+  padding: 0px 20px 50px 20px;
+}
 .more-wrap {
   margin-top: 20px;
 }

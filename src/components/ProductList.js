@@ -13,7 +13,7 @@ export class ProductList extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className='redeem-outer-wrap'>
 				<ProductConsumer>
 					{(value)=>{
 						return (<Title name="Redeem" title={value.user_point}/>)
