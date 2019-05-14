@@ -49,24 +49,22 @@ export class Details extends Component {
 								{/*button*/}
 								<div>
 
-									<div style={{textAlign: 'right'}}>
-          								<Button cart="true"
-          										variant="yellow"
-          										disabled={(user_point < price)? true:false}
-          										onClick={()=>{
-															value.openModal(id);
-												}}>
-												<FontAwesomeIcon icon='check-circle'/> {(user_point < price)?'Not Enough Point': "Redeem"}
+									<div style={{textAlign: 'center'}}>
+    								<Button cart="true"
+        										variant="yellow"
+        										disabled={(user_point < price)? true:false}
+        										onClick={()=>{
+														value.openModal(id);
+											}}>
+											<FontAwesomeIcon icon='check-circle'/> {(user_point < price)?'Not Enough Point': "Redeem"}
+    								</Button>
 
-          								</Button>
-          								<Link to='/redeem'>
-          									<Button variant="black"><FontAwesomeIcon icon='times-circle'/> Go Back</Button>
-        								</Link>
-        							</div>
-
+											<div className='divider' />
+    								<Link to='/redeem'>
+    									<Button variant="black"><FontAwesomeIcon icon='times-circle'/> Go Back</Button>
+    								</Link>
+    							</div>
 								</div>
-
-
 								</div>
 							</div>
 					</div>
