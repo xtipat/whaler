@@ -1,6 +1,16 @@
 @import './_base.scss';
 
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  background: white;
+  color: $dark;
+  border-radius: 0;
+}
+
+.nav-item {
+  border-radius: 0;
+}
+
+.nav-link{
   background: $primary;
   color: white;
 }
@@ -28,8 +38,74 @@
   overflow: hidden;   
 }
 
+
+.nav-link .nav-icon {
+  font-size: 1.5rem;
+}
+
+.nav-link .nav-label {
+  font-size: 0.8rem;
+  font-family: $titleboldfont;
+}
+
+.nav-link.active .nav-icon {
+  font-size: 1.5rem;
+}
+
+.nav-link.active .nav-label {
+  font-size: 0.8rem;
+  font-family: $titleboldfont;
+}
+
+.custom-close-wrap:hover .custom-close-icon {
+  animation: 0.3s rotate90Clockwise;
+}
+
+.custom-close-icon {
+  animation: 0.3s rotate90Counter;
+  color: $dark;
+  font-size: 1.5rem;
+  vertical-align: middle;
+  cursor: pointer;
+  background: white;
+  border-radius: 100%;
+}
+
+.custom-close-label {
+  font-size: 1rem;
+  font-family: $titleboldfont;
+  display: inline;
+  line-height: 1.5rem;
+  vertical-align: middle;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.tag-wrap {
+    margin-bottom: 20px;
+}
+
+.tag-container {
+  background: $primary;
+  border-radius: 10px;
+  font-size: 13px;
+  font-family: $titleboldfont;
+  color: $dark;
+  text-align: center;
+  padding: 2px 10px;
+  display: inline;
+  margin-right: 5px;
+  margin-top: 10px;
+}
+
+.modal-content-title {
+  font-family: $boldfont;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
 a{
-  color: black;
+  color: $dark;
   transition: all 0.2s ease-out;
 
   &:hover {
@@ -64,7 +140,7 @@ a{
 }
 
 .picframe{
-  width: 100%; 
+  width: 100%;
   height: 100%;
   border-radius: 3%;
   z-index: 1;

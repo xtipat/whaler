@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import {db, storage} from '../firebase/firebase.js';
-import ProgressBar from 'react-bootstrap/ProgressBar'
 import MapPage from '../MapPage.js';
 import '../assets/scss/modal.scss';
 import { Modal, Nav, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import {faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import TagInput from './TagInput';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

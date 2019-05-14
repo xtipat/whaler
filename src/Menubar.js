@@ -2,27 +2,15 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faMapMarkedAlt, faSearch, faGift, faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { zoomIn } from 'react-animations';
 import styled, {keyframes} from 'styled-components';
 import './assets/scss/menubar.scss';
 import MenuHere from './components/MenuHere.js'
 import MenuLocate from './components/MenuLocate.js'
 
-library.add(faMapMarkedAlt, faSearch, faGift, faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes)
-
 const styles = {
-  exMenuL: {
-    transform: 'translate(-180%, 0)'
-  },
-
-  exMenuM: {
-    transform: 'translate(-45%, -80%)'
-  },
-
   exMenuR: {
-    transform: 'translate(90%, 0)'
+    transform: 'translate(160%, 0)'
   },
 };
 
@@ -39,7 +27,7 @@ class Menubar extends React.Component {
   }
 
   handlePlusClick(){
-    if(this.state.plusButtonClass == 'plus-icon'){
+    if(this.state.plusButtonClass === 'plus-icon'){
       this.setState({ plusButtonClass: 'plus-icon-active' })
     }
 
@@ -61,7 +49,6 @@ class Menubar extends React.Component {
               <NavLink exact to='/' className='icon-default' activeClassName='icon-active'>
                 <FontAwesomeIcon
                   icon='map-marked-alt'
-                  size="2x"
                   onClick={ this.handleClose }
                   />
               </NavLink>
@@ -70,7 +57,6 @@ class Menubar extends React.Component {
               <NavLink to='/explore' className='icon-default'activeClassName='icon-active'>
                 <FontAwesomeIcon
                   icon='search'
-                  size="2x"
                   onClick={ this.handleClose }
                   />
               </NavLink>
@@ -81,7 +67,6 @@ class Menubar extends React.Component {
               <NavLink to='/redeem' className='icon-default' activeClassName='icon-active'>
                 <FontAwesomeIcon
                   icon='gift'
-                  size="2x"
                   onClick={ this.handleClose }
                   />
               </NavLink>
@@ -90,7 +75,6 @@ class Menubar extends React.Component {
               <NavLink to='/profile' className='icon-default' activeClassName='icon-active'>
                 <FontAwesomeIcon
                   icon='user-circle'
-                  size='2x'
                   onClick={ this.handleClose }
                   />
               </NavLink>
@@ -99,30 +83,31 @@ class Menubar extends React.Component {
         </div>
         <div>
           <Row className='justify-content-center'>
-            <Col xs={3} className='circle-wrap'>
-              <button className='plus-button-wrap' onClick={this.handlePlusClick}>
+            <Col xs={4} className='circle-wrap'>
+              <div className='plus-button-wrap' onClick={this.handlePlusClick}>
                 <FontAwesomeIcon
                   icon='plus-circle'
                   className= {this.state.plusButtonClass}
                   size='5x'/>
-              </button>
+              </div>
               {
                 this.state.plusButtonClass === 'plus-icon' ? <div />:
                   <Row className='justify-content-center'>
-                    <Zoom>
-                      <MenuHere onClick={ this.handleClose } />
-                      <MenuLocate onClick={ this.handleClose } />
-                      <div className='extended-menu-wrap'
-                        onClick={ this.handleClose }
-                        style={ styles.exMenuR }>
-                        <FontAwesomeIcon
-                          icon='times'
-                          className='cancel-icon'
-                          size='2x'
-                          />
-                        <div className='cancel-label'>cancel</div>
-                      </div>
-                    </Zoom>
+                    <Col>
+                      <Zoom>
+                        <MenuHere onClick={ this.handleClose } />
+                        <MenuLocate onClick={ this.handleClose } />
+                        <div className='extended-menu-wrap'
+                          onClick={ this.handleClose }
+                          style={ styles.exMenuR }>
+                          <FontAwesomeIcon
+                            icon='times'
+                            className='cancel-icon'
+                            />
+                          <div className='cancel-label'>cancel</div>
+                        </div>
+                      </Zoom>
+                    </Col>
                   </Row>
               }
             </Col>

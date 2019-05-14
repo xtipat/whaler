@@ -1,25 +1,14 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faMapMarkedAlt, faGift, faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes } from '@fortawesome/free-solid-svg-icons';
 import '../assets/scss/menubar.scss';
 import AddBinInfo from './AddBinInfo.js';
-import MapPage from '../MapPage.js'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
 const styles = {
   exMenuL: {
-    transform: 'translate(-180%, 0)'
-  },
-
-  exMenuM: {
-    transform: 'translate(-45%, -80%)'
-  },
-
-  exMenuR: {
-    transform: 'translate(90%, 0)'
+    transform: 'translate(-130%, 0)'
   },
 };
 
@@ -77,7 +66,6 @@ export default class MenuHere extends React.Component{
           <FontAwesomeIcon
             icon='map-pin'
             className='extended-menu-icon'
-            size='2x'
           />
           <div className='extended-menu-label'>here</div>
         </div>
