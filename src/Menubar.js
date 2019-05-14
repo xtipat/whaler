@@ -54,7 +54,7 @@ class Menubar extends React.Component {
               </NavLink>
             </Col>
             <Col className='icon-wrap'>
-              <NavLink to='/explore' className='icon-default'activeClassName='icon-active'>
+              <NavLink to='/nearby' className='icon-default'activeClassName='icon-active'>
                 <FontAwesomeIcon
                   icon='search'
                   onClick={ this.handleClose }

@@ -10,37 +10,39 @@ export class Product_pop extends Component {
 		const {id, title, img, price, inCart, popular} = this.props.product;
 
 			return (
-				<ProductWrapper className="col-11 mx-auto ">
+				<ProductWrapper className="col-12 mx-auto">
 					<div className="card">
-						<ProductConsumer>
-							{(value)=>(	
-								<div
-									className="img-container p-5" 
-									onClick={() => 
-										value.handleDetail(id)
-									}
-								>
-									<Link to="/details">
-									 	<img src={img} alt="product" className="card-img-top"/>
-									</Link>
-									
-								</div>
-							)} 
-						
-						</ProductConsumer>
-						{/*card footer */}
-						<div className="card-footer d-flex justify-content-between">
-							<p className="align-self-center mb-0 text-capitalize">
-								{title}		
-							</p>
-							<h5 className="text-gold font-italic mb-0">
-								{price} points
-							</h5>
+						<div className='reward-wrap'>
+							<ProductConsumer>
+								{(value)=>(
+									<div
+										className="img-container p-5"
+										onClick={() =>
+											value.handleDetail(id)
+										}
+									>
+										<Link to="/details">
+											<img src={img} alt="product" className="card-img-top"/>
+										</Link>
+
+									</div>
+								)}
+
+							</ProductConsumer>
+							{/*card footer */}
+							<div className="card-footer d-flex justify-content-between">
+								<p className="align-self-center mb-0 text-capitalize">
+									{title}
+								</p>
+								<h5 className="text-gold font-italic mb-0">
+									{price} points
+								</h5>
+							</div>
 						</div>
 					</div>
 				</ProductWrapper>
 			);
-		
+
 	}
 }
 /*This is the css for above classes*/
@@ -97,4 +99,3 @@ const ProductWrapper = styled.div`
 `
 
 export default Product_pop;
-

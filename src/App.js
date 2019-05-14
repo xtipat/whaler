@@ -32,7 +32,7 @@ function App() {
           <Page />
           <ModalRedeem/>
           <ToastContainer position={toast.POSITION.TOP_CENTER} />
-          
+
 
           <Menubar />
         </Col>
@@ -45,6 +45,7 @@ const Page = () => (
   <Switch>
       <Route exact path='/' component={MapPage} />
       <Route path='/redeem' component={Redeem} />
+      <Route path='/nearby' component={Profile} />
       <Route path='/profile' component={Profile} />
       <Route path='/locate' component={Locate} />
       <Route path="/details" component={Details}/>

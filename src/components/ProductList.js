@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Container } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import Product from "./Product";
 import Product_pop from "./Product_pop";
 import Title from "./Title";
 //load the data from file
 import {ProductConsumer} from "../context";
+import '../assets/scss/redeem.scss';
 
 
 
@@ -12,16 +13,16 @@ export class ProductList extends Component {
 
 	render() {
 		return (
-				<div className='wrap '>
-					<div style={{ overflowY: 'scroll', height: '90vh'}}>
-						<ProductConsumer>
-							{(value)=>{
-								return (<Title name="Redeem" title={value.user_point}/>)
-								
-							}}
-						</ProductConsumer>
-						<div className="row my-2">
-							<h4 className="col-11 mx-auto my-3 text-left font-weight-bold">Popular</h4>
+			<div className='redeem-outer-wrap'>
+				<ProductConsumer>
+					{(value)=>{
+						return (<Title name="Redeem" title={value.user_point}/>)
+
+					}}
+				</ProductConsumer>
+				<div className='redeem-wrap'>
+					<div className='popular-wrap'>
+						<div className='redeem-content-title'>Popular</div>
 							<ProductConsumer>
 								{(value)=>{
 									return value.products.map( product => {
@@ -30,7 +31,10 @@ export class ProductList extends Component {
 									})
 								}}
 							</ProductConsumer>
-							<h4 className="col-11 mx-auto my-2 text-left font-weight-bold">more</h4>
+					</div>
+					<div className='more-wrap'>
+						<div className='redeem-content-title'>More</div>
+						<Row>
 							<ProductConsumer>
 								{(value)=>{
 									return value.products.map( product => {
@@ -38,13 +42,12 @@ export class ProductList extends Component {
 									})
 								}}
 							</ProductConsumer>
-						</div>
+						</Row>
 					</div>
-
 				</div>
+			</div>
 		);
 	}
 }
 
 export default ProductList;
-
