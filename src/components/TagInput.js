@@ -34,7 +34,9 @@ export default class TagInput extends React.Component {
           <input
             value={this.state.input}
             onChange={this.handleInputChange}
-            onKeyDown={this.handleInputKeyDown} />
+            onKeyDown={this.handleInputKeyDown}
+            placeholder='type in the bin type'
+            />
         </ul>
       </div>
     );
