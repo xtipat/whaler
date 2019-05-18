@@ -6,6 +6,26 @@ import { db } from './firebase/firebase.js';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CurPosMarker from './components/CurPosMarker.js';
+import SearchBox from './components/SearchBox.js'
+import HomeButton from './components/HomeButton.js'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+const markerStyle = {
+  position: 'fixed',
+  width: 40,
+  height: 40,
+  left: '60%',
+  top: '80%',
+  zIndex: 100,
+
+  borderRadius: 1,
+  backgroundColor: 'gray',
+  textAlign: 'center',
+  color: 'white',
+  fontSize: 16,
+  padding: 4
+};
+
 
 class MapPage extends Component {
   static defaultProps = {
@@ -25,30 +45,34 @@ class MapPage extends Component {
     this.state = {
         loading: null,
         markers: [],
-        lat: this.props.center.lat,
-        lng: this.props.center.lng,
-        locLoaded: false
+        userLat: this.props.center.lat,
+        userLng: this.props.center.lng,
+        lat:this.props.center.lat,
+        lng:this.props.center.lng,
+        userLocLoaded: false
     };
   };
-  getGeoLocation(){
+  getGeoLocation = () =>{
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
       position => {
       this.setState({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-        locLoaded: true
+        userLat: position.coords.latitude,
+        userLng: position.coords.longitude,
+        userLocLoaded: true
       })
+      console.log(this.state.userLat,this.state.userLng);
+      this.moveCenterTo(this.state.userLat,this.state.userLng);
       },
       error => {
-        this.setState({locLoaded: true});
+        this.setState({userLocLoaded: true});
         toast.error("Can't get your current position, try enable your GPS");
       }
       )
     }
     else{
       toast.error("We can't detect GPS on your device!");
-      this.setState({locLoaded: true});
+      this.setState({userLocLoaded: true});
     }
   }
 
@@ -78,7 +102,7 @@ class MapPage extends Component {
 
   componentDidMount() {
     this.fetchAllBinsData();
-    this.getGeoLocation();
+    this.getGeoLocation();  
   }
   componentWillUnmount() {
     db.ref(`bins`).off();
@@ -117,23 +141,36 @@ class MapPage extends Component {
   markCurPos(){
     return(
       <CurPosMarker
-        lat={this.state.lat}
-        lng={this.state.lng}
+        lat={this.state.userLat}
+        lng={this.state.userLng}
       />
     );
   }
+  moveCenterTo(lat,lng){
+    console.log("MOVEE")
+    this.setState({lat: lat,lng: lng});
+  }
+  searchBoxHandler = (place) => {
+    console.log(place[0].geometry.location.lat(),place[0].geometry.location.lng());
+    this.moveCenterTo(place[0].geometry.location.lat(),place[0].geometry.location.lng());
+  }
+  onClickHomeButton = () => {
+    this.getGeoLocation()
+  }
   render() {
-    if(this.state.binsLoaded && this.state.locLoaded)
+    if(this.state.binsLoaded && this.state.userLocLoaded)
     {
       return (
       <div style={this.props.divSize}>
+        <SearchBox style={{position: 'fixed', zIndex:'100'}} onPlacesChanged={this.searchBoxHandler}/>
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyCv7aQ0qD19jSxd954UZSZVQSDXZr1cNLs'}}
-          defaultCenter={{lat:this.state.lat,lng:this.state.lng}}
+          defaultCenter={{lat:this.props.lat,lng:this.props.lng}}
+          center={{lat:this.state.lat,lng:this.state.lng}}
           defaultZoom={this.props.zoom}
           onChange={({ center }) => this.props.handleCenter(center)}
           options={{
-            styles :this.props.exampleMapStyles,
+            //styles :this.props.exampleMapStyles,
             fullscreenControl: false,
             zoomControl: false
           }}
@@ -141,6 +178,7 @@ class MapPage extends Component {
         {this.markAllBins()}
         {this.markCurPos()}
         </GoogleMapReact>
+        <FontAwesomeIcon style={markerStyle} icon="home" onClick={this.getGeoLocation}/>
       </div>
       );
     }

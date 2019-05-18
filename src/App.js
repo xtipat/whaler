@@ -17,12 +17,12 @@ import Locate from './components/Locate.js';
 import {
   faTrash, faTimesCircle, faCheckCircle, faMapMarkedAlt, faSearch, faGift,
   faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes, faCircleNotch,
-  faMale, faMapMarkerAlt, faInfoCircle, faPollH
+  faMale, faMapMarkerAlt, faInfoCircle, faPollH, faHome
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faTrash, faTimesCircle, faCheckCircle, faMapMarkedAlt, faSearch,
   faGift, faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes, faCircleNotch,
-  faMale, faMapMarkerAlt, faInfoCircle, faPollH);
+  faMale, faMapMarkerAlt, faInfoCircle, faPollH, faHome);
 
 function App() {
   return (
