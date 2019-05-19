@@ -112,11 +112,11 @@ you can also find the list in `package.json` file
 - [react-tagsinput](https://github.com/olahol/react-tagsinput)
 - [react-toastify](https://fkhadra.github.io/react-toastify)
 - [styled-component](https://www.styled-components.com)
-- [Yup](https://github.com/jquense/yup)
+- [yup](https://github.com/jquense/yup)
 - [@react-firebase/database](https://react-firebase-js.com)
 
 ### Assets
-- **Title Font**: [Lato](https://fonts.google.com/specimen/Lato)
+- **Title Font**: [Oswald](https://fonts.google.com/specimen/Oswald)
 - **Default, Context Font**: [Open Sans](https://fonts.google.com/specimen/Open+Sans)
 
 ---

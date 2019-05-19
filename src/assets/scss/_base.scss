@@ -9,8 +9,8 @@ $gray-background: #E9E8E9;
 $defaultfont: OpenSans;
 $boldfont: OpenSans-Bold;
 $semiboldfont: OpenSans-SemiBold;
-$titlefont: Lato;
-$titleboldfont: Lato-Bold;
+$titlefont: Oswald;
+$titleboldfont: Oswald-Bold;
 
 //page class
 body {
@@ -29,6 +29,17 @@ body {
 
 .page-wrap {
   background: $gray-background;
+  text-align: center;
+  padding: 0;
+  height: 100vh;
+  -webkit-box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.41);
+  -moz-box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.41);
+  box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.41);
+  overflow: hidden;
+}
+
+.nonauth-wrap {
+  background: $dark;
   text-align: center;
   padding: 0;
   height: 100vh;
