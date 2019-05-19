@@ -1,5 +1,6 @@
 # **Whaler** - CS374 Project
 ## **Update**
+* 19/05/20 Add Formik & Yup
 * 19/05/10 Add Live Demo Link
 * 19/05/09
   * Remove Circular Action Button (Not compatible with react web)
@@ -99,6 +100,7 @@ Here, we are using **ReactJS** and **CSS/SCSS** stylesheet.
 ### Libraries and Framework
 you can also find the list in `package.json` file
 - [firebase](https://firebase.google.com/?gclid=Cj0KCQiAxNnfBRDwARIsAJlH29DkGiYpDh3s0DOPre_sJG9q66-aNFBNOoSL3MEp3OAXBUAlu4ejy_YaAly4EALw_wcB)
+- [formik](https://jaredpalmer.com/formik/)
 - [google-map-react](https://github.com/google-map-react/google-map-react)
 - [node-sass](https://github.com/sass/node-sass)
 - [react](https://reactjs.org)
@@ -110,6 +112,7 @@ you can also find the list in `package.json` file
 - [react-tagsinput](https://github.com/olahol/react-tagsinput)
 - [react-toastify](https://fkhadra.github.io/react-toastify)
 - [styled-component](https://www.styled-components.com)
+- [Yup](https://github.com/jquense/yup)
 - [@react-firebase/database](https://react-firebase-js.com)
 
 ### Assets

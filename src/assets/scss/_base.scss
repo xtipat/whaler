@@ -18,7 +18,9 @@ body {
 }
 
 
-*:focus {outline:none !important}
+*:focus {
+  outline:none !important;
+}
 
 .outer-wrap {
   background: white;
@@ -43,7 +45,8 @@ body {
 }
 
 @include placeholder {
-  font-family: $defaultfont;
+  font-family: $titlefont;
+  font-size: 0.9rem;
   font-style: italic;
 }
 
@@ -106,6 +109,7 @@ body {
   &:hover {
     color: $dark;
   }
+
 }
 
 .btn-black {
@@ -117,6 +121,16 @@ body {
   }
 }
 
+
+.btn-white {
+  background: white;
+  transition: all 0.2s ease-out;
+  color: $dark;
+
+  &:hover {
+    color: $primary;
+  }
+}
 .vertical-center-wrap {
   position: relative;
   padding: 0;
@@ -156,4 +170,17 @@ body {
 
 .progress-bar {
   background-color: $primary !important;
+}
+
+.hidden {
+  display: none;
+}
+
+input[type=text]:focus, textarea:focus {
+  box-shadow:none;
+  border-color: $primary;
+}
+
+.form-control.is-invalid:focus{
+  border-color: none;
 }

@@ -4,8 +4,10 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import Menubar from './Menubar.js';
 import Profile from './Profile.js'
 import Redeem from './Redeem.js';
-import Details from './components/Details'
-import ModalRedeem from './components/ModalRedeem'
+import Details from './components/Details';
+import ModalRedeem from './components/ModalRedeem';
+import Signin from './authentication/Signin.js';
+import Signup from './authentication/Signup.js';
 import 'react-bootstrap/dist/react-bootstrap.min.js';
 import './assets/scss/_base.scss';
 import { ToastContainer, toast } from 'react-toastify';
@@ -17,12 +19,12 @@ import Locate from './components/Locate.js';
 import {
   faTrash, faTimesCircle, faCheckCircle, faMapMarkedAlt, faSearch, faGift,
   faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes, faCircleNotch,
-  faMale, faMapMarkerAlt, faInfoCircle, faPollH
+  faMale, faMapMarkerAlt, faInfoCircle, faPollH, faFish
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faTrash, faTimesCircle, faCheckCircle, faMapMarkedAlt, faSearch,
   faGift, faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes, faCircleNotch,
-  faMale, faMapMarkerAlt, faInfoCircle, faPollH);
+  faMale, faMapMarkerAlt, faInfoCircle, faPollH, faFish);
 
 function App() {
   return (
@@ -32,8 +34,6 @@ function App() {
           <Page />
           <ModalRedeem/>
           <ToastContainer position={toast.POSITION.TOP_CENTER} />
-
-
           <Menubar />
         </Col>
       </Row>
@@ -48,8 +48,9 @@ const Page = () => (
       <Route path='/nearby' component={Profile} />
       <Route path='/profile' component={Profile} />
       <Route path='/locate' component={Locate} />
-      <Route path="/details" component={Details}/>
-
+      <Route path='/details' component={Details}/>
+      <Route path='/signin' component={Signin} />
+      <Route path='/signup' component={Signup} />
   </Switch>
 )
 
