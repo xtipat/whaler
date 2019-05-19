@@ -22,13 +22,11 @@ class Signin extends React.Component {
   handleSubmit = event => {
     const { email, password } = this.state;
 
-    const { history } = this.props;
-
     auth
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState(() => ({ ...INITIAL_STATE }));
-        history.push('/');
+        this.props.history.push('/');
       })
       .catch(error => {
         this.setState({ error });
@@ -69,7 +67,7 @@ class Signin extends React.Component {
                 </Form.Group>
                 <div style={{ textAlign: 'middle' }}>
                  <div>
-                    <Button variant='yellow' type="submit">Sign In</Button>
+                    <Button variant='yellow' type="submit">Login</Button>
                   </div>
                   <div className='float-text'>
                     or

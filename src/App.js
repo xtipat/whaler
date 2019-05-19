@@ -7,6 +7,7 @@ import Redeem from './Redeem.js';
 import Details from './components/Details';
 import ModalRedeem from './components/ModalRedeem';
 import Signin from './authentication/Signin.js';
+import Signout from './authentication/Signout.js';
 import Signup from './authentication/Signup.js';
 import Loader from './components/Loader.js'
 import withAuthentication from './session/withAuthentication.js';
@@ -70,6 +71,7 @@ class App extends React.Component {
                   return(
                   <Col xs={12} sm={8} md={6} lg={4} className='nonauth-wrap'>
                     <NonAuth />
+                    <ToastContainer position={toast.POSITION.TOP_CENTER} />
                   </Col>
                 );
                 }
@@ -91,7 +93,8 @@ const Page = () => (
       <Route path='/profile' component={Profile} />
       <Route path='/locate' component={Locate} />
       <Route path='/details' component={Details}/>
-      <Route exact path='/signin' render={() => (
+      <Route path='/logout' component={Signout}/>
+      <Route exact path='/login' render={() => (
 						<Redirect to='/' />
 			)}/>
       <Route exact path='/signup' render={() => (
@@ -102,11 +105,8 @@ const Page = () => (
 
 const NonAuth = () => (
   <Switch>
-    <Route path='/signin' component={Signin} />
+    <Route path='/login' component={Signin} />
     <Route path='/signup' component={Signup} />
-    <Route path render={() => (
-          <Redirect to='/signin' />
-    )}/>
   </Switch>
 )
 export default withRouter(withAuthentication(App));
