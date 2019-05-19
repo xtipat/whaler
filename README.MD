@@ -26,19 +26,22 @@
 
 ## **Progress**
 ### To-do List
-- [ ] Make decisions about minor styles
-  - [ ] hover action
 - [ ] Complete Router Link
 - [ ] Considering Redux Integration (Use or Remove)
 - [x] Discuss about design choices
   - [x] Primary Color
   - [x] Fonts
+- [x] Make decisions about minor styles
+  - [x] hover action
 
 ### Implementation
 - [ ] Map Page
+  - [ ] a button to bring back to current location
+  - [ ] a button to exit 'locate' mode
+  - [ ] style tag container
   - [x] add Google Map
-  - [ ] Bin Details Modal
-  - [ ] Add Bin Modal
+  - [x] Bin Details Modal
+  - [x] Add Bin Modal
 - [ ] Explore
 - [ ] Redeem Page
   - [ ] Reward List
@@ -47,8 +50,13 @@
   - [ ] Profile Display
   - [ ] Statistics
   - [ ] Edit Profile
-- [ ] Menu Bar
-  - [ ] Extended Menu Trigger
+- [ ] Authentication
+  - [ ] Logout (should be in Profile page) *for now, go to /logout to logout*
+  - [x] Login
+  - [x] Signup
+  - [x] Session
+- [x] Menu Bar
+  - [x] Extended Menu Trigger
   - [x] Layout
   - [x] Router Link on main menu
 
