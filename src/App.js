@@ -104,6 +104,9 @@ const NonAuth = () => (
   <Switch>
     <Route path='/signin' component={Signin} />
     <Route path='/signup' component={Signup} />
+    <Route path render={() => (
+          <Redirect to='/signin' />
+    )}/>
   </Switch>
 )
 export default withRouter(withAuthentication(App));

@@ -192,6 +192,11 @@ input[type=text]:focus, textarea:focus {
   border-color: $primary;
 }
 
+input[type=password]:focus, textarea:focus {
+  box-shadow:none;
+  border-color: $primary;
+}
+
 .form-control.is-invalid:focus{
   border-color: none;
 }
