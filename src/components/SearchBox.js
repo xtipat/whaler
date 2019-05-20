@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types';
 import GoogleMapReact from 'google-map-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import '../assets/scss/searchBox.scss';
 
 export default class SearchBox extends React.Component {
   static propTypes = {
@@ -10,7 +12,10 @@ export default class SearchBox extends React.Component {
   }
   render() {
     return (
-        <input class="form-control form-control-sm" type="text" placeholder="Search" aria-label="Search" ref="input" {...this.props} />
+      <div className="active-orange">
+        <FontAwesomeIcon className="search-box-logo" icon="search"/>
+        <input className="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search for places" aria-label="Search" ref="input" {...this.props} />
+      </div>
     );
   }
   onPlacesChanged = () => {

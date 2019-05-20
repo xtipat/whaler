@@ -1,0 +1,38 @@
+@import './_base.scss';
+
+.active-orange input[type=text] {
+    position: absolute;
+    z-index: 2;
+    top: 10px;
+    left: 10%;
+    border-bottom: 1px solid $primary;
+    box-shadow: 0 1px 0 0 $primary;
+    background-color:rgba(255,255,255,0.3) !important;
+    border:none !important;
+    transition: all 0.2s ease-out;
+    &:focus {
+        background-color:rgba(255,255,255,0.7) !important;
+      }
+}
+
+.search-box-logo{
+    position: absolute;
+    color: gray;
+    z-index: 3;
+    top: 18px;
+    left: 82%;
+}
+
+.back-button{
+    position: absolute;
+    border-color: aqua;
+    background-color: $primary;
+    color: black;
+    z-index: 3;
+    top: 50px;
+    width: 80px;
+    height: 1.6em;
+    font-family: $defaultfont;
+    font-size: 15px;
+    left: 0;
+}

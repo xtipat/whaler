@@ -9,33 +9,18 @@ import CurPosMarker from './components/CurPosMarker.js';
 import SearchBox from './components/SearchBox.js'
 import HomeButton from './components/HomeButton.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-const markerStyle = {
-  position: 'fixed',
-  width: 40,
-  height: 40,
-  left: '60%',
-  top: '80%',
-  zIndex: 100,
-
-  borderRadius: 1,
-  backgroundColor: 'gray',
-  textAlign: 'center',
-  color: 'white',
-  fontSize: 16,
-  padding: 4
-};
+import './assets/scss/homeIcon.scss';
+import './assets/scss/_base.scss';
 
 
 class MapPage extends Component {
   static defaultProps = {
     isMini: false,
-    divSize: { height: '100vh', width: '100%'},
+    divSize: { height: '100vh', width: '100%', position: 'relative'},
     center: {
       lat: 59.95,
       lng: 30.33
     },
-    handleCenter: () => {},
     zoom: 15,
     exampleMapStyles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"color":"#000000"},{"lightness":13}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#144b53"},{"lightness":14},{"weight":1.4}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#08304b"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#0c4152"},{"lightness":5}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#0b434f"},{"lightness":25}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#0b3d51"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"}]},{"featureType":"transit","elementType":"all","stylers":[{"color":"#146474"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#021019"}]}]
   };
@@ -61,7 +46,6 @@ class MapPage extends Component {
         userLng: position.coords.longitude,
         userLocLoaded: true
       })
-      console.log(this.state.userLat,this.state.userLng);
       this.moveCenterTo(this.state.userLat,this.state.userLng);
       },
       error => {
@@ -147,28 +131,34 @@ class MapPage extends Component {
     );
   }
   moveCenterTo(lat,lng){
-    console.log("MOVEE")
+    this.setState({lat: this.state.nowLat,lng: this.state.nowLng});
     this.setState({lat: lat,lng: lng});
   }
   searchBoxHandler = (place) => {
-    console.log(place[0].geometry.location.lat(),place[0].geometry.location.lng());
+    // console.log(place[0].geometry.location.lat(),place[0].geometry.location.lng());
     this.moveCenterTo(place[0].geometry.location.lat(),place[0].geometry.location.lng());
   }
   onClickHomeButton = () => {
     this.getGeoLocation()
+  }
+  handleCenterChange =(center) => {
+    this.setState({
+      nowLat: center.lat,
+      nowLng: center.lng
+    });
   }
   render() {
     if(this.state.binsLoaded && this.state.userLocLoaded)
     {
       return (
       <div style={this.props.divSize}>
-        <SearchBox style={{position: 'fixed', zIndex:'100'}} onPlacesChanged={this.searchBoxHandler}/>
+        <SearchBox onPlacesChanged={this.searchBoxHandler}/>
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyCv7aQ0qD19jSxd954UZSZVQSDXZr1cNLs'}}
           defaultCenter={{lat:this.props.lat,lng:this.props.lng}}
           center={{lat:this.state.lat,lng:this.state.lng}}
           defaultZoom={this.props.zoom}
-          onChange={({ center }) => this.props.handleCenter(center)}
+          onChange={({ center }) => this.handleCenterChange(center)}
           options={{
             //styles :this.props.exampleMapStyles,
             fullscreenControl: false,
@@ -178,7 +168,9 @@ class MapPage extends Component {
         {this.markAllBins()}
         {this.markCurPos()}
         </GoogleMapReact>
-        <FontAwesomeIcon style={markerStyle} icon="home" onClick={this.getGeoLocation}/>
+        <div className='home-icon-container'  onClick={this.onClickHomeButton}>
+          <FontAwesomeIcon  icon="home" className="home-icon" activeClassName='icon-active'/>
+        </div>
       </div>
       );
     }

@@ -1,0 +1,33 @@
+@import './_base.scss';
+
+.home-icon-container{
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    right: 20px;
+    bottom: 74px;
+    z-index: 2;
+  
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: -2px 2px 31px -10px rgba(0,0,0,0.75);
+    text-align: center;
+    font-size: 25px;
+    color: white;
+    &:hover{
+        cursor: pointer;
+    }
+    &:hover .home-icon{
+        cursor: pointer;
+        color: $primary;
+      }
+};
+
+.home-icon{
+    color: black;
+    position: absolute;
+    top: 25%;
+    left: 22%;
+    transition: all 0.2s ease-out;
+}
+
