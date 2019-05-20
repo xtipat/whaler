@@ -5,14 +5,17 @@ import MapPage from '../MapPage.js';
 import '../assets/scss/modal.scss';
 import { Modal, Nav, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import TagInput from './TagInput';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import TagsInput from 'react-tagsinput'
+import 'react-tagsinput/react-tagsinput.scss'
+import Autosuggest from 'react-autosuggest';
 
 export default class AddBinInfo extends Component {
   constructor(props){
     super(props);
     this.state = {
+      tags: [],
       redirect: false,
       picExists: false,
       inputValue: '',
@@ -25,6 +28,7 @@ export default class AddBinInfo extends Component {
     this.picHandle = this.picHandle.bind(this);
     this.typesHandle = this.typesHandle.bind(this);
     this.submitHandle = this.submitHandle.bind(this);
+    this.autocompleteRenderInput = this.autocompleteRenderInput.bind(this);
   };
   writeToDatabase() {
     var newRef = db.ref('/bins/').push();
@@ -44,6 +48,48 @@ export default class AddBinInfo extends Component {
       this.props.onHide();
     });
   }
+
+  types(){
+    return [
+      {type: 'General waste'},
+      {type: 'Plastic'},
+      {type: 'Recycle'},
+      {type: 'Bottle'},
+    ]
+  }
+  autocompleteRenderInput ({addTag, ...props}) {
+    const handleOnChange = (e, {newValue, method}) => {
+      if (method === 'enter') {
+        e.preventDefault()
+      } else {
+        props.onChange(e)
+      }
+    }
+
+    const inputValue = (props.value && props.value.trim().toLowerCase()) || ''
+    const inputLength = inputValue.length
+
+    let suggestions = this.types().filter((state) => {
+      return state.type.toLowerCase().slice(0, inputLength) === inputValue
+    })
+
+    return (
+      <Autosuggest
+        ref={props.ref}
+        suggestions={suggestions}
+        shouldRenderSuggestions={(value) => value && value.trim().length > 0}
+        getSuggestionValue={(suggestion) => suggestion.type}
+        renderSuggestion={(suggestion) => <span>{suggestion.type}</span>}
+        inputProps={{...props, onChange: handleOnChange}}
+        onSuggestionSelected={(e, {suggestion}) => {
+          addTag(suggestion.type)
+        }}
+        onSuggestionsClearRequested={() => {}}
+        onSuggestionsFetchRequested={() => {}}
+      />
+    )
+  }
+
   checkImage(){
     if(this.state.picExists){
       return(<img src={this.state.imgsrc} className="picframe" ref={this.myRef}/>);
@@ -73,8 +119,8 @@ export default class AddBinInfo extends Component {
       toast.error("Please fill all the information first :D");
     }
   }
-  typesHandle(items){
-    this.setState({types:items});
+  typesHandle(tags){
+    this.setState({tags});
   }
   redirect(){
   	if(this.state.redirect)
@@ -97,7 +143,7 @@ export default class AddBinInfo extends Component {
               <input type="file" name="file" onChange={this.picHandle} accept="image/*" className='hidden_input' ref={this.state.inputValue}/>
             </div>
             <div style={{display: 'flex', justifyContent: 'flex-start'}}>Bin Types</div>
-            <TagInput typesHandle={this.typesHandle}/>
+            <TagsInput renderInput={this.autocompleteRenderInput} value={this.state.tags} onChange={this.typesHandle} />
             <br></br>
             {this.redirect()}
             <Button variant="yellow" onClick={this.submitHandle}>Submit</Button>
