@@ -17,7 +17,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var storage = firebase.storage();
 const db = firebase.database();
-//const auth = firebase.auth();
+const auth = firebase.auth();
 const binsRef = db.ref("bins")
 const usersRef = db.ref("users")
 
@@ -25,7 +25,7 @@ export {
   firebaseConfig,
   db,
   storage,
-  //auth,
+  auth,
   binsRef,
   usersRef,
 };
