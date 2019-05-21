@@ -94,10 +94,7 @@ const Page = () => (
       <Route path='/locate' component={Locate} />
       <Route path='/details' component={Details}/>
       <Route path='/logout' component={Signout}/>
-      <Route exact path='/login' render={() => (
-						<Redirect to='/' />
-			)}/>
-      <Route exact path='/signup' render={() => (
+      <Route render={() => (
 						<Redirect to='/' />
 			)}/>
   </Switch>
@@ -107,6 +104,10 @@ const NonAuth = () => (
   <Switch>
     <Route path='/login' component={Signin} />
     <Route path='/signup' component={Signup} />
+    <Route path='/logout' component={Signout}/>
+    <Route render={() => (
+          <Redirect to='/login' />
+    )}/>
   </Switch>
 )
 export default withRouter(withAuthentication(App));
