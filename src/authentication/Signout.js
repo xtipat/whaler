@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { auth } from '../firebase';
 import '../assets/scss/auth.scss';
 
@@ -8,8 +8,22 @@ class Signout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
+      auth: this.props.auth,
+      redirect: false,
     };
+  }
+
+  componentWillRecieveProps(){
+    if (this.prevProps.auth !== this.props.auth)
+      this.setState({ auth: this.props.auth, redirect: false})
+  }
+
+  componentDidMount(){
+    if(!this.state.auth){
+      setTimeout(() => {
+        this.setState({ redirect: true})
+      }, 1500);
+    }
   }
 
   handleSignOut () {
@@ -24,22 +38,53 @@ class Signout extends React.Component {
   }
 
   render(){
-    return(
-      <div className='unauth-wrapper'>
-        <Row className='justify-content-center' style={{ height: '100%' }}>
-          <Col xs={8}>
-            <div className='form-outer-wrap'>
-              <div className='form-title'>
-                dropping out ?
+    if(this.state.auth){
+      return(
+        <div className='unauth-wrapper'>
+          <Row className='justify-content-center' style={{ height: '100%' }}>
+            <Col xs={8}>
+              <div className='form-outer-wrap'>
+                <div className='form-title'>
+                  dropping out ?
+                </div>
+                <div style={{ textAlign: 'center'}}>
+                  <Button variant='yellow' onClick={this.handleSignOut}>Logout</Button>
+                </div>
               </div>
-              <div style={{ textAlign: 'center'}}>
-                <Button variant='yellow' onClick={this.handleSignOut}>Logout</Button>
-              </div>
-            </div>
-          </Col>
-        </Row>
-      </div>
-    );
+            </Col>
+          </Row>
+        </div>
+      );
+    }
+
+    else {
+      if(this.state.redirect){
+        return (<Redirect to='/login' />)
+      }
+      else {
+        return(
+          <div className='unauth-wrapper'>
+            <Row className='justify-content-center' style={{ height: '100%' }}>
+              <Col xs={8}>
+                <div className='form-outer-wrap'>
+                  <div className='form-title'>
+                    You've logged out
+                  </div>
+                  <div className='float-text'>
+                    wait until we redirect you to the first page, or
+                  </div>
+                  <div style={{ textAlign: 'center'}}>
+                    <Link to='/login'>
+                      <Button variant='yellow'>Go Back Now</Button>
+                    </Link>
+                  </div>
+                </div>
+              </Col>
+            </Row>
+          </div>
+        );
+      }
+    }
   }
 }
 

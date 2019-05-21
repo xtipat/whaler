@@ -30,7 +30,7 @@ class Signin extends React.Component {
       })
       .catch(error => {
         this.setState({ error });
-        toast.error('wrong email or password')
+        toast.warn('wrong email or password')
       });
 
       event.preventDefault();

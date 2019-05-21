@@ -93,7 +93,7 @@ const Page = () => (
       <Route path='/profile' component={Profile} />
       <Route path='/locate' component={Locate} />
       <Route path='/details' component={Details}/>
-      <Route path='/logout' component={Signout}/>
+      <Route path='/logout' render={() => (<Signout auth/>)}/>
       <Route render={() => (
 						<Redirect to='/' />
 			)}/>

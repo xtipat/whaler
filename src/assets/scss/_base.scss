@@ -200,3 +200,7 @@ input[type=password]:focus, textarea:focus {
 .form-control.is-invalid:focus{
   border-color: none;
 }
+
+.custom-toast {
+  font-family: $titlefont;
+}
