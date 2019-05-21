@@ -48,6 +48,10 @@ class Signout extends React.Component {
                   dropping out ?
                 </div>
                 <div style={{ textAlign: 'center'}}>
+                  <Link to='/profile'>
+                    <Button variant='white'>Back</Button>
+                  </Link>
+                  <div className='divider' />
                   <Button variant='yellow' onClick={this.handleSignOut}>Logout</Button>
                 </div>
               </div>

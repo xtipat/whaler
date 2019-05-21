@@ -4,7 +4,8 @@ import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { ToastContainer, toast } from 'react-toastify';
 import Menubar from './Menubar.js';
-import Profile from './Profile.js'
+import Profile from './Profile.js';
+import Explore from './Explore.js';
 import Redeem from './Redeem.js';
 import Details from './components/Details';
 import ModalRedeem from './components/ModalRedeem';
@@ -42,7 +43,7 @@ class App extends React.Component {
   componentDidMount() {
     setTimeout(() => {
       this.setState({loading: false});
-    }, 400)
+    }, 1000)
   }
 
   render(){
@@ -90,11 +91,13 @@ const Page = () => (
   <Switch>
       <Route exact path='/' component={MapPage} />
       <Route path='/redeem' component={Redeem} />
-      <Route path='/nearby' component={Profile} />
+      <Route path='/explore' component={Explore} />
       <Route path='/profile' component={Profile} />
       <Route path='/locate' component={Locate} />
       <Route path='/details' component={Details}/>
       <Route path='/logout' render={() => (<Signout auth/>)}/>
+      <Route path='/login' render={() => (<Redirect to='/' />)}/>
+      <Route path='/signup' render={() => (<Redirect to='/' />)}/>
       <Route component={Unmatched} />
   </Switch>
 )
