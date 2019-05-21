@@ -22,7 +22,7 @@ class Signout extends React.Component {
     if(!this.state.auth){
       setTimeout(() => {
         this.setState({ redirect: true})
-      }, 1500);
+      }, 3000);
     }
   }
 

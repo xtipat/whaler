@@ -1,9 +1,7 @@
 import React from 'react';
 import { Row, Col, Form, InputGroup, Button } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Formik, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { auth, db } from '../firebase';
 import * as yup from 'yup';
 import '../assets/scss/auth.scss';
@@ -70,13 +68,6 @@ class Signup extends React.Component {
       .required('Required'),
     });
 
-    const {
-      username,
-      email,
-      password,
-      passwordConfirm,
-      errors,
-    } = this.state;
     return(
       <div className='unauth-wrapper'>
         <Row className='justify-content-center' style={{ height: '100%' }}>
@@ -106,7 +97,7 @@ class Signup extends React.Component {
                           name='email'
                           value={values.email}
                           onChange={(e) => {this.handleChange(e); handleChange(e)}}
-                          placeholder='name@example.com'
+                          placeholder='email@example.com'
                           isInvalid={touched.email && !!errors.email}
                           />
                         <Form.Control.Feedback type='invalid'>{errors.email}</Form.Control.Feedback>

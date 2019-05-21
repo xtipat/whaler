@@ -30,7 +30,10 @@ class Signin extends React.Component {
       })
       .catch(error => {
         this.setState({ error });
-        toast.warn('wrong email or password')
+        if (email === '' || password === '')
+          toast.warn('please fill in email and password')
+        else
+          toast.warn('wrong email or password')
       });
 
       event.preventDefault();
@@ -42,7 +45,6 @@ class Signin extends React.Component {
 
   render(){
     const { email, password, error } = this.state;
-    const isInvalid = password === '' || email === '';
     return(
       <div className='unauth-wrapper'>
         <Row className='justify-content-center' style={{ height: '100%' }}>
@@ -57,17 +59,19 @@ class Signin extends React.Component {
               <Form onSubmit={this.handleSubmit}>
                 <Form.Group className='signin form-wrapper'>
                   <Form.Control
-                    type="email" placeholder="name@example.com"
+                    type="email" placeholder="email@example.com"
                     name="email" value={email}
-                    onChange={this.handleChange} />
+                    onChange={this.handleChange}
+                    />
                   <Form.Control
                     type="password" placeholder="password"
                     name="password" value={password}
-                    onChange={this.handleChange} />
+                    onChange={this.handleChange}
+                    />
                 </Form.Group>
                 <div style={{ textAlign: 'middle' }}>
-                 <div>
-                    <Button variant='yellow' type="submit">Login</Button>
+                  <div>
+                    <Button variant='yellow' type='submit'>Login</Button>
                   </div>
                   <div className='float-text'>
                     or
