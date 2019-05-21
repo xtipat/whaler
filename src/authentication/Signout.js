@@ -75,7 +75,7 @@ class Signout extends React.Component {
                     You've logged out
                   </div>
                   <div className='float-text'>
-                    wait until we redirect you to the first page, or
+                    wait a while and we'll redirect you to the first page, or
                   </div>
                   <div style={{ textAlign: 'center'}}>
                     <Link to='/login'>
