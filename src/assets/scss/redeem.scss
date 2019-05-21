@@ -1,0 +1,74 @@
+@import './_base.scss';
+
+
+.redeem-outer-wrap {
+  height: 100vh;
+  overflow-y: scroll;
+  background-color: white;
+}
+
+.redeem-wrap {
+  background: white;
+  padding: 0px 20px 50px 20px;
+}
+
+.detail-wrap {
+  background: white;
+  padding: 0px 20px 120px 20px;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.more-wrap {
+  margin-top: 20px;
+}
+
+.header-wrap {
+  background: white;
+  padding: 20px 35px 10px 35px;
+}
+
+.redeem-title-wrap {
+  text-align: left;
+}
+
+.redeem-title {
+  font-family: $titleboldfont;
+  font-size: 28px;
+  color: $dark;
+}
+
+.balance-wrap {
+  text-align: right;
+}
+
+.balance-label {
+  display: inline-flex;
+  font-family: $titleboldfont;
+  font-size: 18px;
+  color: $dark;
+  line-height: 48px;
+  vertical-align: bottom;
+
+}
+
+.balance{
+  display: inline-flex;
+  font-family: $titleboldfont;
+  font-size: 18px;
+  color: $primary;
+  line-height: 48px;
+  vertical-align: bottom;
+}
+
+.reward-wrap {
+  border: 1px solid $lightgray;
+}
+
+.redeem-content-title {
+  text-align: left;
+  font-family: $titleboldfont;
+  font-size: 20px;
+  margin: 5px 15px 10px 15px;
+  color: $dark;
+}

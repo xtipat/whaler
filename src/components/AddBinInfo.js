@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import {db, storage} from '../firebase/firebase.js';
 import MapPage from '../MapPage.js';
-import '../assets/scss/modal.scss';
 import { Modal, Nav, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,6 +9,20 @@ import 'react-toastify/dist/ReactToastify.css';
 import TagsInput from 'react-tagsinput'
 import 'react-tagsinput/react-tagsinput.css'
 import Autosuggest from 'react-autosuggest';
+import '../assets/scss/modal.scss';
+
+
+const styles = {
+  modalContentWrap: {
+    background: 'white',
+    width: '100%',
+    padding: '20px',
+  },
+
+  colors: {
+    primary: '#FEC93F'
+  }
+}
 
 export default class AddBinInfo extends Component {
   constructor(props){
@@ -96,10 +109,10 @@ export default class AddBinInfo extends Component {
     }
     else{
       return(
-        <div style={{position: "absolute", left:"50%", top:"25%", marginLeft:"-43px"}}>
+        <div style={{position: 'relative', top:'80px', cursor: 'pointer'}}>
           <FontAwesomeIcon icon='plus-circle' size="2x"/>
           <br/>
-          Attach a Photo
+          <div className='add-photo-label'>Attach a Photo</div>
         </div>
       );
     }
@@ -133,12 +146,18 @@ export default class AddBinInfo extends Component {
         {...this.props}
         centered
       >
-        <Modal.Header closeButton>
-          Add a New Bin:
+        <Modal.Header style={{ background: styles.colors.primary, border: 'none' }}>
+          <div style={{ textAlign: 'right', width: '100%'}}>
+            <div className='custom-close-wrap' onClick={ this.props.onHide }>
+              <div className='custom-close-label'>close</div>
+              <FontAwesomeIcon icon='times-circle' className='custom-close-icon'/>
+            </div>
+          </div>
         </Modal.Header>
         <Modal.Body>
           <div style={{textAlign: 'center'}}>
-            <div class="add-photo">
+            <div className='modal-title'>Add a New Bin</div>
+            <div className="add-photo">
               {this.checkImage()}
               <input type="file" name="file" onChange={this.picHandle} accept="image/*" className='hidden_input' ref={this.state.inputValue}/>
             </div>

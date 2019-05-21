@@ -31,11 +31,11 @@
 .add-photo{
   background: $gray;
   border-radius: .25rem;
-  margin-bottom: 10px;  
+  margin-bottom: 10px;
   height: 200px;
   width: 270px;
-  //position: relative;
-  overflow: hidden;   
+  overflow: hidden;
+  cursor: pointer;
 }
 
 
@@ -89,7 +89,7 @@
   background: $primary;
   border-radius: 10px;
   font-size: 13px;
-  font-family: $titleboldfont;
+  font-family: $boldfont;
   color: $dark;
   text-align: center;
   padding: 2px 10px;
@@ -102,6 +102,16 @@
   font-family: $boldfont;
   font-size: 16px;
   margin: 10px 0;
+  text-align: left;
+  color: $dark;
+}
+
+.modal-title {
+  font-family: $boldfont;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 15px;
+  color: $dark;
 }
 
 a{
@@ -149,4 +159,11 @@ a{
 .types-head{
   margin: 1px  0px 2rem 0px;
   font-family: $semiboldfont;
+}
+
+.add-photo-label {
+  font-size: 16px;
+  font-family: $titleboldfont;
+  letter-spacing: 0.8px;
+  color: $dark;
 }

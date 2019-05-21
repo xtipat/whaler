@@ -22,35 +22,34 @@ export default class ModalRedeem extends Component {
 					else{
 						return(
 							<ModalContainer>
-								<div className='container'>
-									<div className='row'>
-										<div id="modal" className="col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize p-5">
-											<h5>Confirm</h5>
-											<img src={img} className="img-fluid" alt="product"/>
-											<h5>{title}</h5>
-											<h5 className="text-muted">available point : {user_point} points</h5>
-											<h5 className="text-muted">price : {price} points</h5>
-											<div style={{textAlign: 'right'}}>
-												<Link to='/redeem'>
-											        <Button variant="yellow"
-											        		cart onClick={()=>closeModal(user_point - price)}>
-											        	<FontAwesomeIcon icon='check-circle'/> Confirm
-											        </Button>
-											    </Link>
-										        <Link to='/details'>
-											        <Button variant="black"
-											        		onClick={()=>closeModal(user_point)}>
-											        	<FontAwesomeIcon icon='times-circle'/> Cancel
-											        </Button>
-											    </Link>
+								<div className='row'>
+									<div id="modal" className="col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize p-5">
+										<h5>Confirm</h5>
+										<img src={img} className="img-fluid" alt="product"/>
+										<h5>{title}</h5>
+										<h5 className="text-muted">available point : {user_point} points</h5>
+										<h5 className="text-muted">price : {price} points</h5>
+										<div style={{textAlign: 'center'}}>
+											<Link to='/redeem'>
+										        <Button variant="yellow"
+										        		cart onClick={()=>closeModal(user_point - price)}>
+										        	<FontAwesomeIcon icon='check-circle'/> Confirm
+										        </Button>
+									    </Link>
+											<div className='divider' />
+							        <Link to='/details'>
+									        <Button variant="black"
+									        		onClick={()=>closeModal(user_point)}>
+									        	<FontAwesomeIcon icon='times-circle'/> Cancel
+									        </Button>
+									    </Link>
 
-										    </div>
-										</div>
+									    </div>
 									</div>
 								</div>
 							</ModalContainer>
 						)
-					} 
+					}
 				}}
 			</ProductConsumer>
 		);
@@ -71,7 +70,3 @@ justify-content: center;
 	background: var(--mainWhite )
 }
 `
-
-
-
-
