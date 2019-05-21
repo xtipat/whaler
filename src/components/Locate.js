@@ -13,9 +13,9 @@ export default class Locate extends Component {
   constructor(props){
     super(props);
     this.state = {modalShow: false};
-    this.handleCenter = this.handleCenter.bind(this)
+    this.handleCenterForAddBin = this.handleCenterForAddBin.bind(this)
   };
-  handleCenter(center){
+  handleCenterForAddBin(center){
     this.setState({lat:center.lat, lng:center.lng})
   }
   render(){
@@ -40,7 +40,7 @@ export default class Locate extends Component {
           lat={this.state.lat}
           lng={this.state.lng}
         />
-        <MapPage handleCenter = {this.handleCenter.bind(this)}/>
+        <MapPage handleCenterForAddBin = {this.handleCenterForAddBin.bind(this)}/>
       </div>
     );
   }

@@ -34,7 +34,6 @@ export default class AddBinInfo extends Component {
       inputValue: '',
       imgsrc: "http://placekitten.com/270/200",
       imgfile: null,
-      types: []
     };
     this.myRef = React.createRef();
     this.input = React.createRef();
@@ -52,7 +51,7 @@ export default class AddBinInfo extends Component {
       'location': {'lat': this.props.lat, 'lng': this.props.lng},
       'locationAccept': 0,
       'locationReject': 0,
-      'types': this.state.types
+      'types': this.state.tags
     });
     var strRef = storage.ref().child(newRef.key);
     strRef.put(this.state.imgfile).then((snapshot) => {
@@ -73,6 +72,7 @@ export default class AddBinInfo extends Component {
   autocompleteRenderInput ({addTag, ...props}) {
     const handleOnChange = (e, {newValue, method}) => {
       if (method === 'enter') {
+      	console.log("AS")
         e.preventDefault()
       } else {
         props.onChange(e)
@@ -109,7 +109,7 @@ export default class AddBinInfo extends Component {
     }
     else{
       return(
-        <div style={{position: 'relative', top:'80px', cursor: 'pointer'}}>
+        <div className='add-photo-placeholder'>
           <FontAwesomeIcon icon='plus-circle' size="2x"/>
           <br/>
           <div className='add-photo-label'>Attach a Photo</div>
@@ -123,7 +123,7 @@ export default class AddBinInfo extends Component {
     }
   }
   submitHandle(){
-    if(this.state.picExists && this.state.types.length>0)
+    if(this.state.picExists && this.state.tags.length>0)
     {
       this.writeToDatabase();
     }
@@ -139,6 +139,13 @@ export default class AddBinInfo extends Component {
   	if(this.state.redirect)
   		window.location = '/';
   }
+  handleCloseButton = () => {
+  	console.log("CLOSE");
+  	this.setState({
+  		picExists: false
+  	});
+  	this.props.onHide();
+  }
   render(){
     return(
       <Modal
@@ -148,7 +155,7 @@ export default class AddBinInfo extends Component {
       >
         <Modal.Header style={{ background: styles.colors.primary, border: 'none' }}>
           <div style={{ textAlign: 'right', width: '100%'}}>
-            <div className='custom-close-wrap' onClick={ this.props.onHide }>
+            <div className='custom-close-wrap' onClick={this.handleCloseButton}>
               <div className='custom-close-label'>close</div>
               <FontAwesomeIcon icon='times-circle' className='custom-close-icon'/>
             </div>
