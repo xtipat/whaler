@@ -47,11 +47,11 @@
   - [ ] Reward List
   - [ ] Redeem Reward
 - [ ] Profile Page
-  - [ ] Profile Display
-  - [ ] Statistics
-  - [ ] Edit Profile
+  - [x] Profile Display
+  - [x] Statistics
+  - [ ] Edit Profile *should we just cur it out?*
 - [ ] Authentication
-  - [ ] Logout (should be in Profile page) *for now, go to /logout to logout*
+  - [x] Logout (should be in Profile page)
   - [x] Login
   - [x] Signup
   - [x] Session

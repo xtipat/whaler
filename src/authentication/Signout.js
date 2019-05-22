@@ -48,6 +48,10 @@ class Signout extends React.Component {
                   dropping out ?
                 </div>
                 <div style={{ textAlign: 'center'}}>
+                  <Link to='/profile'>
+                    <Button variant='white'>Back</Button>
+                  </Link>
+                  <div className='divider' />
                   <Button variant='yellow' onClick={this.handleSignOut}>Logout</Button>
                 </div>
               </div>
@@ -71,7 +75,7 @@ class Signout extends React.Component {
                     You've logged out
                   </div>
                   <div className='float-text'>
-                    wait until we redirect you to the first page, or
+                    wait a while and we'll redirect you to the first page, or
                   </div>
                   <div style={{ textAlign: 'center'}}>
                     <Link to='/login'>
