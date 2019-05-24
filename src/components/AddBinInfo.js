@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import TagsInput from 'react-tagsinput'
-import 'react-tagsinput/react-tagsinput.css'
+import 'react-tagsinput/react-tagsinput.scss'
 import Autosuggest from 'react-autosuggest';
 import '../assets/scss/modal.scss';
 
