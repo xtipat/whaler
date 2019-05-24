@@ -173,13 +173,13 @@ export default class BinDetails extends React.Component {
   checkPicture(){
     if(this.state.picLoaded == false)
       return (
-        <div style={{ textAlign: 'center'}}>
-          <img src="http://placekitten.com/270/200"/>
+        <div style={{ textAlign: 'center', borderRadius: '10px'}}>
+          <img src="http://placekitten.com/260/200"/>
         </div>
       )
     else
       return (
-        <div style={{ textAlign: 'center'}}>
+        <div style={{ textAlign: 'center', borderRadius: '10px'}}>
           <img src={this.state.binPicSrc} width='100%' height='100%'/>
         </div>
       )

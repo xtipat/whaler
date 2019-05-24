@@ -1,4 +1,4 @@
-
+import { auth } from './firebase';
 
 export const storeProducts = [
   {

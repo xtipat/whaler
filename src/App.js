@@ -25,12 +25,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import {
   faTrash, faTimesCircle, faCheckCircle, faMapMarkedAlt, faSearch, faGift,
   faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes, faCircleNotch,
-  faMale, faMapMarkerAlt, faInfoCircle, faPollH, faFish, faHeartBroken
+  faMale, faMapMarkerAlt, faInfoCircle, faPollH, faFish, faHeartBroken, faHome
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faTrash, faTimesCircle, faCheckCircle, faMapMarkedAlt, faSearch,
   faGift, faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes, faCircleNotch,
-  faMale, faMapMarkerAlt, faInfoCircle, faPollH, faFish, faHeartBroken);
+  faMale, faMapMarkerAlt, faInfoCircle, faPollH, faFish, faHeartBroken, faHome);
 
 class App extends React.Component {
   constructor(props){
