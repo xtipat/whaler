@@ -93,7 +93,13 @@ export default class BinDetails extends React.Component {
 
     console.log(this.state.binLocAcptPer)
   }
-
+  addBinVote(){
+    var userRef = db.ref(`/users/${this.props.uid}`).once('value').then( snapshot => {
+      var value = snapshot.val();
+      var binsVoted = value.votedBinCount;
+      db.ref(`/users/${this.props.uid}/votedBinCount`).set(binsVoted+1);
+    });
+  }
   componentDidUpdate(prevProps) {
     //console.log(this.state.show,prevProps.show);
     if(this.props.show !== prevProps.show)
@@ -130,6 +136,7 @@ export default class BinDetails extends React.Component {
                     runTransaction({reducer: val => {return val + 1;}})
                     .then(() => {
                           toast.success("Location of this bin was accepted.");
+                          this.addBinVote();
                         });
                   }}>
                     <FontAwesomeIcon icon='check-circle'/> Accept
@@ -145,6 +152,7 @@ export default class BinDetails extends React.Component {
                     runTransaction({reducer: val => {return val + 1;}})
                     .then(() => {
                           toast.warning("Location of this bin was rejected.");
+                          this.addBinVote();
                         });
                   }}>
                     <FontAwesomeIcon icon='times-circle'/> Reject
@@ -205,6 +213,7 @@ export default class BinDetails extends React.Component {
                   runTransaction({reducer: val => {return val + 1;}})
                   .then(() => {
                         toast.success("Details of this bin were accepted.");
+                        this.addBinVote();
                       });
                 }}>
                   <FontAwesomeIcon icon='check-circle'/> Accept
@@ -220,6 +229,7 @@ export default class BinDetails extends React.Component {
                   runTransaction({reducer: val => {return val + 1;}})
                   .then(() => {
                         toast.warning("Details of this bin were rejected.");
+                        this.addBinVote();
                       });
                 }}>
                   <FontAwesomeIcon icon='times-circle'/> Reject

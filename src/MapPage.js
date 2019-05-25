@@ -103,6 +103,7 @@ class MapPage extends Component {
             key={this.state.markers[i].key}
             fbkey={this.state.markers[i].key}
             clickable = {false}
+            uid={this.props.uid}
             icon="trash"
           />
         );
@@ -114,6 +115,7 @@ class MapPage extends Component {
             lng={this.state.markers[i].location.lng}
             key={this.state.markers[i].key}
             fbkey={this.state.markers[i].key}
+            uid={this.props.uid}
             clickable = {true}
             icon="trash"
           />

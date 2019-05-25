@@ -53,6 +53,13 @@ export default class AddBinInfo extends Component {
       'locationReject': 0,
       'types': this.state.tags
     });
+    var userRef = db.ref(`/users/${this.props.uid}`).once('value').then( snapshot => {
+    	var value = snapshot.val();
+    	var binsAdded = value.addedBinCount;
+    	var points = value.point;
+    	db.ref(`/users/${this.props.uid}/addedBinCount`).set(binsAdded+1);
+    	db.ref(`/users/${this.props.uid}/point`).set(points+100);
+    });
     var strRef = storage.ref().child(newRef.key);
     strRef.put(this.state.imgfile).then((snapshot) => {
       console.log("Uploaded Pic",newRef.key);

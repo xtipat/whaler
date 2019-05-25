@@ -55,7 +55,7 @@ class App extends React.Component {
               if(authUser){
                 return(
                   <Col xs={12} sm={8} md={6} lg={4} className='page-wrap'>
-                    <Page />
+                    <Page auth = {authUser}/>
                     <ModalRedeem/>
                     <ToastContainer position={toast.POSITION.TOP_CENTER} />
                     <Menubar />
@@ -87,13 +87,13 @@ class App extends React.Component {
   }
 }
 
-const Page = () => (
+const Page = (auth) => (
   <Switch>
-      <Route exact path='/' component={MapPage} />
-      <Route path='/redeem' component={Redeem} />
+      <Route exact path='/' render={(routeProps) => (<MapPage uid = {auth.auth.uid} {...routeProps} />)} />
+      <Route path='/redeem'  component={Redeem} />
       <Route path='/explore' component={Explore} />
       <Route path='/profile' component={Profile} />
-      <Route path='/locate' component={Locate} />
+      <Route path='/locate' render={(routeProps) => (<Locate uid = {auth.auth.uid} {...routeProps} />)} />
       <Route path='/details' component={Details}/>
       <Route path='/logout' render={() => (<Signout auth/>)}/>
       <Route path='/login' render={() => (<Redirect to='/' />)}/>

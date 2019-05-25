@@ -23,6 +23,7 @@ class BinMarker extends Component {
         onHide={modalClose}
         fbkey={this.props.fbkey}
         icon={this.props.icon}
+        uid={this.props.uid}
       />
       </div>
       );
@@ -38,6 +39,7 @@ class BinMarker extends Component {
         onHide={modalClose}
         fbkey={this.props.fbkey}
         icon={this.props.icon}
+        uid={this.props.uid}
       />
       </div>
       );
