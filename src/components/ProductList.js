@@ -7,7 +7,9 @@ import Title from "./Title";
 import {ProductConsumer} from "../context";
 import '../assets/scss/redeem.scss';
 import AuthUserContext from '../session/authUserContext';
-import firebase from '../firebase/firebase';
+import {firebase,usersRef } from '../firebase/firebase';
+
+
 
 
 
@@ -21,8 +23,31 @@ export class ProductList extends Component {
 					<AuthUserContext.Consumer>
 						
 						{(authUser)=>{
+							console.log(usersRef)
 							console.log(authUser.uid)
-							return (<div>Hello</div>)
+							var myCurValue = ""
+							const temp = usersRef.on('value', function(snapshot) {
+								const myValue = snapshot.val();
+								const keyList = Object.keys(myValue);
+								var myCurValue = ""
+								console.log(keyList)
+
+								//find the key
+								for(var i=0;i<keyList.length;i++) {
+      								const myKey = keyList[i];
+      								//console.log(myKey)
+      								//console.log(myValue[myKey])
+      								if(myKey === authUser.uid){
+      									myCurValue = myValue[myKey]
+      								}
+      								
+   	 							}
+   	 							return myCurValue
+   	 							
+							});
+							console.log(temp)
+							console.log(myCurValue)
+							return (<Title name="Redeem" title="100"/>)
 
 						}}
 					</AuthUserContext.Consumer>
