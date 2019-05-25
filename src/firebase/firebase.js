@@ -28,4 +28,5 @@ export {
   auth,
   binsRef,
   usersRef,
+  firebase
 };
