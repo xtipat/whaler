@@ -5,6 +5,8 @@ import ProductList from './components/ProductList';
 import './assets/scss/redeem.scss';
 
 
+
+
 function Redeem() {
   return (
   	<div>
@@ -14,3 +16,4 @@ function Redeem() {
 }
 
 export default Redeem;
+

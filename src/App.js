@@ -52,7 +52,9 @@ class App extends React.Component {
         <Row className='justify-content-sm-center outer-wrap'>
             <AuthUserContext.Consumer>
             {authUser => {
+
               if(authUser){
+                //console.log(authUser)
                 return(
                   <Col xs={12} sm={8} md={6} lg={4} className='page-wrap'>
                     <Page />
@@ -113,3 +115,4 @@ const NonAuth = () => (
   </Switch>
 )
 export default withRouter(withAuthentication(App));
+

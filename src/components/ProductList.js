@@ -6,6 +6,10 @@ import Title from "./Title";
 //load the data from file
 import {ProductConsumer} from "../context";
 import '../assets/scss/redeem.scss';
+import AuthUserContext from '../session/authUserContext';
+import firebase from '../firebase/firebase';
+
+
 
 
 
@@ -14,12 +18,14 @@ export class ProductList extends Component {
 	render() {
 		return (
 			<div className='redeem-outer-wrap'>
-				<ProductConsumer>
-					{(value)=>{
-						return (<Title name="Redeem" title={value.user_point}/>)
+					<AuthUserContext.Consumer>
+						
+						{(authUser)=>{
+							console.log(authUser.uid)
+							return (<div>Hello</div>)
 
-					}}
-				</ProductConsumer>
+						}}
+					</AuthUserContext.Consumer>
 				<div className='redeem-wrap'>
 					<div className='popular-wrap'>
 						<div className='redeem-content-title'>Popular</div>
@@ -51,3 +57,4 @@ export class ProductList extends Component {
 }
 
 export default ProductList;
+
