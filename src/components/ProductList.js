@@ -7,11 +7,16 @@ import Title from "./Title";
 import {ProductConsumer} from "../context";
 import '../assets/scss/redeem.scss';
 import AuthUserContext from '../session/authUserContext';
-import {firebase,usersRef } from '../firebase/firebase';
+import {firebase,db } from '../firebase/firebase';
 
 
 
-
+function temp(id){
+	return db.ref("users/"+id).once('value').then(
+								function(snapshot) {
+									return "hellp"
+								})
+}
 
 
 
@@ -20,37 +25,16 @@ export class ProductList extends Component {
 	render() {
 		return (
 			<div className='redeem-outer-wrap'>
-					<AuthUserContext.Consumer>
-						
-						{(authUser)=>{
-							console.log(usersRef)
-							console.log(authUser.uid)
-							var myCurValue = ""
-							const temp = usersRef.on('value', function(snapshot) {
-								const myValue = snapshot.val();
-								const keyList = Object.keys(myValue);
-								var myCurValue = ""
-								console.log(keyList)
+					<ProductConsumer>
 
-								//find the key
-								for(var i=0;i<keyList.length;i++) {
-      								const myKey = keyList[i];
-      								//console.log(myKey)
-      								//console.log(myValue[myKey])
-      								if(myKey === authUser.uid){
-      									myCurValue = myValue[myKey]
-      								}
-      								
-   	 							}
-   	 							return myCurValue
-   	 							
-							});
-							console.log(temp)
-							console.log(myCurValue)
-							return (<Title name="Redeem" title="100"/>)
+							{(value)=>{
+								//value.getUserPoint('xtHhubmwwhTU5fQy5ADMG8tG03T2')
+								console.log(value.user_point)
+								return (<Title name="Redeem" title={value.user_point}/>)
 
-						}}
-					</AuthUserContext.Consumer>
+							}}
+					</ProductConsumer>
+				
 				<div className='redeem-wrap'>
 					<div className='popular-wrap'>
 						<div className='redeem-content-title'>Popular</div>

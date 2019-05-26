@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {storeProducts, detailProduct, user_point} from "./data"
+import {firebase,db,auth } from './firebase/firebase';
+import AuthUserContext from './session/authUserContext';
 
 const ProductContext = React.createContext();
 //Provider: Provide all the informaiton
@@ -14,10 +16,18 @@ class ProductProvider extends Component {
 		cart: [],
 		user_point: user_point,
 		modalOpen: false,
-		modalProduct:detailProduct
+		modalProduct:detailProduct,
+		//this should be set as well
+		//!!!!!!!!!
+		user_id: "xtHhubmwwhTU5fQy5ADMG8tG03T2"
 	}
 	componentDidMount(){
 		this.setProducts();
+		//we need to change this value base on the use id
+		//!!!!!!!!!!!!!!!
+
+		this.getUserPoint("xtHhubmwwhTU5fQy5ADMG8tG03T2");
+		
 	}
 	//we need to initialize the product as empty string first because we want to copy not reference the real data
 	setProducts = () =>{
@@ -69,12 +79,31 @@ class ProductProvider extends Component {
 			return {modalProduct: product, modalOpen:true}
 		},() => {console.log(this.state)})
 	}
-	closeModal = price => {
+	closeModal = (remainPoints,price, title) => {
+		db.ref("/users/"+this.state.user_id).update({ point: remainPoints });
+		var newKey = firebase.database().ref('/redeem_hist/').push()
+		console.log(price)
+		console.log(title)
+		newKey.set({
+			point_used: price,
+		    rewardName: title,
+		    uid: this.state.user_id
+		  });
 		this.setState(() => {
 			
 			
-			return {modalOpen: false,user_point: price }
+			return {modalOpen: false,user_point: remainPoints }
 		})
+	}
+	getUserPoint = id => {
+		let ref = db.ref("users/"+id)
+		ref.on('value', snapshot =>{
+			console.log(snapshot.val().point)
+			const cur_point = snapshot.val().point
+			this.setState(() =>{
+				return {user_point: cur_point}
+			})
+		});
 	}
 	
 	render() {
@@ -84,7 +113,8 @@ class ProductProvider extends Component {
 				handleDetail: this.handleDetail,
 				addToCart: this.addToCart,
 				openModal: this.openModal,
-				closeModal: this.closeModal
+				closeModal: this.closeModal,
+				getUserPoint: this.getUserPoint
 			}}>
 				{this.props.children}
 			</ProductContext.Provider>
