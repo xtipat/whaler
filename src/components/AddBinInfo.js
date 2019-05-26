@@ -146,6 +146,7 @@ export default class AddBinInfo extends Component {
   submitHandle(){
     if(this.state.picExists && this.state.tags.length>0)
     {
+    	toast.success("You earned 100 points for adding bin! Redirecting.....")
       this.writeToDatabase();
     }
     else
@@ -157,8 +158,10 @@ export default class AddBinInfo extends Component {
     this.setState({tags});
   }
   redirect(){
-  	if(this.state.redirect)
+  	if(this.state.redirect){
+
   		window.location = '/';
+  	}
   }
   handleCloseButton = () => {
   	console.log("CLOSE");

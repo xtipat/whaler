@@ -139,7 +139,7 @@ export default class BinDetails extends React.Component {
                   <Button ref="locAcptBtn" variant="yellow" onClick={() => {
                     runTransaction({reducer: val => {return val + 1;}})
                     .then(() => {
-                          toast.success("Location of this bin was accepted.");
+                          toast.success(<div> Location of this bin was accepted.<br/>You earned 20 points! </div>);
                           this.addBinVote();
                         });
                   }}>
@@ -155,7 +155,7 @@ export default class BinDetails extends React.Component {
                   <Button variant="black" onClick={() => {
                     runTransaction({reducer: val => {return val + 1;}})
                     .then(() => {
-                          toast.warning("Location of this bin was rejected.");
+                          toast.warning(<div> Location of this bin was rejected.<br/>You earned 20 points! </div>);
                           this.addBinVote();
                         });
                   }}>
