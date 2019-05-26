@@ -115,4 +115,3 @@ const NonAuth = () => (
   </Switch>
 )
 export default withRouter(withAuthentication(App));
-

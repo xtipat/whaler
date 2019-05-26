@@ -5,7 +5,7 @@ export const doCreateUser = (uid, username, email, date) =>
     uid,
     username,
     email,
-    point: 0,
+    point: 200,
     addedBinCount: 0,
     votedBinCount: 0,
     date,
@@ -13,3 +13,6 @@ export const doCreateUser = (uid, username, email, date) =>
 
 export const onceGetAllBin = () =>
 	db.ref(`bins`).once('value');
+
+export const onceGetOneUser = (uid) =>
+  db.ref(`users/${uid}`).once('value');
