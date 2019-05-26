@@ -82,6 +82,12 @@ export default class AddBinInfo extends Component {
       {type: 'Plastic'},
       {type: 'Recycle'},
       {type: 'Bottle'},
+      {type: 'Food waste'},
+      {type: 'Organic waste'},
+      {type: 'Paper'},
+      {type: 'Tins and Metals'},
+      {type: 'Glass'},
+      {type: 'Hazardous waste'}
     ]
   }
   autocompleteRenderInput ({addTag, ...props}) {
@@ -183,7 +189,7 @@ export default class AddBinInfo extends Component {
               {this.checkImage()}
               <input type="file" name="file" onChange={this.picHandle} accept="image/*" className='hidden_input' ref={this.state.inputValue}/>
             </div>
-            <div style={{display: 'flex', justifyContent: 'flex-start'}}>Bin Types</div>
+            <div style={{display: 'flex', justifyContent: 'flex-start'}}>Bin Types <span className='note'> (hit enter to add tag)</span></div>
             <TagsInput renderInput={this.autocompleteRenderInput} value={this.state.tags} onChange={this.typesHandle} />
             <br></br>
             {this.redirect()}
