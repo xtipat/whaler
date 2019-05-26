@@ -3,8 +3,9 @@
 .prof-outer-wrap {
   height: 100%;
   width: 100%;
-  padding: 60px 30px 120px 30px;
+  padding: 60px 0 120px 0;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .prof-inner-wrap {
