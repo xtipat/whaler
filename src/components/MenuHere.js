@@ -74,6 +74,7 @@ export default class MenuHere extends React.Component{
           onHide={modalClose}
           lat = {this.state.lat}
           lng = {this.state.lng}
+          uid = {this.props.uid}
         />
       </div>
     );

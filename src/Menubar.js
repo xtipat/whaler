@@ -95,8 +95,8 @@ class Menubar extends React.Component {
                   <Row className='justify-content-center'>
                     <Col>
                       <Zoom>
-                        <MenuHere onClick={ this.handleClose } />
-                        <MenuLocate onClick={ this.handleClose } />
+                        <MenuHere onClick={ this.handleClose } uid = {this.props.auth.uid}/>
+                        <MenuLocate onClick={ this.handleClose } uid = {this.props.auth.uid}/>
                         <div className='extended-menu-wrap'
                           onClick={ this.handleClose }
                           style={ styles.exMenuR }>

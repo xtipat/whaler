@@ -1,18 +1,18 @@
-// color palette
+/* color palette */
 $primary: #FEC93F;
 $dark: #17181F;
 $gray: #ccc;
 $lightgray: #ddd;
 $gray-background: #E9E8E9;
 
-// Font
+/* Font */
 $defaultfont: OpenSans;
 $boldfont: OpenSans-Bold;
 $semiboldfont: OpenSans-SemiBold;
 $titlefont: Oswald;
 $titleboldfont: Oswald-Bold;
 
-//page class
+/* page class */
 body {
   font-family: $defaultfont;
 }

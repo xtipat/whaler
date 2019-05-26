@@ -41,6 +41,7 @@ export default class AddBinInfo extends Component {
     this.typesHandle = this.typesHandle.bind(this);
     this.submitHandle = this.submitHandle.bind(this);
     this.autocompleteRenderInput = this.autocompleteRenderInput.bind(this);
+    console.log(this.props.uid);
   };
   writeToDatabase() {
     var newRef = db.ref('/bins/').push();
@@ -52,6 +53,20 @@ export default class AddBinInfo extends Component {
       'locationAccept': 0,
       'locationReject': 0,
       'types': this.state.tags
+    });
+    var userRef = db.ref(`/users/${this.props.uid}`).once('value').then( snapshot => {
+    	var value = snapshot.val();
+    	var binsAdded = value.addedBinCount;
+    	var points = value.point;
+    	db.ref(`/users/${this.props.uid}`).update({
+        'addedBinCount': binsAdded+1,
+        'point': points+100,
+      });
+    });
+    var newBin = db.ref(`/users/${this.props.uid}/binReactedWith/${newRef.key}`).push();
+    newBin.set({
+      'locaVoted': true,
+      'detVoted': true
     });
     var strRef = storage.ref().child(newRef.key);
     strRef.put(this.state.imgfile).then((snapshot) => {
