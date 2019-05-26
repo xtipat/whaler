@@ -32,7 +32,7 @@ export default class ModalRedeem extends Component {
 										<div style={{textAlign: 'center'}}>
 											<Link to='/redeem'>
 										        <Button variant="yellow"
-										        		cart onClick={()=>closeModal(user_point - price)}>
+										        		cart onClick={()=>closeModal((user_point - price),price,title)}>
 										        	<FontAwesomeIcon icon='check-circle'/> Confirm
 										        </Button>
 									    </Link>

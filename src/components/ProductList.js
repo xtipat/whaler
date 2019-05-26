@@ -7,9 +7,16 @@ import Title from "./Title";
 import {ProductConsumer} from "../context";
 import '../assets/scss/redeem.scss';
 import AuthUserContext from '../session/authUserContext';
-import firebase from '../firebase/firebase';
+import {firebase,db } from '../firebase/firebase';
 
 
+
+function temp(id){
+	return db.ref("users/"+id).once('value').then(
+								function(snapshot) {
+									return "hellp"
+								})
+}
 
 
 
@@ -18,14 +25,16 @@ export class ProductList extends Component {
 	render() {
 		return (
 			<div className='redeem-outer-wrap'>
-					<AuthUserContext.Consumer>
-						
-						{(authUser)=>{
-							console.log(authUser.uid)
-							return (<div>Hello</div>)
+					<ProductConsumer>
 
-						}}
-					</AuthUserContext.Consumer>
+							{(value)=>{
+								//value.getUserPoint('xtHhubmwwhTU5fQy5ADMG8tG03T2')
+								console.log(value.user_point)
+								return (<Title name="Redeem" title={value.user_point}/>)
+
+							}}
+					</ProductConsumer>
+				
 				<div className='redeem-wrap'>
 					<div className='popular-wrap'>
 						<div className='redeem-content-title'>Popular</div>
