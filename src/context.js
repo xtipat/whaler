@@ -95,6 +95,14 @@ class ProductProvider extends Component {
 			return {modalOpen: false,user_point: remainPoints }
 		})
 	}
+	closeModal_cancel = (remainPoints) => {
+			this.setState(() => {
+			
+			
+			return {modalOpen: false,user_point: remainPoints }
+		})
+	}
+
 	getUserPoint = id => {
 		let ref = db.ref("users/"+id)
 		ref.on('value', snapshot =>{
@@ -114,6 +122,7 @@ class ProductProvider extends Component {
 				addToCart: this.addToCart,
 				openModal: this.openModal,
 				closeModal: this.closeModal,
+				closeModal_cancel: this.closeModal_cancel,
 				getUserPoint: this.getUserPoint
 			}}>
 				{this.props.children}

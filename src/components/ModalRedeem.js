@@ -11,7 +11,7 @@ export default class ModalRedeem extends Component {
 		return (
 			<ProductConsumer>
 				{(value) => {
-					const {modalOpen, closeModal} = value;
+					const {modalOpen, closeModal, closeModal_cancel} = value;
 					const {img, title, price} = value.modalProduct
 					const user_point= value.user_point
 
@@ -39,7 +39,7 @@ export default class ModalRedeem extends Component {
 											<div className='divider' />
 							        <Link to='/details'>
 									        <Button variant="black"
-									        		onClick={()=>closeModal(user_point)}>
+									        		onClick={()=>closeModal_cancel(user_point)}>
 									        	<FontAwesomeIcon icon='times-circle'/> Cancel
 									        </Button>
 									    </Link>
