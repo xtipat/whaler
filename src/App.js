@@ -58,7 +58,7 @@ class App extends React.Component {
                     <Page auth = {authUser}/>
                     <ModalRedeem/>
                     <ToastContainer position={toast.POSITION.TOP_CENTER} />
-                    <Menubar />
+                    <Menubar auth = {authUser}/>
                   </Col>
                 );
               } else {
