@@ -94,7 +94,7 @@ const Page = (auth) => (
       <Route exact path='/' render={(routeProps) => (<MapPage uid = {auth.auth.uid} {...routeProps} />)} />
       <Route path='/redeem'  component={Redeem} />
       <Route path='/explore' component={Explore} />
-      <Route path='/profile' render={(routeProps) => (<Profile uid = {auth.auth.uid} {...routeProps} />)} />
+      <Route path='/profile' component={Profile} />
       <Route path='/locate' render={(routeProps) => (<Locate uid = {auth.auth.uid} {...routeProps} />)} />
       <Route path='/details' component={Details}/>
       <Route path='/logout' render={() => (<Signout auth/>)}/>
