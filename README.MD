@@ -30,9 +30,13 @@
   - [ ] ***!prioritize*** locate mode interface.
     - [ ] Use a page-wide 'Go back' bar to replace menu bar
     - [ ] Get rid of other bin icons in locate mode
+  - [ ] Change Current Location Icon
   - [ ] Change Home Icon to Crosshair or Navigation Arrow Icon
   - [ ] Change Search Bar size
 - [ ] Modal-relevant
+  - [ ] Add Label on vote
+  - [ ] Add Modal after voting (Buttons: OK/Next -> OK/View Results)
+  - [ ] Add Modal after Add Bin (Buttons: OK/Redeem Your Point)
   - [ ] Change autocomplete tag
   - [ ] Make it so that tag is completed automatically when pressing submit *is this possible?*
 - [ ] Redeem-relevant
