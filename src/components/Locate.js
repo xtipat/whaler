@@ -6,64 +6,42 @@ import ProgressBar from 'react-bootstrap/ProgressBar'
 import MapPage from '../MapPage.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AddBinInfo from './AddBinInfo.js';
-
-const markerStyle = {
-  position: 'fixed',
-  width: 40,
-  height: 40,
-  left: '48.7%',
-  top: '47.4%',
-  zIndex: 100,
-
-  borderRadius: 40,
-  backgroundColor: '#000000',
-  textAlign: 'center',
-  color: 'white',
-  fontSize: 16,
-  padding: 4
-};
-
-const styles = {
-  exMenuL: {
-    transform: 'translate(-180%, 0)'
-  },
-
-  exMenuM: {
-    transform: 'translate(-45%, -80%)'
-  },
-
-  exMenuR: {
-    transform: 'translate(90%, 0)'
-  },
-};
+import { NavLink } from 'react-router-dom';
+import '../assets/scss/marker.scss';
 
 export default class Locate extends Component {
   constructor(props){
     super(props);
     this.state = {modalShow: false};
-    this.handleCenter = this.handleCenter.bind(this)
+    this.handleCenterForAddBin = this.handleCenterForAddBin.bind(this)
   };
-  handleCenter(center){
+  handleCenterForAddBin(center){
     this.setState({lat:center.lat, lng:center.lng})
   }
   render(){
     let modalClose = () => this.setState({ modalShow: false });
     return(
       <div>
-        <div
-          className='extended-menu-wrap'
+        <div className='locate-marker-container'
           onClick={() => {this.setState({ modalShow: true }); //this.props.onClick() 
         }}
           >
-          <FontAwesomeIcon style={markerStyle} icon="map-pin"/>
+          <span className='locate-text'>Mark Here</span>
+          <FontAwesomeIcon icon="map-pin"/>
         </div>
+        <NavLink exact to='/'>
+          <div className='back-button'>
+            Go Back
+          </div>
+        </NavLink>
         <AddBinInfo
           show={this.state.modalShow}
           onHide={modalClose}
           lat={this.state.lat}
           lng={this.state.lng}
+          uid={this.props.uid}
         />
-        <MapPage handleCenter = {this.handleCenter.bind(this)}/>
+        <MapPage handleCenterForAddBin = {this.handleCenterForAddBin.bind(this)}/>
       </div>
     );
   }

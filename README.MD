@@ -32,8 +32,13 @@
     - [ ] Get rid of other bin icons in locate mode
   - [ ] Change Home Icon to Crosshair or Navigation Arrow Icon
   - [ ] Change Search Bar size
+- [ ] Modal-relevant
+  - [ ] Change autocomplete tag
+  - [ ] Make it so that tag is completed automatically when pressing submit *is this possible?*
 - [ ] Redeem-relevant
   - [ ] ***!prioritize*** Add Modal after confirm redeem & show remaining points (Buttons: OK / Go to Redeem History)
+  - [ ] Make it so that rewards can be clicked through the whole box, not just images
+  - [ ] Change Layout of rewards
 - [ ] Profile-relevant
   - [ ] ***!prioritize*** Redeem History
 - [ ] Menu-relevant

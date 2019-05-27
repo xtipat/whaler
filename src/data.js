@@ -1,4 +1,4 @@
-
+import { auth } from './firebase';
 
 export const storeProducts = [
   {
@@ -71,3 +71,5 @@ export const detailProduct = {
 };
 
 export const user_point = 1000;
+
+export const threshold = 50;

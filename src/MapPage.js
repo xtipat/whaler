@@ -6,16 +6,21 @@ import { db } from './firebase/firebase.js';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CurPosMarker from './components/CurPosMarker.js';
-
+import SearchBox from './components/SearchBox.js'
+import HomeButton from './components/HomeButton.js'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import './assets/scss/homeIcon.scss';
+import './assets/scss/_base.scss';
+import {threshold} from './data.js'
 class MapPage extends Component {
   static defaultProps = {
     isMini: false,
-    divSize: { height: '100vh', width: '100%'},
+    divSize: { height: '100vh', width: '100%', position: 'relative'},
     center: {
       lat: 59.95,
       lng: 30.33
     },
-    handleCenter: () => {},
+    handleCenterForAddBin: () => {},
     zoom: 15,
     exampleMapStyles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"color":"#000000"},{"lightness":13}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#144b53"},{"lightness":14},{"weight":1.4}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#08304b"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#0c4152"},{"lightness":5}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#0b434f"},{"lightness":25}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#0b3d51"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"}]},{"featureType":"transit","elementType":"all","stylers":[{"color":"#146474"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#021019"}]}]
   };
@@ -25,30 +30,33 @@ class MapPage extends Component {
     this.state = {
         loading: null,
         markers: [],
-        lat: this.props.center.lat,
-        lng: this.props.center.lng,
-        locLoaded: false
+        userLat: this.props.center.lat,
+        userLng: this.props.center.lng,
+        lat:this.props.center.lat,
+        lng:this.props.center.lng,
+        userLocLoaded: false
     };
   };
-  getGeoLocation(){
+  getGeoLocation = () =>{
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
       position => {
       this.setState({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-        locLoaded: true
+        userLat: position.coords.latitude,
+        userLng: position.coords.longitude,
+        userLocLoaded: true
       })
+      this.moveCenterTo(this.state.userLat,this.state.userLng);
       },
       error => {
-        this.setState({locLoaded: true});
+        this.setState({userLocLoaded: true});
         toast.error("Can't get your current position, try enable your GPS");
       }
       )
     }
     else{
       toast.error("We can't detect GPS on your device!");
-      this.setState({locLoaded: true});
+      this.setState({userLocLoaded: true});
     }
   }
 
@@ -87,7 +95,7 @@ class MapPage extends Component {
     let markers = [];
     //console.log(this.state.markers)
     for(let i = 0;i<this.state.markers.length;i++){
-      if(this.state.markers[i].locationAccept>=50){
+      if((this.state.markers[i].locationAccept>=threshold)&&(this.state.markers[i].detailAccept>=threshold)){
         markers.push(
           <BinMarker
             lat={this.state.markers[i].location.lat}
@@ -95,6 +103,7 @@ class MapPage extends Component {
             key={this.state.markers[i].key}
             fbkey={this.state.markers[i].key}
             clickable = {false}
+            uid={this.props.uid}
             icon="trash"
           />
         );
@@ -106,6 +115,7 @@ class MapPage extends Component {
             lng={this.state.markers[i].location.lng}
             key={this.state.markers[i].key}
             fbkey={this.state.markers[i].key}
+            uid={this.props.uid}
             clickable = {true}
             icon="trash"
           />
@@ -117,23 +127,44 @@ class MapPage extends Component {
   markCurPos(){
     return(
       <CurPosMarker
-        lat={this.state.lat}
-        lng={this.state.lng}
+        lat={this.state.userLat}
+        lng={this.state.userLng}
       />
     );
   }
+  moveCenterTo(lat,lng){
+    this.setState({lat: this.state.nowLat,lng: this.state.nowLng});
+    this.setState({lat: lat,lng: lng});
+  }
+  searchBoxHandler = (place) => {
+    // console.log(place[0].geometry.location.lat(),place[0].geometry.location.lng());
+    if(place[0])
+      this.moveCenterTo(place[0].geometry.location.lat(),place[0].geometry.location.lng());
+  }
+  onClickHomeButton = () => {
+    this.getGeoLocation()
+  }
+  handleCenterChange =(center) => {
+    this.props.handleCenterForAddBin(center);
+    this.setState({
+      nowLat: center.lat,
+      nowLng: center.lng
+    });
+  }
   render() {
-    if(this.state.binsLoaded && this.state.locLoaded)
+    if(this.state.binsLoaded && this.state.userLocLoaded)
     {
       return (
       <div style={this.props.divSize}>
+        <SearchBox onPlacesChanged={this.searchBoxHandler}/>
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyCv7aQ0qD19jSxd954UZSZVQSDXZr1cNLs'}}
-          defaultCenter={{lat:this.state.lat,lng:this.state.lng}}
+          defaultCenter={{lat:this.props.lat,lng:this.props.lng}}
+          center={{lat:this.state.lat,lng:this.state.lng}}
           defaultZoom={this.props.zoom}
-          onChange={({ center }) => this.props.handleCenter(center)}
+          onChange={({ center }) => this.handleCenterChange(center)}
           options={{
-            styles :this.props.exampleMapStyles,
+            //styles :this.props.exampleMapStyles,
             fullscreenControl: false,
             zoomControl: false
           }}
@@ -141,6 +172,9 @@ class MapPage extends Component {
         {this.markAllBins()}
         {this.markCurPos()}
         </GoogleMapReact>
+        <div className='home-icon-container'  onClick={this.onClickHomeButton}>
+          <FontAwesomeIcon  icon="home" className="home-icon" activeClassName='icon-active'/>
+        </div>
       </div>
       );
     }

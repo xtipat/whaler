@@ -1,24 +1,26 @@
-// color palette
+/* color palette */
 $primary: #FEC93F;
 $dark: #17181F;
 $gray: #ccc;
 $lightgray: #ddd;
 $gray-background: #E9E8E9;
 
-// Font
+/* Font */
 $defaultfont: OpenSans;
 $boldfont: OpenSans-Bold;
 $semiboldfont: OpenSans-SemiBold;
-$titlefont: Lato;
-$titleboldfont: Lato-Bold;
+$titlefont: Oswald;
+$titleboldfont: Oswald-Bold;
 
-//page class
+/* page class */
 body {
   font-family: $defaultfont;
 }
 
 
-*:focus {outline:none !important}
+*:focus {
+  outline:none !important;
+}
 
 .outer-wrap {
   background: white;
@@ -27,6 +29,17 @@ body {
 
 .page-wrap {
   background: $gray-background;
+  text-align: center;
+  padding: 0;
+  height: 100vh;
+  -webkit-box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.41);
+  -moz-box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.41);
+  box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.41);
+  overflow: hidden;
+}
+
+.nonauth-wrap {
+  background: $dark;
   text-align: center;
   padding: 0;
   height: 100vh;
@@ -43,7 +56,8 @@ body {
 }
 
 @include placeholder {
-  font-family: $defaultfont;
+  font-family: $titlefont;
+  font-size: 0.9rem;
   font-style: italic;
 }
 
@@ -106,6 +120,7 @@ body {
   &:hover {
     color: $dark;
   }
+
 }
 
 .btn-black {
@@ -117,6 +132,16 @@ body {
   }
 }
 
+
+.btn-white {
+  background: white;
+  transition: all 0.2s ease-out;
+  color: $dark;
+
+  &:hover {
+    color: $primary;
+  }
+}
 .vertical-center-wrap {
   position: relative;
   padding: 0;
@@ -154,6 +179,54 @@ body {
   display:inline-block;
 }
 
-.progress-bar {
-  background-color: $primary !important;
+.left.progress {
+  width: 50%;
+  display:inline-block;
+  border-radius: .25rem 0rem 0rem .25rem;
+  .progress-bar{
+    float: right;
+    height: 100%;
+  }
+}
+
+.right.progress {
+  width: 50%;
+  display:inline-block;
+  border-radius: 0rem .25rem .25rem 0rem;
+  .progress-bar{
+    float: left;
+    height: 100%;
+  }
+}
+
+.left-label{
+  display:inline-block;
+  float: left;
+}
+
+.right-label{
+  display:inline-block;
+  float: right;
+}
+
+.hidden {
+  display: none;
+}
+
+input[type=text]:focus, textarea:focus {
+  box-shadow:none;
+  border-color: $primary;
+}
+
+input[type=password]:focus, textarea:focus {
+  box-shadow:none;
+  border-color: $primary;
+}
+
+.form-control.is-invalid:focus{
+  border-color: none;
+}
+
+.custom-toast {
+  font-family: $titlefont;
 }
