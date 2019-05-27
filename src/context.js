@@ -17,16 +17,28 @@ class ProductProvider extends Component {
 		user_point: user_point,
 		modalOpen: false,
 		modalProduct:detailProduct,
-		//this should be set as well
-		//!!!!!!!!!
-		user_id: "xtHhubmwwhTU5fQy5ADMG8tG03T2"
+
+		user_id: ""
 	}
 	componentDidMount(){
 		this.setProducts();
 		//we need to change this value base on the use id
-		//!!!!!!!!!!!!!!!
+			
+		firebase.auth().onAuthStateChanged(user => {
+  		if (user) {
+    		// User is signed in.
+    		 this.setState(() => {
+    			
+    			return {user_id: firebase.auth().currentUser.uid}
+    		})
+    		this.getUserPoint(firebase.auth().currentUser.uid);
 
-		this.getUserPoint("xtHhubmwwhTU5fQy5ADMG8tG03T2");
+
+  		} else {
+    		// No user is signed in.
+  		}
+		});
+
 		
 	}
 	//we need to initialize the product as empty string first because we want to copy not reference the real data
@@ -104,8 +116,19 @@ class ProductProvider extends Component {
 	}
 
 	getUserPoint = id => {
+		console.log(id)
 		let ref = db.ref("users/"+id)
 		ref.on('value', snapshot =>{
+			console.log(snapshot.val().point)
+			const cur_point = snapshot.val().point
+			this.setState(() =>{
+				return {user_point: cur_point}
+			})
+		});
+	}
+	getUserPoint_once = id => {
+		let ref = db.ref("users/"+id)
+		ref.once('value', snapshot =>{
 			console.log(snapshot.val().point)
 			const cur_point = snapshot.val().point
 			this.setState(() =>{
@@ -123,7 +146,8 @@ class ProductProvider extends Component {
 				openModal: this.openModal,
 				closeModal: this.closeModal,
 				closeModal_cancel: this.closeModal_cancel,
-				getUserPoint: this.getUserPoint
+				getUserPoint: this.getUserPoint,
+				getUserPoint_once: this.getUserPoint_once
 			}}>
 				{this.props.children}
 			</ProductContext.Provider>

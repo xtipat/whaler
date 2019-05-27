@@ -19,17 +19,21 @@ function temp(id){
 }
 
 
-
 export class ProductList extends Component {
 
 	render() {
 		return (
 			<div className='redeem-outer-wrap'>
-					<ProductConsumer>
+				
+				  	<ProductConsumer>
 
 							{(value)=>{
 								//value.getUserPoint('xtHhubmwwhTU5fQy5ADMG8tG03T2')
 								console.log(value.user_point)
+								console.log(firebase.auth().currentUser.uid)
+								const uid = firebase.auth().currentUser.uid
+								
+								//value.getUserPoint_once(firebase.auth().currentUser.uid)
 								return (<Title name="Redeem" title={value.user_point}/>)
 
 							}}
@@ -66,4 +70,5 @@ export class ProductList extends Component {
 }
 
 export default ProductList;
+
 

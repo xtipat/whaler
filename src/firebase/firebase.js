@@ -21,6 +21,7 @@ const auth = firebase.auth();
 const binsRef = db.ref("bins")
 const usersRef = db.ref("users")
 
+
 export {
   firebaseConfig,
   db,
