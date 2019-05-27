@@ -1,5 +1,6 @@
 # **Whaler** - CS374 Project
 ## **Update**
+* 19/05/20 Add Formik & Yup
 * 19/05/10 Add Live Demo Link
 * 19/05/09
   * Remove Circular Action Button (Not compatible with react web)
@@ -24,32 +25,21 @@
 **Live Demo** : https://whaler.netlify.com
 
 ## **Progress**
-### To-do List
-- [ ] Make decisions about minor styles
-  - [ ] hover action
-- [ ] Complete Router Link
-- [ ] Considering Redux Integration (Use or Remove)
-- [x] Discuss about design choices
-  - [x] Primary Color
-  - [x] Fonts
-
-### Implementation
-- [ ] Map Page
-  - [x] add Google Map
-  - [ ] Bin Details Modal
-  - [ ] Add Bin Modal
-- [ ] Explore
-- [ ] Redeem Page
-  - [ ] Reward List
-  - [ ] Redeem Reward
-- [ ] Profile Page
-  - [ ] Profile Display
-  - [ ] Statistics
-  - [ ] Edit Profile
-- [ ] Menu Bar
-  - [ ] Extended Menu Trigger
-  - [x] Layout
-  - [x] Router Link on main menu
+### To-do List ***!important***
+- [ ] Map-relevant
+  - [ ] ***!prioritize*** locate mode interface.
+    - [ ] Use a page-wide 'Go back' bar to replace menu bar
+    - [ ] Get rid of other bin icons in locate mode
+  - [ ] Change Home Icon to Crosshair or Navigation Arrow Icon
+  - [ ] Change Search Bar size
+- [ ] Redeem-relevant
+  - [ ] ***!prioritize*** Add Modal after confirm redeem & show remaining points (Buttons: OK / Go to Redeem History)
+- [ ] Profile-relevant
+  - [ ] ***!prioritize*** Redeem History
+- [ ] Menu-relevant
+  - [ ] ***!prioritize*** Change extended menu bar labels
+  - [ ] Get rid of cancel buttons
+  - [ ] Change color of plus buttons on menu bar extended
 
 ## **Coding Guides**
 * This project is implemented with ReactJS framework with SASS/SCSS stylesheet. All the JavaScript file can be found in `/src/` folder, and assets such as fonts and third-party js/css are put in `/public/`. The base directory from here on will refer to `/src/`
@@ -99,6 +89,7 @@ Here, we are using **ReactJS** and **CSS/SCSS** stylesheet.
 ### Libraries and Framework
 you can also find the list in `package.json` file
 - [firebase](https://firebase.google.com/?gclid=Cj0KCQiAxNnfBRDwARIsAJlH29DkGiYpDh3s0DOPre_sJG9q66-aNFBNOoSL3MEp3OAXBUAlu4ejy_YaAly4EALw_wcB)
+- [formik](https://jaredpalmer.com/formik/)
 - [google-map-react](https://github.com/google-map-react/google-map-react)
 - [node-sass](https://github.com/sass/node-sass)
 - [react](https://reactjs.org)
@@ -110,10 +101,11 @@ you can also find the list in `package.json` file
 - [react-tagsinput](https://github.com/olahol/react-tagsinput)
 - [react-toastify](https://fkhadra.github.io/react-toastify)
 - [styled-component](https://www.styled-components.com)
+- [yup](https://github.com/jquense/yup)
 - [@react-firebase/database](https://react-firebase-js.com)
 
 ### Assets
-- **Title Font**: [Lato](https://fonts.google.com/specimen/Lato)
+- **Title Font**: [Oswald](https://fonts.google.com/specimen/Oswald)
 - **Default, Context Font**: [Open Sans](https://fonts.google.com/specimen/Open+Sans)
 
 ---
