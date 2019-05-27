@@ -36,25 +36,6 @@ export default class BinDetails extends React.Component {
     };
   };
 
-  checkUser(){
-      db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).once('value').then(snapshot => {
-        let value = snapshot.val();
-        if (value === null){
-          this.setState({
-            hideLocBtn: false,
-            hideDetBtn: false
-          });
-        }
-        else{
-          this.setState({
-            hideLocBtn: value.locaVoted,
-            hideDetBtn: value.detVoted
-          });
-        }
-      }
-      );
-    }
-
   fetchBinData(){
     db.ref(`bins/${this.props.fbkey}`).once('value').then(snapshot => {
       let bin = snapshot.val();
@@ -120,7 +101,6 @@ export default class BinDetails extends React.Component {
   }
 
   locationContents() {
-    const style = this.state.hideLocBtn ? {display: 'none'} : {textAlign: 'center'};
     return(
       <div>
         <div style={{ height: '50vh', width: '100%'}}>
@@ -141,7 +121,7 @@ export default class BinDetails extends React.Component {
             />
           </GoogleMapReact>
         </div>
-        <div style={style}>
+        <div style={{textAlign: 'center'}}>
           <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
             <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/locationAccept`}>
               {({ runTransaction }) => {
@@ -151,7 +131,6 @@ export default class BinDetails extends React.Component {
                     .then(() => {
                           toast.success(<div> Location of this bin was accepted.<br/>You earned 20 points! </div>);
                           this.addBinVote();
-                          db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'locaVoted': true});
                         });
                   }}>
                     <FontAwesomeIcon icon='check-circle'/> Accept
@@ -168,7 +147,6 @@ export default class BinDetails extends React.Component {
                     .then(() => {
                           toast.warning(<div> Location of this bin was rejected.<br/>You earned 20 points! </div>);
                           this.addBinVote();
-                          db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'locaVoted': true});
                         });
                   }}>
                     <FontAwesomeIcon icon='times-circle'/> Reject
@@ -211,7 +189,6 @@ export default class BinDetails extends React.Component {
   }
 
   detailsContents(){
-    const style = this.state.hideDetBtn ? {display: 'none'} : {textAlign: 'center'};
     return(
       <div>
         {this.checkPicture()}
@@ -221,7 +198,7 @@ export default class BinDetails extends React.Component {
               {this.writeAllBinTypes()}
             </div>
         </div>
-        <div style={style}>
+        <div style={{textAlign: 'center'}}>
         <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
           <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/detailAccept`}>
             {({ runTransaction }) => {
@@ -231,7 +208,6 @@ export default class BinDetails extends React.Component {
                   .then(() => {
                         toast.success("Details of this bin were accepted.");
                         this.addBinVote();
-                        db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'detVoted': true});
                       });
                 }}>
                   <FontAwesomeIcon icon='check-circle'/> Accept
@@ -248,7 +224,6 @@ export default class BinDetails extends React.Component {
                   .then(() => {
                         toast.warning("Details of this bin were rejected.");
                         this.addBinVote();
-                        db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'detVoted': true});
                       });
                 }}>
                   <FontAwesomeIcon icon='times-circle'/> Reject
@@ -290,7 +265,6 @@ export default class BinDetails extends React.Component {
 
   render() {
     if(this.state.loaded){
-      this.checkUser();
       return (
         <Modal
           size="sm"
