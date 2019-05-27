@@ -9,32 +9,37 @@ class BinMarker extends Component {
     super(props);
     this.state = {modalShow: false};
   }
+  static defaultProps = {
+    isMini: false
+  };
   static defaultProps = {};
-  checkClickable(){
+  checkIsAccepted(){
     let modalClose = () => this.setState({ modalShow: false });
-    if(this.props.clickable){
+    let onClickHandler = () => this.setState({ modalShow: true });
+    if(this.props.isMini == true) onClickHandler = () => {};
+    if(this.props.isAccepted){
       return(
       <div>
-      <div className="bin-marker-clickable" onClick={() => this.setState({ modalShow: true })}>
+      <div className="bin-marker-accepted" onClick={onClickHandler}>
         <FontAwesomeIcon icon={this.props.icon}/>
       </div>
-      <BinDetails
-        show={this.state.modalShow}
-        onHide={modalClose}
-        fbkey={this.props.fbkey}
-        icon={this.props.icon}
-        uid={this.props.uid}
-      />
+        <BinInfo
+          show={this.state.modalShow}
+          onHide={modalClose}
+          fbkey={this.props.fbkey}
+          icon={this.props.icon}
+          uid={this.props.uid}
+        />
       </div>
       );
     }
     else{
       return(
       <div>
-      <div className="bin-marker-not-clickable" onClick={() => this.setState({ modalShow: true })}>
+      <div className="bin-marker-not-accepted" onClick={onClickHandler}>
         <FontAwesomeIcon icon={this.props.icon}/>
       </div>
-      <BinInfo
+      <BinDetails
         show={this.state.modalShow}
         onHide={modalClose}
         fbkey={this.props.fbkey}
@@ -48,7 +53,7 @@ class BinMarker extends Component {
 
   render(){
     return(
-      this.checkClickable()
+      this.checkIsAccepted()
     );
   }
 }

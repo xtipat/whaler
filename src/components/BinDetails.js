@@ -99,7 +99,24 @@ export default class BinDetails extends React.Component {
     if(this.props.show !== prevProps.show)
       this.fetchBinData();
   }
-
+  checkUser(){
+    db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).once('value').then(snapshot => {
+      let value = snapshot.val();
+      if (value === null){
+        this.setState({
+          hideLocBtn: false,
+          hideDetBtn: false
+        });
+      }
+      else{
+        this.setState({
+          hideLocBtn: value.locaVoted,
+          hideDetBtn: value.detVoted
+        });
+      }
+    }
+    );
+  }
   locationContents() {
     return(
       <div>

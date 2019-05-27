@@ -30,7 +30,7 @@ class HomeButton extends Component {
   render(){
     return(
         <div onClick={this.props.clickHandler()}>
-          <FontAwesomeIcon style={markerStyle} icon="home"/>
+          <FontAwesomeIcon style={markerStyle} icon="location-arrow"/>
         </div>
       );
   }
