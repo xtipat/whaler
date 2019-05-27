@@ -179,8 +179,34 @@ body {
   display:inline-block;
 }
 
-.progress-bar {
-  background-color: $primary !important;
+.left.progress {
+  width: 50%;
+  display:inline-block;
+  border-radius: .25rem 0rem 0rem .25rem;
+  .progress-bar{
+    float: right;
+    height: 100%;
+  }
+}
+
+.right.progress {
+  width: 50%;
+  display:inline-block;
+  border-radius: 0rem .25rem .25rem 0rem;
+  .progress-bar{
+    float: left;
+    height: 100%;
+  }
+}
+
+.left-label{
+  display:inline-block;
+  float: left;
+}
+
+.right-label{
+  display:inline-block;
+  float: right;
 }
 
 .hidden {

@@ -72,26 +72,16 @@ export default class BinDetails extends React.Component {
     if(this.state.binDetRjctAcpt === undefined)
       this.setState({ binDetRjct: 0})
 
-    this.setState({
-      binLocAcptPer: Math.round(100*this.state.binLocAcpt/threshold),
-      binDetAcptPer: Math.round(100*this.state.binDetAcpt/threshold),
-      binLocRjctPer: Math.round(100*this.state.binLocRjct/threshold),
-      binDetRjctPer: Math.round(100*this.state.binDetRjct/threshold)
-    });
+    let binLocAcptNet = this.state.binLocAcpt - this.state.binLocRjct;
+    if(binLocAcptNet >= 0)
+     this.setState({binLocAcptPer: binLocAcptNet, binLocRjctPer: 0})
+    else this.setState({binLocAcptPer: 0, binLocRjctPer: Math.abs(binLocAcptNet)})
 
-    if(this.state.binLocAcpt + this.state.binLocRjct === 0)
-      this.setState({
-        binLocAcptPer: 0,
-        binLocRjctPer: 0
-      })
+    let binDetAcptNet = this.state.binDetAcpt - this.state.binDetRjct;
+    if(binDetAcptNet >= 0)
+     this.setState({binDetAcptPer: binDetAcptNet, binDetRjctPer: 0})
+    else this.setState({binDetAcptPer: 0, binDetRjctPer: Math.abs(binDetAcptNet)})
 
-    if(this.state.binDetAcpt + this.state.binDetRjct === 0)
-      this.setState({
-        binDetAcptPer: 0,
-        binDetRjctPer: 0
-      })
-
-    console.log(this.state.binLocAcptPer)
   }
   addBinVote(){
     var userRef = db.ref(`/users/${this.props.uid}`).once('value').then( snapshot => {
@@ -252,9 +242,23 @@ export default class BinDetails extends React.Component {
     return(
       <div>
         <div className='modal-content-title'>Location Reliability</div>
-        <ProgressBar striped variant="success" now={this.state.binLocAcptPer} label={`${this.state.binLocAcpt} / ${threshold}`}/>
+        <section>
+          <ProgressBar variant="danger" className="left" now={this.state.binLocRjctPer} />
+          <ProgressBar variant="success" className="right" now={this.state.binLocAcptPer} />
+        </section>
+        <div>
+          <div className="left-label">Reject: {this.state.binLocRjct}</div>
+          <div className="right-label">Accept: {this.state.binLocAcpt}</div>
+        </div>
         <div className='modal-content-title'>Info Reliability</div>
-        <ProgressBar striped variant="success" now={this.state.binDetAcptPer} label={`${this.state.binDetAcpt} / ${threshold}`}/>
+        <section>
+          <ProgressBar variant="danger" className="left" now={this.state.binDetRjctPer} />
+          <ProgressBar variant="success" className="right" now={this.state.binDetAcptPer} />
+        </section>
+        <div>
+          <div className="left-label">Reject: {this.state.binDetRjct}</div>
+          <div className="right-label">Accept: {this.state.binDetAcpt}</div>
+        </div>
       </div>
     );
   }
