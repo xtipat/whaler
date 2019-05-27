@@ -107,6 +107,7 @@ class MapPage extends Component {
               (this.state.markers[i].detailAccept>=threshold)}
             uid={this.props.uid}
             icon="trash"
+            isClickable={!this.props.isInLocatePage}
           />
         );
     }

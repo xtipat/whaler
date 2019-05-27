@@ -85,7 +85,6 @@
   position: absolute;
   width: 8px;
   height: 8px;
-  offset-anchor: center;
   top: 52.1%;
   left: 53.2%;
   z-index: 101;
@@ -96,4 +95,12 @@
   border-width: 10px;
   text-align: center;
   align-self: auto;
+}
+
+.un-clickable{
+  background: gray !important;
+  border: 5px solid gray !important;
+  &:hover{
+    cursor: -webkit-grab;
+  }
 }

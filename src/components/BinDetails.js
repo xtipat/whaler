@@ -136,7 +136,7 @@ export default class BinDetails extends React.Component {
             <BinMarker
               lat={this.state.binLat}
               lng={this.state.binLng}
-              isMini={true}
+              isClickable={false}
               icon={this.props.icon}
             />
           </GoogleMapReact>

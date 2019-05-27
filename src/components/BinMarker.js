@@ -10,17 +10,18 @@ class BinMarker extends Component {
     this.state = {modalShow: false};
   }
   static defaultProps = {
-    isMini: false
+    isClickable: true
   };
   static defaultProps = {};
   checkIsAccepted(){
     let modalClose = () => this.setState({ modalShow: false });
     let onClickHandler = () => this.setState({ modalShow: true });
-    if(this.props.isMini == true) onClickHandler = () => {};
+    let cssClickableClass = "";
+    if(this.props.isClickable == false) { onClickHandler = () => {}; cssClickableClass = " un-clickable";}
     if(this.props.isAccepted){
       return(
       <div>
-      <div className="bin-marker-accepted" onClick={onClickHandler}>
+      <div className={"bin-marker-accepted"+cssClickableClass} onClick={onClickHandler}>
         <FontAwesomeIcon icon={this.props.icon}/>
       </div>
         <BinInfo
@@ -36,7 +37,7 @@ class BinMarker extends Component {
     else{
       return(
       <div>
-      <div className="bin-marker-not-accepted" onClick={onClickHandler}>
+      <div className={"bin-marker-not-accepted"+cssClickableClass} onClick={onClickHandler}>
         <FontAwesomeIcon icon={this.props.icon}/>
       </div>
       <BinDetails
