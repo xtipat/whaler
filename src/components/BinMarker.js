@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import BinDetails from './BinDetails.js';
 import BinInfo from './BinInfo.js'
 import '../assets/scss/marker.scss';
+import { db } from '../firebase/firebase.js';
 
 class BinMarker extends Component {
   constructor (props) {
@@ -13,7 +14,28 @@ class BinMarker extends Component {
     isClickable: true
   };
   static defaultProps = {};
+
+  checkUser(){
+      db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).once('value').then(snapshot => {
+        let value = snapshot.val();
+        if (value === null){
+          this.setState({
+            hideLocBtn: false,
+            hideDetBtn: false
+          });
+        }
+        else{
+          this.setState({
+            hideLocBtn: value.locaVoted,
+            hideDetBtn: value.detVoted
+          });
+        }
+      }
+      );
+    }
+
   checkIsAccepted(){
+    this.checkUser();
     let modalClose = () => this.setState({ modalShow: false });
     let onClickHandler = () => this.setState({ modalShow: true });
     let cssClickableClass = "";
@@ -24,12 +46,15 @@ class BinMarker extends Component {
       <div className={"bin-marker-accepted"+cssClickableClass} onClick={onClickHandler}>
         <FontAwesomeIcon icon={this.props.icon}/>
       </div>
+      {this.checkUser()}
         <BinInfo
           show={this.state.modalShow}
           onHide={modalClose}
           fbkey={this.props.fbkey}
           icon={this.props.icon}
           uid={this.props.uid}
+          hideDetBtn={this.state.hideDetBtn}
+          hideLocBtn={this.state.hideLocBtn}
         />
       </div>
       );
@@ -46,6 +71,8 @@ class BinMarker extends Component {
         fbkey={this.props.fbkey}
         icon={this.props.icon}
         uid={this.props.uid}
+        hideDetBtn={this.state.hideDetBtn}
+        hideLocBtn={this.state.hideLocBtn}
       />
       </div>
       );

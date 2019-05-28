@@ -36,25 +36,6 @@ export default class BinDetails extends React.Component {
     };
   };
 
-  checkUser(){
-      db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).once('value').then(snapshot => {
-        let value = snapshot.val();
-        if (value === null){
-          this.setState({
-            hideLocBtn: false,
-            hideDetBtn: false
-          });
-        }
-        else{
-          this.setState({
-            hideLocBtn: value.locaVoted,
-            hideDetBtn: value.detVoted
-          });
-        }
-      }
-      );
-    }
-
   fetchBinData(){
     db.ref(`bins/${this.props.fbkey}`).once('value').then(snapshot => {
       let bin = snapshot.val();
@@ -120,7 +101,6 @@ export default class BinDetails extends React.Component {
   }
 
   locationContents() {
-    const style = this.state.hideLocBtn ? {display: 'none'} : {textAlign: 'center'};
     return(
       <div>
         <div style={{ height: '50vh', width: '100%'}}>
@@ -141,12 +121,12 @@ export default class BinDetails extends React.Component {
             />
           </GoogleMapReact>
         </div>
-        <div style={style}>
+        <div style={{textAlign: "center"}}>
           <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
             <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/locationAccept`}>
               {({ runTransaction }) => {
                 return (
-                  <Button ref="locAcptBtn" variant="yellow" onClick={() => {
+                  <Button disabled={this.props.hideLocBtn} ref="locAcptBtn" variant="yellow" onClick={() => {
                     runTransaction({reducer: val => {return val + 1;}})
                     .then(() => {
                           toast.success(<div> Location of this bin was accepted.<br/>You earned 20 points! </div>);
@@ -163,7 +143,7 @@ export default class BinDetails extends React.Component {
             <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/locationReject`}>
               {({ runTransaction }) => {
                 return (
-                  <Button variant="black" onClick={() => {
+                  <Button disabled={this.props.hideLocBtn} variant="black" onClick={() => {
                     runTransaction({reducer: val => {return val + 1;}})
                     .then(() => {
                           toast.warning(<div> Location of this bin was rejected.<br/>You earned 20 points! </div>);
@@ -211,7 +191,6 @@ export default class BinDetails extends React.Component {
   }
 
   detailsContents(){
-    const style = this.state.hideDetBtn ? {display: 'none'} : {textAlign: 'center'};
     return(
       <div>
         {this.checkPicture()}
@@ -221,12 +200,12 @@ export default class BinDetails extends React.Component {
               {this.writeAllBinTypes()}
             </div>
         </div>
-        <div style={style}>
+        <div style={{textAlign: "center"}}>
         <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
           <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/detailAccept`}>
             {({ runTransaction }) => {
               return (
-                <Button variant="yellow" onClick={() => {
+                <Button disabled={this.props.hideDetBtn} variant="yellow" onClick={() => {
                   runTransaction({reducer: val => {return val + 1;}})
                   .then(() => {
                         toast.success("Details of this bin were accepted.");
@@ -243,7 +222,7 @@ export default class BinDetails extends React.Component {
           <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/detailReject`}>
             {({ runTransaction }) => {
               return (
-                <Button variant="black" onClick={() => {
+                <Button disabled={this.props.hideDetBtn} variant="black" onClick={() => {
                   runTransaction({reducer: val => {return val + 1;}})
                   .then(() => {
                         toast.warning("Details of this bin were rejected.");
@@ -290,13 +269,13 @@ export default class BinDetails extends React.Component {
 
   render() {
     if(this.state.loaded){
-      this.checkUser();
       return (
         <Modal
           size="sm"
           {...this.props}
           centered
         >
+        {console.log(this.props.hideLocBtn)}
           <Tab.Container defaultActiveKey="location">
             <Modal.Header style={{ background: styles.colors.primary, border: 'none' }}>
               <div style={{ textAlign: 'right', width: '100%'}}>

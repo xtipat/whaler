@@ -126,7 +126,7 @@ class MapPage extends Component {
       return(
         <LocateMarker
           lat = {this.state.nowLat}
-          lng = {this.state.nowLng} 
+          lng = {this.state.nowLng}
           handleLocationPinButton = {this.props.handleLocationPinButton}
         />
       );
