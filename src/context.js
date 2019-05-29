@@ -16,6 +16,7 @@ class ProductProvider extends Component {
 		cart: [],
 		user_point: user_point,
 		modalOpen: false,
+		modalCongrat: true,
 		modalProduct:detailProduct,
 
 		user_id: ""
@@ -70,7 +71,7 @@ class ProductProvider extends Component {
 	//we don't want to mutate the state first, then we use index
 	//we get the item change value and return in setState.
 	addToCart = (id) =>{
-		console.log("hello from add to cart: ", id);
+		//console.log("hello from add to cart: ", id);
 		let tempProducts = [...this.state.products];
 		const index = tempProducts.indexOf(this.getItem(id))
 		const product = tempProducts[index]
@@ -85,7 +86,12 @@ class ProductProvider extends Component {
 			},() => {console.log(this.state)})
 	}
 	openModal = id => {
-		console.log("openModal")
+		const product = this.getItem(id);
+		this.setState(() => {
+			return {modalProduct: product, modalOpen:true}
+		},() => {console.log(this.state)})
+	}
+	openModalCongrat = id => {
 		const product = this.getItem(id);
 		this.setState(() => {
 			return {modalProduct: product, modalOpen:true}
@@ -103,13 +109,12 @@ class ProductProvider extends Component {
 		  });
 		this.setState(() => {
 			
-			
 			return {modalOpen: false,user_point: remainPoints }
 		})
 	}
+	//this for click confirm in modal: should show the congratulation modal after
 	closeModal_cancel = (remainPoints) => {
 			this.setState(() => {
-			
 			
 			return {modalOpen: false,user_point: remainPoints }
 		})
@@ -136,6 +141,7 @@ class ProductProvider extends Component {
 			})
 		});
 	}
+
 	
 	render() {
 		return (
@@ -147,7 +153,8 @@ class ProductProvider extends Component {
 				closeModal: this.closeModal,
 				closeModal_cancel: this.closeModal_cancel,
 				getUserPoint: this.getUserPoint,
-				getUserPoint_once: this.getUserPoint_once
+				getUserPoint_once: this.getUserPoint_once,
+				openModalCongrat: this.openModalCongrat 
 			}}>
 				{this.props.children}
 			</ProductContext.Provider>

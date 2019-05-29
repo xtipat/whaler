@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Product from "./Product";
 import Product_pop from "./Product_pop";
+import Product_slide from "./Product_slide";
 import Title from "./Title";
 //load the data from file
 import {ProductConsumer} from "../context";
@@ -9,9 +10,6 @@ import {ProductConsumer} from "../context";
 import AuthUserContext from '../session/authUserContext';
 import {firebase,db } from '../firebase/firebase';
 import styled from 'styled-components';
-
-
-
 
 
 export class ProductList extends Component {
@@ -35,11 +33,9 @@ export class ProductList extends Component {
 						<div className='redeem-content-title'>Popular</div>
 							<ProductConsumer>
 								{(value)=>{
-									return value.products.map( product => {
-										if(product.popular === true)
-											return <Product_pop key={product.id} product={product} />
-									})
-								}}
+									return  <Product_slide products={value.products} />
+									}
+								}
 							</ProductConsumer>
 					</div>
 					<div className='more-wrap'>
@@ -64,7 +60,7 @@ export class ProductList extends Component {
 const ProductWrapper = styled.div`
 .redeem-outer-wrap{
   height: 100 px;
-  width: 100%;
+  max-width: 100%;
   padding: 0 0 60px 0;
   overflow-y: scroll;
   overflow-x: hidden;

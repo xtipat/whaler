@@ -25,7 +25,7 @@ export const storeProducts = [
     inCart: false,
     count: 0,
     total: 0,
-    popular:false
+    popular:true
   },
   {
     id: 3,
