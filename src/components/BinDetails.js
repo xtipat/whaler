@@ -153,7 +153,7 @@ export default class BinDetails extends React.Component {
             <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/locationAccept`}>
               {({ runTransaction }) => {
                 return (
-                  <Button ref={this.locAcptBtn} disabled={this.state.hideLocBtn} ref="locAcptBtn" variant="yellow" onClick={() => {
+                  <Button ref={this.locAcptBtn} disabled={this.state.hideLocBtn} variant="yellow" onClick={() => {
                     runTransaction({reducer: val => {return val + 1;}})
                     .then(() => {
                           toast.success(<div> Location of this bin was accepted.<br/>You earned 20 points! </div>);
