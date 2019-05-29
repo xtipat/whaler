@@ -9,36 +9,46 @@ export class Product extends Component {
 		return (
 
 			<ProductWrapper className="col-6">
+			<ProductConsumer>
+				{(value)=>(
+					<div className="card" 
+						onClick={() =>
+						value.handleDetail(id)
+						}
+					>
+						<Link to="/details">
+						<div className='reward-wrap'>
+							
+								
+									<div
+										//this is for making the image bigger
+										className="img-container p-6"
+										//onClick={() =>
+										//	value.handleDetail(id)
+										//}
+									>
+										
+											<img src={img} alt="product" className="card-img-top img-thumbnail img-responsive" />
+										
 
-				<div className="card">
-					<div className='reward-wrap'>
-						<ProductConsumer>
-							{(value)=>(
-								<div
-									className="img-container p-6"
-									onClick={() =>
-										value.handleDetail(id)
-									}
-								>
-									<Link to="/details">
-										<img src={img} alt="product" className="card-img-top img-thumbnail img-responsive" />
-									</Link>
+									</div>
+								
 
-								</div>
-							)}
-
-						</ProductConsumer>
-						{/*card footer */}
-						<div className="card-footer d-flex justify-content-between ">
-							<p className="align-self-left mb-2 text-capitalize">
-								{title}
-							</p>
-							<h5 className="text-gold font-italic mb-0">
-								{price} points
-							</h5>
+							
+							{/*card footer */}
+							<div className="card-footer d-flex justify-content-between ">
+								<p className="align-self-left mb-2 text-capitalize">
+									{title}
+								</p>
+								<h5 className="text-gold font-italic mb-0">
+									{price} points
+								</h5>
+							</div>
 						</div>
+						</Link>
 					</div>
-				</div>
+				)}
+			</ProductConsumer>
 			</ProductWrapper>
 		);
 	}
