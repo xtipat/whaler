@@ -11,35 +11,38 @@ export class Product_pop extends Component {
 
 			return (
 				<ProductWrapper className="col-12 mx-auto">
-					<div className="card">
-						<div className='reward-wrap'>
-							<ProductConsumer>
-								{(value)=>(
-									<div
-										className="img-container p-5"
-										onClick={() =>
-											value.handleDetail(id)
-										}
-									>
-										<Link to="/details">
+					<ProductConsumer>
+						{(value)=>(
+							<div className="card"
+								onClick={() =>
+									value.handleDetail(id)
+								}
+							>
+								<Link className="product_link" to="/details">
+									<div className='reward-wrap'>
+										<div
+											className="img-container p-6"
+													
+										>
 											<img src={img} alt="product" className="card-img-top"/>
-										</Link>
+												
+										</div>
+											
 
+										{/*card footer */}
+										<div className="card-footer d-flex justify-content-between">
+											<p className="align-self-center mb-0 text-capitalize">
+												{title}
+											</p>
+											<h5 className="text-gold font-italic mb-0">
+												{price} points
+											</h5>
+										</div>
 									</div>
-								)}
-
-							</ProductConsumer>
-							{/*card footer */}
-							<div className="card-footer d-flex justify-content-between">
-								<p className="align-self-center mb-0 text-capitalize">
-									{title}
-								</p>
-								<h5 className="text-gold font-italic mb-0">
-									{price} points
-								</h5>
+								</Link>
 							</div>
-						</div>
-					</div>
+						)}
+					</ProductConsumer>
 				</ProductWrapper>
 			);
 
@@ -75,25 +78,16 @@ const ProductWrapper = styled.div`
 .img-container:hover .card-img-top{
 	transform: scale(1.2)
 }
-.cart-btn{
-	position: absolute;
-	bottom:0;
-	right:0;
-	padding:0.2rem 0.4rem;
-	background:var(--lightBlue);
-	border: none;
-	color: var(--mainWhite);
-	font-size:1.4rem;
-	border-radius: 0.5rem 0 0 0;
-	transform: translate(100%,100%);
-	transition: all 1s linear;
-}
+
 .img-container:hover .cart-btn{
 	transform: translate(0,0);
 }
-.cart-btn:hover {
-	color:var(--mainBlue);
-	cursor: pointer;
+.product_link, .product_link:hover {
+   text-decoration: none; 
+   background: rgba(247, 247, 247);
+   color: black;
+
+
 }
 
 `
