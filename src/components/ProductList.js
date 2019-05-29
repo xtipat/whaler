@@ -44,7 +44,7 @@ export class ProductList extends Component {
 					</div>
 					<div className='more-wrap'>
 						<div className='redeem-content-title'>More</div>
-						<Row>
+						<Row >
 							<ProductConsumer>
 								{(value)=>{
 									return value.products.map( product => {

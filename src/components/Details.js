@@ -4,13 +4,16 @@ import {Link} from "react-router-dom"
 import Title from "./Title";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Modal, Nav, Tab, Button, ProgressBar } from 'react-bootstrap';
-import '../assets/scss/redeem.scss';
+import styled from 'styled-components';
+
 
 
 
 export class Details extends Component {
 	render() {
 		return (
+			<DetailContainer>
+
 			<ProductConsumer >
 				{(value) =>{
 					const {
@@ -60,8 +63,8 @@ export class Details extends Component {
     								</Button>
 
 											<div className='divider' />
-    								<Link to='/redeem'>
-    									<Button variant="black"><FontAwesomeIcon icon='times-circle'/> Go Back</Button>
+    								<Link to='/redeem' className='redeem_link'>
+    									<Button className='black-button' variant="black"><FontAwesomeIcon icon='times-circle'/> Go Back</Button>
     								</Link>
     							</div>
 								</div>
@@ -70,11 +73,20 @@ export class Details extends Component {
 					</div>
 					)
 				}}
-
 			</ProductConsumer>
+			</DetailContainer>
+
 		);
 	}
 }
 
 export default Details;
+
+const DetailContainer = styled.div`
+
+.redeem_link:hover {
+   text-decoration: none; 
+   background: none;
+   
+`
 

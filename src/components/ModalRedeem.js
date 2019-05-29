@@ -30,14 +30,14 @@ export default class ModalRedeem extends Component {
 										<h5 className="text-muted">available point : {user_point} points</h5>
 										<h5 className="text-muted">price : {price} points</h5>
 										<div style={{textAlign: 'center'}}>
-											<Link to='/redeem'>
+										<Link to='/redeem' className="redeem_link">
 										        <Button variant="yellow"
 										        		cart onClick={()=>closeModal((user_point - price),price,title)}>
 										        	<FontAwesomeIcon icon='check-circle'/> Confirm
 										        </Button>
 									    </Link>
 											<div className='divider' />
-							        <Link to='/details'>
+							        	<Link to='/details' className='redeem_link'>
 									        <Button variant="black"
 									        		onClick={()=>closeModal_cancel(user_point)}>
 									        	<FontAwesomeIcon icon='times-circle'/> Cancel
@@ -68,5 +68,9 @@ align-items: center;
 justify-content: center;
 #modal {
 	background: var(--mainWhite )
+}
+.redeem_link:hover{
+	text-decoration: none; 
+   background: none;
 }
 `
