@@ -11,8 +11,7 @@ import HomeButton from './components/HomeButton.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './assets/scss/homeIcon.scss';
 import './assets/scss/_base.scss';
-
-
+import {threshold} from './data.js'
 class MapPage extends Component {
   static defaultProps = {
     isMini: false,
@@ -87,7 +86,7 @@ class MapPage extends Component {
 
   componentDidMount() {
     this.fetchAllBinsData();
-    this.getGeoLocation();  
+    this.getGeoLocation();
   }
   componentWillUnmount() {
     db.ref(`bins`).off();
@@ -96,7 +95,7 @@ class MapPage extends Component {
     let markers = [];
     //console.log(this.state.markers)
     for(let i = 0;i<this.state.markers.length;i++){
-      if(this.state.markers[i].locationAccept>=50){
+      if((this.state.markers[i].locationAccept>=threshold)&&(this.state.markers[i].detailAccept>=threshold)){
         markers.push(
           <BinMarker
             lat={this.state.markers[i].location.lat}
@@ -104,6 +103,7 @@ class MapPage extends Component {
             key={this.state.markers[i].key}
             fbkey={this.state.markers[i].key}
             clickable = {false}
+            uid={this.props.uid}
             icon="trash"
           />
         );
@@ -115,6 +115,7 @@ class MapPage extends Component {
             lng={this.state.markers[i].location.lng}
             key={this.state.markers[i].key}
             fbkey={this.state.markers[i].key}
+            uid={this.props.uid}
             clickable = {true}
             icon="trash"
           />

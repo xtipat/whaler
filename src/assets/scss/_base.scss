@@ -1,18 +1,18 @@
-// color palette
+/* color palette */
 $primary: #FEC93F;
 $dark: #17181F;
 $gray: #ccc;
 $lightgray: #ddd;
 $gray-background: #E9E8E9;
 
-// Font
+/* Font */
 $defaultfont: OpenSans;
 $boldfont: OpenSans-Bold;
 $semiboldfont: OpenSans-SemiBold;
 $titlefont: Oswald;
 $titleboldfont: Oswald-Bold;
 
-//page class
+/* page class */
 body {
   font-family: $defaultfont;
 }
@@ -179,8 +179,34 @@ body {
   display:inline-block;
 }
 
-.progress-bar {
-  background-color: $primary !important;
+.left.progress {
+  width: 50%;
+  display:inline-block;
+  border-radius: .25rem 0rem 0rem .25rem;
+  .progress-bar{
+    float: right;
+    height: 100%;
+  }
+}
+
+.right.progress {
+  width: 50%;
+  display:inline-block;
+  border-radius: 0rem .25rem .25rem 0rem;
+  .progress-bar{
+    float: left;
+    height: 100%;
+  }
+}
+
+.left-label{
+  display:inline-block;
+  float: left;
+}
+
+.right-label{
+  display:inline-block;
+  float: right;
 }
 
 .hidden {

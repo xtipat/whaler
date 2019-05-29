@@ -39,6 +39,7 @@ export default class Locate extends Component {
           onHide={modalClose}
           lat={this.state.lat}
           lng={this.state.lng}
+          uid={this.props.uid}
         />
         <MapPage handleCenterForAddBin = {this.handleCenterForAddBin.bind(this)}/>
       </div>

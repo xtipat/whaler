@@ -71,3 +71,5 @@ export const detailProduct = {
 };
 
 export const user_point = 1000;
+
+export const threshold = 50;

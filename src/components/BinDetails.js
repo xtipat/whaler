@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import firebase from "firebase/app";
 import { FirebaseDatabaseProvider, FirebaseDatabaseTransaction } from "@react-firebase/database";
 import '../assets/scss/modal.scss';
+import { threshold } from '../data.js'
 
 
 const styles = {
@@ -34,6 +35,25 @@ export default class BinDetails extends React.Component {
       show: false
     };
   };
+
+  checkUser(){
+      db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).once('value').then(snapshot => {
+        let value = snapshot.val();
+        if (value === null){
+          this.setState({
+            hideLocBtn: false,
+            hideDetBtn: false
+          });
+        }
+        else{
+          this.setState({
+            hideLocBtn: value.locaVoted,
+            hideDetBtn: value.detVoted
+          });
+        }
+      }
+      );
+    }
 
   fetchBinData(){
     db.ref(`bins/${this.props.fbkey}`).once('value').then(snapshot => {
@@ -71,28 +91,28 @@ export default class BinDetails extends React.Component {
     if(this.state.binDetRjctAcpt === undefined)
       this.setState({ binDetRjct: 0})
 
-    this.setState({
-      binLocAcptPer: Math.round(100*this.state.binLocAcpt/(this.state.binLocAcpt+this.state.binLocRjct)),
-      binDetAcptPer: Math.round(100*this.state.binDetAcpt/(this.state.binDetAcpt + this.state.binDetRjct)),
-      binLocRjctPer: Math.round(100*this.state.binLocRjct/100),
-      binDetRjctPer: Math.round(100*this.state.binDetRjct/100)
-    });
+    let binLocAcptNet = this.state.binLocAcpt - this.state.binLocRjct;
+    if(binLocAcptNet >= 0)
+     this.setState({binLocAcptPer: binLocAcptNet, binLocRjctPer: 0})
+    else this.setState({binLocAcptPer: 0, binLocRjctPer: Math.abs(binLocAcptNet)})
 
-    if(this.state.binLocAcpt + this.state.binLocRjct === 0)
-      this.setState({
-        binLocAcptPer: 0,
-        binLocRjctPer: 0
-      })
+    let binDetAcptNet = this.state.binDetAcpt - this.state.binDetRjct;
+    if(binDetAcptNet >= 0)
+     this.setState({binDetAcptPer: binDetAcptNet, binDetRjctPer: 0})
+    else this.setState({binDetAcptPer: 0, binDetRjctPer: Math.abs(binDetAcptNet)})
 
-    if(this.state.binDetAcpt + this.state.binDetRjct === 0)
-      this.setState({
-        binDetAcptPer: 0,
-        binDetRjctPer: 0
-      })
-
-    console.log(this.state.binLocAcptPer)
   }
-
+  addBinVote(){
+    var userRef = db.ref(`/users/${this.props.uid}`).once('value').then( snapshot => {
+      var value = snapshot.val();
+      var binsVoted = value.votedBinCount;
+      var points = value.point;
+      db.ref(`/users/${this.props.uid}`).update({
+        'votedBinCount': binsVoted+1,
+        'point': points+20,
+      });
+    });
+  }
   componentDidUpdate(prevProps) {
     //console.log(this.state.show,prevProps.show);
     if(this.props.show !== prevProps.show)
@@ -100,6 +120,7 @@ export default class BinDetails extends React.Component {
   }
 
   locationContents() {
+    const style = this.state.hideLocBtn ? {display: 'none'} : {textAlign: 'center'};
     return(
       <div>
         <div style={{ height: '50vh', width: '100%'}}>
@@ -120,7 +141,7 @@ export default class BinDetails extends React.Component {
             />
           </GoogleMapReact>
         </div>
-        <div style={{textAlign: 'center'}}>
+        <div style={style}>
           <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
             <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/locationAccept`}>
               {({ runTransaction }) => {
@@ -128,7 +149,9 @@ export default class BinDetails extends React.Component {
                   <Button ref="locAcptBtn" variant="yellow" onClick={() => {
                     runTransaction({reducer: val => {return val + 1;}})
                     .then(() => {
-                          toast.success("Location of this bin was accepted.");
+                          toast.success(<div> Location of this bin was accepted.<br/>You earned 20 points! </div>);
+                          this.addBinVote();
+                          db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'locaVoted': true});
                         });
                   }}>
                     <FontAwesomeIcon icon='check-circle'/> Accept
@@ -143,7 +166,9 @@ export default class BinDetails extends React.Component {
                   <Button variant="black" onClick={() => {
                     runTransaction({reducer: val => {return val + 1;}})
                     .then(() => {
-                          toast.warning("Location of this bin was rejected.");
+                          toast.warning(<div> Location of this bin was rejected.<br/>You earned 20 points! </div>);
+                          this.addBinVote();
+                          db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'locaVoted': true});
                         });
                   }}>
                     <FontAwesomeIcon icon='times-circle'/> Reject
@@ -186,6 +211,7 @@ export default class BinDetails extends React.Component {
   }
 
   detailsContents(){
+    const style = this.state.hideDetBtn ? {display: 'none'} : {textAlign: 'center'};
     return(
       <div>
         {this.checkPicture()}
@@ -195,7 +221,7 @@ export default class BinDetails extends React.Component {
               {this.writeAllBinTypes()}
             </div>
         </div>
-        <div style={{textAlign: 'center'}}>
+        <div style={style}>
         <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
           <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/detailAccept`}>
             {({ runTransaction }) => {
@@ -204,6 +230,8 @@ export default class BinDetails extends React.Component {
                   runTransaction({reducer: val => {return val + 1;}})
                   .then(() => {
                         toast.success("Details of this bin were accepted.");
+                        this.addBinVote();
+                        db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'detVoted': true});
                       });
                 }}>
                   <FontAwesomeIcon icon='check-circle'/> Accept
@@ -219,6 +247,8 @@ export default class BinDetails extends React.Component {
                   runTransaction({reducer: val => {return val + 1;}})
                   .then(() => {
                         toast.warning("Details of this bin were rejected.");
+                        this.addBinVote();
+                        db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'detVoted': true});
                       });
                 }}>
                   <FontAwesomeIcon icon='times-circle'/> Reject
@@ -237,16 +267,30 @@ export default class BinDetails extends React.Component {
     return(
       <div>
         <div className='modal-content-title'>Location Reliability</div>
-        <ProgressBar striped variant="success" now={this.state.binLocAcptPer} />
-
+        <section>
+          <ProgressBar variant="danger" className="left" now={this.state.binLocRjctPer} />
+          <ProgressBar variant="success" className="right" now={this.state.binLocAcptPer} />
+        </section>
+        <div>
+          <div className="left-label">Reject: {this.state.binLocRjct}</div>
+          <div className="right-label">Accept: {this.state.binLocAcpt}</div>
+        </div>
         <div className='modal-content-title'>Info Reliability</div>
-        <ProgressBar striped variant="success" now={this.state.binDetAcptPer} />
+        <section>
+          <ProgressBar variant="danger" className="left" now={this.state.binDetRjctPer} />
+          <ProgressBar variant="success" className="right" now={this.state.binDetAcptPer} />
+        </section>
+        <div>
+          <div className="left-label">Reject: {this.state.binDetRjct}</div>
+          <div className="right-label">Accept: {this.state.binDetAcpt}</div>
+        </div>
       </div>
     );
   }
 
   render() {
     if(this.state.loaded){
+      this.checkUser();
       return (
         <Modal
           size="sm"

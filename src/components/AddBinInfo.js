@@ -41,6 +41,7 @@ export default class AddBinInfo extends Component {
     this.typesHandle = this.typesHandle.bind(this);
     this.submitHandle = this.submitHandle.bind(this);
     this.autocompleteRenderInput = this.autocompleteRenderInput.bind(this);
+    console.log(this.props.uid);
   };
   writeToDatabase() {
     var newRef = db.ref('/bins/').push();
@@ -52,6 +53,20 @@ export default class AddBinInfo extends Component {
       'locationAccept': 0,
       'locationReject': 0,
       'types': this.state.tags
+    });
+    var userRef = db.ref(`/users/${this.props.uid}`).once('value').then( snapshot => {
+    	var value = snapshot.val();
+    	var binsAdded = value.addedBinCount;
+    	var points = value.point;
+    	db.ref(`/users/${this.props.uid}`).update({
+        'addedBinCount': binsAdded+1,
+        'point': points+100,
+      });
+    });
+    var newBin = db.ref(`/users/${this.props.uid}/binReactedWith/${newRef.key}`).push();
+    newBin.set({
+      'locaVoted': true,
+      'detVoted': true
     });
     var strRef = storage.ref().child(newRef.key);
     strRef.put(this.state.imgfile).then((snapshot) => {
@@ -67,6 +82,12 @@ export default class AddBinInfo extends Component {
       {type: 'Plastic'},
       {type: 'Recycle'},
       {type: 'Bottle'},
+      {type: 'Food waste'},
+      {type: 'Organic waste'},
+      {type: 'Paper'},
+      {type: 'Tins and Metals'},
+      {type: 'Glass'},
+      {type: 'Hazardous waste'}
     ]
   }
   autocompleteRenderInput ({addTag, ...props}) {
@@ -125,6 +146,7 @@ export default class AddBinInfo extends Component {
   submitHandle(){
     if(this.state.picExists && this.state.tags.length>0)
     {
+    	toast.success("You earned 100 points for adding bin! Redirecting.....")
       this.writeToDatabase();
     }
     else
@@ -136,8 +158,10 @@ export default class AddBinInfo extends Component {
     this.setState({tags});
   }
   redirect(){
-  	if(this.state.redirect)
+  	if(this.state.redirect){
+
   		window.location = '/';
+  	}
   }
   handleCloseButton = () => {
   	console.log("CLOSE");
@@ -168,7 +192,7 @@ export default class AddBinInfo extends Component {
               {this.checkImage()}
               <input type="file" name="file" onChange={this.picHandle} accept="image/*" className='hidden_input' ref={this.state.inputValue}/>
             </div>
-            <div style={{display: 'flex', justifyContent: 'flex-start'}}>Bin Types</div>
+            <div style={{display: 'flex', justifyContent: 'flex-start'}}>Bin Types <span className='note'> (hit enter to add tag)</span></div>
             <TagsInput renderInput={this.autocompleteRenderInput} value={this.state.tags} onChange={this.typesHandle} />
             <br></br>
             {this.redirect()}

@@ -185,3 +185,24 @@ a{
   letter-spacing: 0.8px;
   color: $dark;
 }
+
+.react-tagsinput-tag{
+  background: $primary !important;
+}
+.note{
+  padding-left: 5px;
+  color: #777;
+}
+ul{
+  width: 100%;
+  padding: 0;
+  margin-left: 0;
+}
+li{
+  width: 100%;
+  background: $gray-background;
+  border-bottom: 1px solid $gray;
+  &:hover{
+    background: $primary
+  };
+}
