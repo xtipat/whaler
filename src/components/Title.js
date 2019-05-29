@@ -1,6 +1,5 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import '../assets/scss/redeem.scss';
 import {ProductConsumer} from "../context";
 
 

@@ -28,7 +28,7 @@ export class Product extends Component {
 									{/*card footer */}
 									{/*card-footer from boostrap card*/}
 									<div className="card-footer d-flex justify-content-between ">
-										<p className="align-self-center mb-0 text-capitalize text-muted">
+										<p className="align-self-center mb-0 text-capitalize">
 											{title}
 										</p>
 										<h5 className="text-gold mb-0">
@@ -49,7 +49,7 @@ export class Product extends Component {
 const ProductWrapper = styled.div`
 .card{
 	border-color:transparent;
-	
+
 }
 .card-footer{
 	background: transparent;
@@ -75,10 +75,11 @@ const ProductWrapper = styled.div`
 .img-container:hover .cart-btn{
 	transform: translate(0,0);
 }
-.product_link:hover {
+.product_link, .product_link:hover {
    text-decoration: none; 
    background: rgba(247, 247, 247);
-   colour: black
+   color: black;
+
 
 }
 
