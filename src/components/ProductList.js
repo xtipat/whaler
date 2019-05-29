@@ -8,6 +8,8 @@ import {ProductConsumer} from "../context";
 //import '../assets/scss/redeem.scss';
 import AuthUserContext from '../session/authUserContext';
 import {firebase,db } from '../firebase/firebase';
+import styled from 'styled-components';
+
 
 
 
@@ -16,7 +18,8 @@ export class ProductList extends Component {
 
 	render() {
 		return (
-			<div className='redeem-outer-wrap'>
+			<ProductWrapper>
+			<div className='redeem-outer-wrap mb-5'>
 				  	<ProductConsumer>
 
 							{(value)=>{
@@ -53,9 +56,20 @@ export class ProductList extends Component {
 					</div>
 				</div>
 			</div>
+			</ProductWrapper>
 		);
 	}
 }
+
+const ProductWrapper = styled.div`
+.redeem-outer-wrap{
+  height: 100 px;
+  width: 100%;
+  padding: 0 0 60px 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+`
 
 export default ProductList;
 
