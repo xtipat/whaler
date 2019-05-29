@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import {ProductConsumer} from '../context';
 
-
-
 export class Product extends Component {
 	render() {
 		const {id, title, img, price, inCart} = this.props.product;
@@ -17,7 +15,7 @@ export class Product extends Component {
 						<ProductConsumer>
 							{(value)=>(
 								<div
-									className="img-container p-5"
+									className="img-container p-6"
 									onClick={() =>
 										value.handleDetail(id)
 									}
