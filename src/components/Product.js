@@ -23,7 +23,7 @@ export class Product extends Component {
 										//this is for making the image bigger
 										className="img-container p-6"
 									>	
-										<img src={img} alt="product" className="card-img-top img-thumbnail img-responsive" />
+										<img src={img} alt="product" className="card-img-top img-thumbnail img-responsive " />
 									</div>
 									{/*card footer */}
 									{/*card-footer from boostrap card*/}
@@ -49,6 +49,7 @@ export class Product extends Component {
 const ProductWrapper = styled.div`
 .card{
 	border-color:transparent;
+	
 }
 .card-footer{
 	background: transparent;
