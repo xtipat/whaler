@@ -35,6 +35,10 @@ export default class BinDetails extends React.Component {
       buttonLoaded: false,
       show: false
     };
+    this.detAcptBtn = React.createRef();
+    this.detRjctBtn = React.createRef();
+    this.locAcptBtn = React.createRef();
+    this.locRjctBtn = React.createRef();
   };
 
   fetchBinData(){
@@ -96,15 +100,12 @@ export default class BinDetails extends React.Component {
     if(this.state.binDetRjctAcpt === undefined)
       this.setState({ binDetRjct: 0})
 
-    let binLocAcptNet = this.state.binLocAcpt - this.state.binLocRjct;
-    if(binLocAcptNet >= 0)
-     this.setState({binLocAcptPer: binLocAcptNet, binLocRjctPer: 0})
-    else this.setState({binLocAcptPer: 0, binLocRjctPer: Math.abs(binLocAcptNet)})
-
-    let binDetAcptNet = this.state.binDetAcpt - this.state.binDetRjct;
-    if(binDetAcptNet >= 0)
-     this.setState({binDetAcptPer: binDetAcptNet, binDetRjctPer: 0})
-    else this.setState({binDetAcptPer: 0, binDetRjctPer: Math.abs(binDetAcptNet)})
+    this.setState({
+      binLocAcptPer: Math.round(100*this.state.binLocAcpt/(this.state.binLocAcpt+this.state.binLocRjct)),
+      binLocRjctPer: Math.round(100*this.state.binLocRjct/(this.state.binLocAcpt+this.state.binLocRjct)),
+      binDetAcptPer: Math.round(100*this.state.binDetAcpt/(this.state.binDetAcpt+this.state.binDetRjct)),
+      binDetRjctPer: Math.round(100*this.state.binDetRjct/(this.state.binDetAcpt+this.state.binDetRjct))
+    });
 
   }
   addBinVote(){
@@ -152,13 +153,11 @@ export default class BinDetails extends React.Component {
             <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/locationAccept`}>
               {({ runTransaction }) => {
                 return (
-                  <Button disabled={this.state.hideLocBtn} ref="locAcptBtn" variant="yellow" onClick={() => {
+                  <Button ref={this.locAcptBtn} disabled={this.state.hideLocBtn} ref="locAcptBtn" variant="yellow" onClick={() => {
                     runTransaction({reducer: val => {return val + 1;}})
                     .then(() => {
                           toast.success(<div> Location of this bin was accepted.<br/>You earned 20 points! </div>);
-                          this.addBinVote();
-                          this.setState({hideLocBtn: true});
-                          db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'locaVoted': true});
+                          this.voteLoc();
                         });
                   }}>
                     <FontAwesomeIcon icon='check-circle'/> Accept
@@ -170,13 +169,11 @@ export default class BinDetails extends React.Component {
             <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/locationReject`}>
               {({ runTransaction }) => {
                 return (
-                  <Button disabled={this.state.hideLocBtn} variant="black" onClick={() => {
+                  <Button ref={this.locRjctBtn} disabled={this.state.hideLocBtn} variant="black" onClick={() => {
                     runTransaction({reducer: val => {return val + 1;}})
                     .then(() => {
                           toast.warning(<div> Location of this bin was rejected.<br/>You earned 20 points! </div>);
-                          this.addBinVote();
-                          this.setState({hideLocBtn: true});
-                          db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'locaVoted': true});
+                          this.voteLoc();
                         });
                   }}>
                     <FontAwesomeIcon icon='times-circle'/> Reject
@@ -218,6 +215,20 @@ export default class BinDetails extends React.Component {
       )
   }
 
+  voteDet(){
+    this.addBinVote();
+    this.detRjctBtn.current.setAttribute("disabled", true);
+    this.detAcptBtn.current.setAttribute("disabled", true);
+    db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'detVoted': true});
+  }
+
+  voteLoc(){
+    this.addBinVote();
+    this.locRjctBtn.current.setAttribute("disabled", true);
+    this.locAcptBtn.current.setAttribute("disabled", true);
+    db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'locaVoted': true});
+  }
+
   detailsContents(){
     return(
       <div>
@@ -233,13 +244,11 @@ export default class BinDetails extends React.Component {
           <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/detailAccept`}>
             {({ runTransaction }) => {
               return (
-                <Button disabled={this.state.hideDetBtn} variant="yellow" onClick={() => {
+                <Button ref={this.detAcptBtn} disabled={this.state.hideDetBtn} variant="yellow" onClick={() => {
                   runTransaction({reducer: val => {return val + 1;}})
                   .then(() => {
                         toast.success(<div> Details of this bin were accepted.<br/>You earned 20 points! </div>);
-                        this.addBinVote();
-                        this.setState({hideDetBtn: true});
-                        db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'detVoted': true});
+                        this.voteDet();
                       });
                 }}>
                   <FontAwesomeIcon icon='check-circle'/> Accept
@@ -251,13 +260,11 @@ export default class BinDetails extends React.Component {
           <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/detailReject`}>
             {({ runTransaction }) => {
               return (
-                <Button disabled={this.state.hideDetBtn} variant="black" onClick={() => {
+                <Button ref={this.detRjctBtn} disabled={this.state.hideDetBtn} variant="black" onClick={() => {
                   runTransaction({reducer: val => {return val + 1;}})
                   .then(() => {
                         toast.warning(<div> Details of this bin were rejected.<br/>You earned 20 points! </div>);
-                        this.addBinVote();
-                        this.setState({hideDetBtn: true});
-                        db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'detVoted': true});
+                        this.voteDet();
                       });
                 }}>
                   <FontAwesomeIcon icon='times-circle'/> Reject
@@ -280,7 +287,7 @@ export default class BinDetails extends React.Component {
           <ProgressBar variant="danger" className="left" now={this.state.binLocRjctPer} />
           <ProgressBar variant="success" className="right" now={this.state.binLocAcptPer} />
         </section>
-        <div>
+        <div style={{paddingBottom: 30}}>
           <div className="left-label">Reject: {this.state.binLocRjct}</div>
           <div className="right-label">Accept: {this.state.binLocAcpt}</div>
         </div>
@@ -289,7 +296,7 @@ export default class BinDetails extends React.Component {
           <ProgressBar variant="danger" className="left" now={this.state.binDetRjctPer} />
           <ProgressBar variant="success" className="right" now={this.state.binDetAcptPer} />
         </section>
-        <div>
+        <div style={{paddingBottom: 30}}>
           <div className="left-label">Reject: {this.state.binDetRjct}</div>
           <div className="right-label">Accept: {this.state.binDetAcpt}</div>
         </div>
