@@ -14,8 +14,12 @@ class BinMarker extends Component {
     isClickable: true
   };
   static defaultProps = {};
-
+  onComponentDidMount(){
+    if(this.props.isAccepted)
+      this.checkUser();
+  }
   checkUser(){
+      console.log("TEST");
       db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).once('value').then(snapshot => {
         let value = snapshot.val();
         if (value === null){
@@ -35,7 +39,6 @@ class BinMarker extends Component {
     }
 
   checkIsAccepted(){
-    this.checkUser();
     let modalClose = () => this.setState({ modalShow: false });
     let onClickHandler = () => this.setState({ modalShow: true });
     let cssClickableClass = "";
@@ -46,7 +49,6 @@ class BinMarker extends Component {
       <div className={"bin-marker-accepted"+cssClickableClass} onClick={onClickHandler}>
         <FontAwesomeIcon icon={this.props.icon}/>
       </div>
-      {this.checkUser()}
         <BinInfo
           show={this.state.modalShow}
           onHide={modalClose}

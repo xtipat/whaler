@@ -32,6 +32,7 @@ export default class BinDetails extends React.Component {
     this.state = {
       picLoaded: false,
       loaded: false,
+      buttonLoaded: false,
       show: false
     };
   };
@@ -62,6 +63,29 @@ export default class BinDetails extends React.Component {
     });
   }
 
+  checkUser()
+  {
+    console.log("TEST");
+    db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).once('value').then(snapshot => {
+      let value = snapshot.val();
+      if (value === null){
+        this.setState({
+          hideLocBtn: false,
+          hideDetBtn: false,
+          buttonLoaded: true,
+        });
+      }
+      else{
+        this.setState({
+          hideLocBtn: value.locaVoted,
+          hideDetBtn: value.detVoted,
+          buttonLoaded: true,
+        });
+      }
+    }
+    );
+  }
+
   calculatePercent(){
     if(this.state.binLocAcpt === undefined)
       this.setState({ binLocAcpt: 0})
@@ -84,6 +108,7 @@ export default class BinDetails extends React.Component {
 
   }
   addBinVote(){
+    console.log("TEST");
     var userRef = db.ref(`/users/${this.props.uid}`).once('value').then( snapshot => {
       var value = snapshot.val();
       var binsVoted = value.votedBinCount;
@@ -95,9 +120,10 @@ export default class BinDetails extends React.Component {
     });
   }
   componentDidUpdate(prevProps) {
-    //console.log(this.state.show,prevProps.show);
-    if(this.props.show !== prevProps.show)
+    if(this.props.show !== prevProps.show){
       this.fetchBinData();
+      this.checkUser();
+    }
   }
 
   locationContents() {
@@ -121,16 +147,17 @@ export default class BinDetails extends React.Component {
             />
           </GoogleMapReact>
         </div>
-        <div style={{textAlign: "center"}}>
+        <div disabled={this.state.hideLocBtn} style={{textAlign: "center"}}>
           <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
             <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/locationAccept`}>
               {({ runTransaction }) => {
                 return (
-                  <Button disabled={this.props.hideLocBtn} ref="locAcptBtn" variant="yellow" onClick={() => {
+                  <Button disabled={this.state.hideLocBtn} ref="locAcptBtn" variant="yellow" onClick={() => {
                     runTransaction({reducer: val => {return val + 1;}})
                     .then(() => {
                           toast.success(<div> Location of this bin was accepted.<br/>You earned 20 points! </div>);
                           this.addBinVote();
+                          this.setState({hideLocBtn: true});
                           db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'locaVoted': true});
                         });
                   }}>
@@ -143,11 +170,12 @@ export default class BinDetails extends React.Component {
             <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/locationReject`}>
               {({ runTransaction }) => {
                 return (
-                  <Button disabled={this.props.hideLocBtn} variant="black" onClick={() => {
+                  <Button disabled={this.state.hideLocBtn} variant="black" onClick={() => {
                     runTransaction({reducer: val => {return val + 1;}})
                     .then(() => {
                           toast.warning(<div> Location of this bin was rejected.<br/>You earned 20 points! </div>);
                           this.addBinVote();
+                          this.setState({hideLocBtn: true});
                           db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'locaVoted': true});
                         });
                   }}>
@@ -205,11 +233,12 @@ export default class BinDetails extends React.Component {
           <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/detailAccept`}>
             {({ runTransaction }) => {
               return (
-                <Button disabled={this.props.hideDetBtn} variant="yellow" onClick={() => {
+                <Button disabled={this.state.hideDetBtn} variant="yellow" onClick={() => {
                   runTransaction({reducer: val => {return val + 1;}})
                   .then(() => {
-                        toast.success("Details of this bin were accepted.");
+                        toast.success(<div> Details of this bin were accepted.<br/>You earned 20 points! </div>);
                         this.addBinVote();
+                        this.setState({hideDetBtn: true});
                         db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'detVoted': true});
                       });
                 }}>
@@ -222,11 +251,12 @@ export default class BinDetails extends React.Component {
           <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/detailReject`}>
             {({ runTransaction }) => {
               return (
-                <Button disabled={this.props.hideDetBtn} variant="black" onClick={() => {
+                <Button disabled={this.state.hideDetBtn} variant="black" onClick={() => {
                   runTransaction({reducer: val => {return val + 1;}})
                   .then(() => {
-                        toast.warning("Details of this bin were rejected.");
+                        toast.warning(<div> Details of this bin were rejected.<br/>You earned 20 points! </div>);
                         this.addBinVote();
+                        this.setState({hideDetBtn: true});
                         db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'detVoted': true});
                       });
                 }}>
@@ -266,20 +296,25 @@ export default class BinDetails extends React.Component {
       </div>
     );
   }
-
+  onClose(){
+    this.props.onHide();
+    this.setState({
+      loaded: false
+    });
+  }
   render() {
-    if(this.state.loaded){
+    if(this.state.loaded && this.props.show && this.state.buttonLoaded){
       return (
         <Modal
           size="sm"
           {...this.props}
           centered
         >
-        {console.log(this.props.hideLocBtn)}
+        {console.log(this.state.hideLocBtn)}
           <Tab.Container defaultActiveKey="location">
             <Modal.Header style={{ background: styles.colors.primary, border: 'none' }}>
               <div style={{ textAlign: 'right', width: '100%'}}>
-                <div className='custom-close-wrap' onClick={ this.props.onHide }>
+                <div className='custom-close-wrap' onClick={ this.onClose.bind(this) }>
                   <div className='custom-close-label'>close</div>
                   <FontAwesomeIcon icon='times-circle' className='custom-close-icon'/>
                 </div>
