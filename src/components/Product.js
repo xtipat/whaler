@@ -85,4 +85,5 @@ const ProductWrapper = styled.div`
 
 
 `
+
 export default Product;
