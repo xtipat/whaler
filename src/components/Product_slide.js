@@ -66,9 +66,6 @@ export class Product_slide  extends React.PureComponent {
 			              onSelect={this.visiableOnSelect}
 			              slideshowSpeed={2500}
 			            >
-			           
-			           	
-							  
 				              <div style={{ ...styles}}
 									onClick={() =>
 											value.handleDetail(products[0].id)
