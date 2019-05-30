@@ -9,6 +9,7 @@ import Explore from './Explore.js';
 import Redeem from './Redeem.js';
 import Details from './components/Details';
 import ModalRedeem from './components/ModalRedeem';
+import ModalCongrat from './components/ModalCongrat';
 import Signin from './authentication/Signin.js';
 import Signout from './authentication/Signout.js';
 import Signup from './authentication/Signup.js';
@@ -59,6 +60,7 @@ class App extends React.Component {
                   <Col xs={12} sm={8} md={6} lg={4} className='page-wrap'>
                     <Page auth = {authUser}/>
                     <ModalRedeem/>
+                    <ModalCongrat/>
                     <ToastContainer position={toast.POSITION.TOP_CENTER} />
                     <Menubar auth = {authUser}/>
                   </Col>
@@ -104,6 +106,7 @@ const Page = (auth) => (
       <Route component={Unmatched} />
   </Switch>
 )
+
 
 const NonAuth = () => (
   <Switch>
