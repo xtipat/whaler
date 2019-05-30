@@ -23,12 +23,12 @@ export default class ModalRedeem extends Component {
 						return(
 							<ModalContainer>
 								<div className='row'>
-									<div id="modal" className="col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize p-5">
-										<h5>Confirm</h5>
+									<div id="modal" className="col-6 mx-auto col-md-4 col-lg-4 text-center text-capitalize p-5">
+										<h4 className="text-capitalize">Confirm</h4>
 										<img src={img} className="img-fluid" alt="product"/>
-										<h5>{title}</h5>
-										<h5 className="text-muted">available point : {user_point} points</h5>
-										<h5 className="text-muted">price : {price} points</h5>
+										<h4>{title}</h4>
+										<h6 className="text-muted">available point : {user_point} points</h6>
+										<h6 className="text-muted">price : {price} points</h6>
 										<div style={{textAlign: 'center'}}>
 										<Link to='/redeem' className="redeem_link">
 										        <Button variant="yellow"

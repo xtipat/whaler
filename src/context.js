@@ -14,9 +14,9 @@ class ProductProvider extends Component {
 		products: [],
 		detailProduct: detailProduct,
 		cart: [],
-		user_point: 0,
+		user_point: 10000,
 		modalOpen: false,
-		modalCongrat: true,
+		modalOpenCongrat: false,
 		modalProduct:detailProduct,
 
 		user_id: ""
@@ -94,14 +94,12 @@ class ProductProvider extends Component {
 	openModalCongrat = id => {
 		const product = this.getItem(id);
 		this.setState(() => {
-			return {modalProduct: product, modalOpen:true}
+			return {modalProduct: product, modalOpenCongrat:true}
 		},() => {console.log(this.state)})
 	}
 	closeModal = (remainPoints,price, title) => {
 		db.ref("/users/"+this.state.user_id).update({ point: remainPoints });
 		var newKey = firebase.database().ref('/redeem_hist/').push()
-		console.log(price)
-		console.log(title)
 		newKey.set({
 			point_used: price,
 		    rewardName: title,
@@ -110,6 +108,16 @@ class ProductProvider extends Component {
 		this.setState(() => {
 			
 			return {modalOpen: false,user_point: remainPoints }
+		})
+	}
+	closeModalCongrat = (remainPoints,price, title) => {
+		console.log("Modal Congrat close")
+		console.log(price)
+		console.log(title)
+
+		this.setState(() => {
+			
+			return {modalOpenCongrat: false }
 		})
 	}
 	//this for click confirm in modal: should show the congratulation modal after
@@ -154,7 +162,9 @@ class ProductProvider extends Component {
 				closeModal_cancel: this.closeModal_cancel,
 				getUserPoint: this.getUserPoint,
 				getUserPoint_once: this.getUserPoint_once,
-				openModalCongrat: this.openModalCongrat 
+
+				openModalCongrat: this.openModalCongrat,
+				closeModalCongrat: this.closeModalCongrat
 			}}>
 				{this.props.children}
 			</ProductContext.Provider>
