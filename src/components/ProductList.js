@@ -65,6 +65,10 @@ const ProductWrapper = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
 }
+.redeem-content-title{
+  padding: 10px 0px 0px 0px;
+}
+
 `
 
 export default ProductList;
