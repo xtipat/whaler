@@ -85,6 +85,10 @@ const DetailContainer = styled.div`
 .redeem_link:hover {
    text-decoration: none; 
    background: none;
+}
+.detail-wrap{
+	background-color:#E9E8E9;
+}
    
 `
 

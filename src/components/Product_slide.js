@@ -114,7 +114,9 @@ const SlideContainer = styled.div`
   height: auto;
   vertical-align: middle;
 }
-
+.container-fluid{
+  background-color:#E9E8E9;
+}
 
    
 `

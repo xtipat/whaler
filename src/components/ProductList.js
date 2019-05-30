@@ -64,6 +64,13 @@ const ProductWrapper = styled.div`
   padding: 0 0 60px 0;
   overflow-y: scroll;
   overflow-x: hidden;
+  background-color:#E9E8E9;
+}
+.redeem-wrap{
+   background-color:#E9E8E9;
+}
+.more-wrap{
+	background-color:#E9E8E9;
 }
 .redeem-content-title{
   padding: 10px 0px 0px 0px;
