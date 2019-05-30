@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Modal, Nav, Tab, Button, ProgressBar } from 'react-bootstrap';
 import styled from 'styled-components';
 
-
 export class Details extends Component {
 	render() {
 		return (
@@ -26,7 +25,8 @@ export class Details extends Component {
 					const user_point = value.user_point
 					return(
 						<div className='detail-wrap'>
-
+							{/*show title*/}
+							<Title name="Redeem" title={user_point}/>
 							{/*product info*/}
 							<div className="row">
 								<div className="col-10 mx-auto col-md-10 my-3">
