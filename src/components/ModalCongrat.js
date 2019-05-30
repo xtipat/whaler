@@ -10,7 +10,7 @@ export default class ModalRedeem extends Component {
 		return (
 			<ProductConsumer>
 				{(value) => {
-					const {modalOpenCongrat, closeModalCongrat} = value;
+					const { modalOpenCongrat,closeModalCongrat} = value;
 					const {img, title, price} = value.modalProduct
 
 					if(!modalOpenCongrat){
