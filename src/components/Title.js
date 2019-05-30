@@ -16,8 +16,10 @@ export default function Title({name, title}){
 								<div className='redeem-title'>Redeem</div>
 							</Col>
 							<Col className='balance-wrap '>
-								<div className='balance-label'>balance: </div>
-								<div className='balance'>{title} points</div>
+								<div className='balance-label'>balance: 
+									<div className='balance'> {title} points</div>
+								</div>
+								
 							</Col>
 					
 						</Row>
