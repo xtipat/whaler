@@ -14,7 +14,7 @@ class ProductProvider extends Component {
 		products: [],
 		detailProduct: detailProduct,
 		cart: [],
-		user_point: 10000,
+		user_point: 0,
 		modalOpen: false,
 		modalOpenCongrat: false,
 		modalProduct:detailProduct,
