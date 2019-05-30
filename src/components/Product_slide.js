@@ -9,6 +9,7 @@ import RBCarousel from "react-bootstrap-carousel";
 import { Row, Col , Button} from 'react-bootstrap';
 
 
+
 const styles = { height: 250, width: "100%" };
 
 
@@ -69,23 +70,30 @@ export class Product_slide  extends React.PureComponent {
 			           	
 							  
 				              <div style={{ ...styles}}
-								onClick={() =>
+									onClick={() =>
 											value.handleDetail(products[0].id)
 										}
 				              >
+				         		<Link className="product_link" to="/details">
 					              	<img src={products[0].img}  
 						              	 className="img-fluid " 
 						              	 alt="product"
 
 						            />
+						        </Link>
 					          </div>
-					          <div style={{ ...styles}}>
+					      	  {/*second element*/}
+					          <div style={{ ...styles}}
+						          	onClick={() =>
+												value.handleDetail(products[1].id)
+											}
+					          >
+					          	<Link className="product_link" to="/details">
 					              	<img src={products[1].img}  
 						              	 className="img-fluid " alt="product"
 						            />
+						        </Link>
 					          </div>
-
-				  		
 
 			            </RBCarousel>
 			            )}
