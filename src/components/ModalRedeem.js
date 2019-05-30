@@ -30,12 +30,12 @@ export default class ModalRedeem extends Component {
 										<h6 className="text-muted">available point : {user_point} points</h6>
 										<h6 className="text-muted">price : {price} points</h6>
 										<div style={{textAlign: 'center'}}>
-										<Link to='/redeem' className="redeem_link">
+
 										        <Button variant="yellow"
 										        		cart onClick={()=>closeModal((user_point - price),price,title)}>
 										        	<FontAwesomeIcon icon='check-circle'/> Confirm
 										        </Button>
-									    </Link>
+
 											<div className='divider' />
 							        	<Link to='/details' className='redeem_link'>
 									        <Button variant="black"

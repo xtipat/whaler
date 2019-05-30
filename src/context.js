@@ -16,7 +16,7 @@ class ProductProvider extends Component {
 		cart: [],
 		user_point: 10000,
 		modalOpen: false,
-		modalOpenCongrat: true,
+		modalOpenCongrat: false,
 		modalProduct:detailProduct,
 
 		user_id: ""
@@ -91,12 +91,7 @@ class ProductProvider extends Component {
 			return {modalProduct: product, modalOpen:true}
 		},() => {console.log(this.state)})
 	}
-	openModalCongrat = id => {
-		const product = this.getItem(id);
-		this.setState(() => {
-			return {modalProduct: product, modalOpenCongrat:true}
-		},() => {console.log(this.state)})
-	}
+
 	closeModal = (remainPoints,price, title) => {
 		db.ref("/users/"+this.state.user_id).update({ point: remainPoints });
 		var newKey = firebase.database().ref('/redeem_hist/').push()
@@ -107,7 +102,7 @@ class ProductProvider extends Component {
 		  });
 		this.setState(() => {
 			
-			return {modalOpen: false,user_point: remainPoints }
+			return {modalOpen: false,user_point: remainPoints, modalOpenCongrat:true }
 		})
 	}
 	closeModalCongrat = (remainPoints,price, title) => {
@@ -163,7 +158,7 @@ class ProductProvider extends Component {
 				getUserPoint: this.getUserPoint,
 				getUserPoint_once: this.getUserPoint_once,
 
-				openModalCongrat: this.openModalCongrat,
+				
 				closeModalCongrat: this.closeModalCongrat
 			}}>
 				{this.props.children}
