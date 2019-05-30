@@ -9,7 +9,6 @@ import RBCarousel from "react-bootstrap-carousel";
 import { Row, Col , Button} from 'react-bootstrap';
 
 
-
 const styles = { height: 250, width: "100%" };
 
 
@@ -53,32 +52,41 @@ export class Product_slide  extends React.PureComponent {
 			return (
 
 			<SlideContainer>
-			<div className="container-fluid">
-	        <Row>
-	          <Col className="col-12 mx-auto" style={{ marginTop: 20 }}>
-	            <RBCarousel
-	              version={4}
-	              autoplay={this.state.autoplay}
-	              pauseOnVisibility={true}
-	              onSelect={this.visiableOnSelect}
-	              slideshowSpeed={2500}
-	            >
-	              <div style={{ ...styles}}>
-		              	<img src={products[0].img}  
-			              	 className="img-fluid " alt="product"
-			            />
-		          </div>
-		          <div style={{ ...styles}}>
-		              	<img src={products[1].img}  
-			              	 className="img-fluid " alt="product"
-			            />
-		          </div>
+			<ProductConsumer>
+			{(value)=>(
+				<div className="container-fluid">
+		        <Row>
+		          <Col className="col-12 mx-auto" style={{ marginTop: 20 }}>
+		            <RBCarousel
+		              version={4}
+		              autoplay={this.state.autoplay}
+		              pauseOnVisibility={true}
+		              onSelect={this.visiableOnSelect}
+		              slideshowSpeed={2500}
+		            >
+		           
+		           	
 
-	            </RBCarousel>
-	          </Col>
-	          
-	        </Row>
-	      </div>
+		              <div style={{ ...styles}}>
+			              	<img src={products[0].img}  
+				              	 className="img-fluid " alt="product"
+				            />
+			          </div>
+			          <div style={{ ...styles}}>
+			              	<img src={products[1].img}  
+				              	 className="img-fluid " alt="product"
+				            />
+			          </div>
+			        )}
+			        
+
+		            </RBCarousel>
+		          </Col>
+		          
+		        </Row>
+		      </div>
+		    )}
+	      </ProductConsumer>
 	      </SlideContainer>
 			);
 	}

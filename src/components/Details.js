@@ -7,8 +7,6 @@ import { Modal, Nav, Tab, Button, ProgressBar } from 'react-bootstrap';
 import styled from 'styled-components';
 
 
-
-
 export class Details extends Component {
 	render() {
 		return (
