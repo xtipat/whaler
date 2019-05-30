@@ -29,6 +29,12 @@ export default class ModalRedeem extends Component {
 										/>
 										<h1>Success</h1>
 										<h6>Thank you for Redeem the reward.</h6>
+										<Link to='/redeem' className="redeem_link">
+										        <Button variant="black"
+										        		onClick={()=>closeModalCongrat()}>
+										        	<FontAwesomeIcon icon='check-circle'/> Confirm
+										        </Button>
+									    </Link>
 									</div>
 								</div>
 							</div>
@@ -52,14 +58,16 @@ display: flex;
 align-items: center;
 justify-content: center;
 #modal {
-	background: var(--mainWhite )
+	background: var(--mainWhite );
+	width: 90vw;
+	max-width: 90vw;
 }
 .redeem_link:hover{
 	text-decoration: none; 
    background: none;
 }
 .icon-check{
-	color:green
+	color: green;
 	size: 10px
 }
 `

@@ -67,7 +67,9 @@ display: flex;
 align-items: center;
 justify-content: center;
 #modal {
-	background: var(--mainWhite )
+	background: var(--mainWhite );
+	width: 90vw;
+	max-width: 90vw;
 }
 .redeem_link:hover{
 	text-decoration: none; 
