@@ -19,34 +19,23 @@ const styles = {
   }
 }
 
-export default class BinInfo extends React.Component {
-
+export class DetRjct extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      picLoaded: false,
       loaded: false,
       show: false
     };
   };
 
-  detailsContents(){
-    return(
-      <div>
-        {this.checkPicture()}
-        <div className="bintypes-container">
-          <div className='modal-content-title'>Bin Type</div>
-            <div className='tag-wrap'>
-              {this.writeAllBinTypes()}
-            </div>
-        </div>
-      </div>
-    );
+  onClose(){
+    this.props.onHide();
+    this.setState({
+      loaded: false
+    });
   }
 
-
   render() {
-    if(this.state.loaded){
       return (
         <Modal
           size="sm"
@@ -54,36 +43,205 @@ export default class BinInfo extends React.Component {
           centered
         >
           <Tab.Container defaultActiveKey="details">
-            <Modal.Header style={{ background: styles.colors.primary, border: 'none' }}>
-              <div style={{ textAlign: 'right', width: '100%'}}>
-                <div className='custom-close-wrap' onClick={ this.props.onHide }>
-                  <div className='custom-close-label'>close</div>
-                  <FontAwesomeIcon icon='times-circle' className='custom-close-icon'/>
-                </div>
+          <Modal.Header style={{ background: styles.colors.primary, border: 'none' }}>
+            <div style={{ textAlign: 'right', width: '100%'}}>
+              <div className='custom-close-wrap' onClick={ this.onClose.bind(this) }>
+                <div className='custom-close-label'>close</div>
+                <FontAwesomeIcon icon='times-circle' className='custom-close-icon'/>
               </div>
-            </Modal.Header>
+            </div>
+          </Modal.Header>
             <Modal.Body style={{ padding: 0, background: styles.colors.primary }}>
               <Tab.Content>
                 <Tab.Pane eventKey="details" style={ styles.modalContentWrap }>
-                  {this.detailsContents()}
+                Details of this bin were rejected.<br/>You earned 20 points!
+                <div>
+                <Button ref={this.locAcptBtn} variant="yellow" onClick={() => {
+                }}>
+                Redeem
+                </Button>
+                <div className="divider"></div>
+                <Button ref={this.locAcptBtn} variant="yellow" onClick={() => {
+
+                }}>
+                View Result
+                </Button>
+                </div>
                 </Tab.Pane>
               </Tab.Content>
             </Modal.Body>
           </Tab.Container>
         </Modal>
-      );
+      )
     }
-    else{
-      //TO BE REPLACED WITH LOADING SCREEN
-      if (this.props.show){
-        return(
-          <Modal size="sm" {...this.props} centered>
-            <Loader primary />
+  }
+
+  export class DetAcpt extends React.Component {
+    constructor(props){
+      super(props);
+      this.state = {
+        loaded: false,
+        show: false
+      };
+    };
+
+    onClose(){
+      this.props.onHide();
+      this.setState({
+        loaded: false
+      });
+    }
+
+    render() {
+        return (
+          <Modal
+            size="sm"
+            {...this.props}
+            centered
+          >
+            <Tab.Container defaultActiveKey="details">
+              <Modal.Header style={{ background: styles.colors.primary, border: 'none' }}>
+                <div style={{ textAlign: 'right', width: '100%'}}>
+                  <div className='custom-close-wrap' onClick={ this.props.onHide }>
+                    <div className='custom-close-label'>close</div>
+                    <FontAwesomeIcon icon='times-circle' className='custom-close-icon'/>
+                  </div>
+                </div>
+              </Modal.Header>
+              <Modal.Body style={{ padding: 0, background: styles.colors.primary }}>
+                <Tab.Content>
+                  <Tab.Pane eventKey="details" style={ styles.modalContentWrap }>
+                  Details of this bin were accepted.<br/>You earned 20 points!
+                  <div>
+                  <Button variant="yellow" onClick={() => {
+                  }}>
+                  Redeem
+                  </Button>
+                  <div className="divider"></div>
+                  <Button variant="yellow" onClick={() => {
+                  }}>
+                  View Result
+                  </Button>
+                  </div>
+                  </Tab.Pane>
+                </Tab.Content>
+              </Modal.Body>
+            </Tab.Container>
           </Modal>
         )
       }
-      else
-        return(null)
     }
-  }
-}
+
+export class LocRjct extends React.Component {
+      constructor(props){
+        super(props);
+        this.state = {
+          loaded: false,
+          show: false
+        };
+      };
+
+      onClose(){
+        this.props.onHide();
+        this.setState({
+          loaded: false
+        });
+      }
+
+      render() {
+          return (
+            <Modal
+              size="sm"
+              {...this.props}
+              centered
+            >
+              <Tab.Container defaultActiveKey="details">
+              <Modal.Header style={{ background: styles.colors.primary, border: 'none' }}>
+                <div style={{ textAlign: 'right', width: '100%'}}>
+                  <div className='custom-close-wrap' onClick={ this.onClose.bind(this) }>
+                    <div className='custom-close-label'>close</div>
+                    <FontAwesomeIcon icon='times-circle' className='custom-close-icon'/>
+                  </div>
+                </div>
+              </Modal.Header>
+                <Modal.Body style={{ padding: 0, background: styles.colors.primary }}>
+                  <Tab.Content>
+                    <Tab.Pane eventKey="details" style={ styles.modalContentWrap }>
+                    Location of this bin were rejected.<br/>You earned 20 points!
+                    <div>
+                    <Button variant="yellow" onClick={() => {
+
+                    }}>
+                    Redeem
+                    </Button>
+                    <div className="divider"></div>
+                    <Button variant="yellow" onClick={() => {
+
+                    }}>
+                    Next
+                    </Button>
+                    </div>
+                    </Tab.Pane>
+                  </Tab.Content>
+                </Modal.Body>
+              </Tab.Container>
+            </Modal>
+          )
+        }
+      }
+
+export class LocAcpt extends React.Component {
+        constructor(props){
+          super(props);
+          this.state = {
+            loaded: false,
+            show: false
+          };
+        };
+
+        onClose(){
+          this.props.onHide();
+          this.setState({
+            loaded: false
+          });
+        }
+
+        render() {
+            return (
+              <Modal
+                size="sm"
+                {...this.props}
+                centered
+              >
+                <Tab.Container defaultActiveKey="details">
+                  <Modal.Header style={{ background: styles.colors.primary, border: 'none' }}>
+                    <div style={{ textAlign: 'right', width: '100%'}}>
+                      <div className='custom-close-wrap' onClick={ this.props.onHide }>
+                        <div className='custom-close-label'>close</div>
+                        <FontAwesomeIcon icon='times-circle' className='custom-close-icon'/>
+                      </div>
+                    </div>
+                  </Modal.Header>
+                  <Modal.Body style={{ padding: 0, background: styles.colors.primary }}>
+                    <Tab.Content>
+                      <Tab.Pane eventKey="details" style={ styles.modalContentWrap }>
+                      Location of this bin were accepted.<br/>You earned 20 points!
+                      <div>
+                      <Button variant="yellow" onClick={() => {
+                      }}>
+                      Redeem
+                      </Button>
+                      <div className="divider"></div>
+                      <Button variant="yellow" onClick={() => {
+                      }}>
+                      Next
+                      </Button>
+                      </div>
+                      </Tab.Pane>
+                    </Tab.Content>
+                  </Modal.Body>
+                </Tab.Container>
+              </Modal>
+            )
+          }
+        }

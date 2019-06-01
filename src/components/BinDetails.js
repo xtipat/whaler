@@ -11,6 +11,7 @@ import firebase from "firebase/app";
 import { FirebaseDatabaseProvider, FirebaseDatabaseTransaction } from "@react-firebase/database";
 import '../assets/scss/modal.scss';
 import { threshold } from '../data.js'
+import {DetAcpt, DetRjct, LocRjct, LocAcpt} from './ModalVoted.js'
 
 
 const styles = {
@@ -33,7 +34,12 @@ export default class BinDetails extends React.Component {
       picLoaded: false,
       loaded: false,
       buttonLoaded: false,
-      show: false
+      show: false,
+      modalShow: false,
+      detRjct: false,
+      detAcpt: false,
+      locRjct: false,
+      locAcpt: false
     };
     this.detAcptBtn = React.createRef();
     this.detRjctBtn = React.createRef();
@@ -156,7 +162,7 @@ export default class BinDetails extends React.Component {
                   <Button ref={this.locAcptBtn} disabled={this.state.hideLocBtn} variant="yellow" onClick={() => {
                     runTransaction({reducer: val => {return val + 1;}})
                     .then(() => {
-                          toast.success(<div> Location of this bin was accepted.<br/>You earned 20 points! </div>);
+                          this.setState({ locAcpt: true });
                           this.voteLoc();
                         });
                   }}>
@@ -172,7 +178,7 @@ export default class BinDetails extends React.Component {
                   <Button ref={this.locRjctBtn} disabled={this.state.hideLocBtn} variant="black" onClick={() => {
                     runTransaction({reducer: val => {return val + 1;}})
                     .then(() => {
-                          toast.warning(<div> Location of this bin was rejected.<br/>You earned 20 points! </div>);
+                          this.setState({ locRjct: true });
                           this.voteLoc();
                         });
                   }}>
@@ -247,7 +253,7 @@ export default class BinDetails extends React.Component {
                 <Button ref={this.detAcptBtn} disabled={this.state.hideDetBtn} variant="yellow" onClick={() => {
                   runTransaction({reducer: val => {return val + 1;}})
                   .then(() => {
-                        toast.success(<div> Details of this bin were accepted.<br/>You earned 20 points! </div>);
+                        this.setState({ detAcpt: true });
                         this.voteDet();
                       });
                 }}>
@@ -263,7 +269,7 @@ export default class BinDetails extends React.Component {
                 <Button ref={this.detRjctBtn} disabled={this.state.hideDetBtn} variant="black" onClick={() => {
                   runTransaction({reducer: val => {return val + 1;}})
                   .then(() => {
-                        toast.warning(<div> Details of this bin were rejected.<br/>You earned 20 points! </div>);
+                        this.setState({ detRjct: true });
                         this.voteDet();
                       });
                 }}>
@@ -281,6 +287,7 @@ export default class BinDetails extends React.Component {
 
   resultsContents(){
     return(
+
       <div>
         <div className='modal-content-title'>Location Reliability</div>
         <section>
@@ -310,18 +317,38 @@ export default class BinDetails extends React.Component {
     });
   }
   render() {
+    let detRjctClose = () => this.setState({ detRjct: false });
+    let detAcptClose = () => this.setState({ detRjct: false });
+    let locRjctClose = () => this.setState({ locRjct: false });
+    let locAcptClose = () => this.setState({ locAcpt: false });
     if(this.state.loaded && this.props.show && this.state.buttonLoaded){
       return (
+        <div>
+        <DetRjct
+          show={this.state.detRjct}
+          onHide={detRjctClose}
+        ></DetRjct>
+        <DetAcpt
+          show={this.state.detAcpt}
+          onHide={detAcptClose}
+        ></DetAcpt>
+        <LocRjct
+          show={this.state.locRjct}
+          onHide={locRjctClose}
+        ></LocRjct>
+        <LocAcpt
+          show={this.state.locAcpt}
+          onHide={locAcptClose}
+        ></LocAcpt>
         <Modal
           size="sm"
           {...this.props}
           centered
         >
-        {console.log(this.state.hideLocBtn)}
           <Tab.Container defaultActiveKey="location">
             <Modal.Header style={{ background: styles.colors.primary, border: 'none' }}>
               <div style={{ textAlign: 'right', width: '100%'}}>
-                <div className='custom-close-wrap' onClick={ this.onClose.bind(this) }>
+                <div ref={this.close} className='custom-close-wrap' onClick={ this.onClose.bind(this) }>
                   <div className='custom-close-label'>close</div>
                   <FontAwesomeIcon icon='times-circle' className='custom-close-icon'/>
                 </div>
@@ -362,6 +389,7 @@ export default class BinDetails extends React.Component {
             </Modal.Body>
           </Tab.Container>
         </Modal>
+        </div>
       );
     }
     else{
