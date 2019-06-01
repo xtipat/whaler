@@ -225,6 +225,7 @@ export default class BinDetails extends React.Component {
     this.addBinVote();
     this.detRjctBtn.current.setAttribute("disabled", true);
     this.detAcptBtn.current.setAttribute("disabled", true);
+    this.setState({voteClicked: true});
     db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'detVoted': true});
   }
 
@@ -232,6 +233,7 @@ export default class BinDetails extends React.Component {
     this.addBinVote();
     this.locRjctBtn.current.setAttribute("disabled", true);
     this.locAcptBtn.current.setAttribute("disabled", true);
+    this.setState({voteClicked: true}); 
     db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'locaVoted': true});
   }
 
@@ -317,79 +319,83 @@ export default class BinDetails extends React.Component {
     });
   }
   render() {
-    let detRjctClose = () => this.setState({ detRjct: false });
-    let detAcptClose = () => this.setState({ detRjct: false });
-    let locRjctClose = () => this.setState({ locRjct: false });
-    let locAcptClose = () => this.setState({ locAcpt: false });
+    let detRjctClose = () => this.setState({ detRjct: false, voteClicked: false});
+    let detAcptClose = () => this.setState({ detRjct: false, voteClicked: false });
+    let locRjctClose = () => this.setState({ locRjct: false, voteClicked: false });
+    let locAcptClose = () => this.setState({ locAcpt: false, voteClicked: false });
+    if(this.state.voteClicked){
+      return(
+        <div>
+          <DetRjct
+            show={this.state.detRjct}
+            onHide={detRjctClose}
+          ></DetRjct>
+          <DetAcpt
+            show={this.state.detAcpt}
+            onHide={detAcptClose}
+          ></DetAcpt>
+          <LocRjct
+            show={this.state.locRjct}
+            onHide={locRjctClose}
+          ></LocRjct>
+          <LocAcpt
+            show={this.state.locAcpt}
+            onHide={locAcptClose}
+          ></LocAcpt>
+        </div>
+      );
+    }
     if(this.state.loaded && this.props.show && this.state.buttonLoaded){
       return (
-        <div>
-        <DetRjct
-          show={this.state.detRjct}
-          onHide={detRjctClose}
-        ></DetRjct>
-        <DetAcpt
-          show={this.state.detAcpt}
-          onHide={detAcptClose}
-        ></DetAcpt>
-        <LocRjct
-          show={this.state.locRjct}
-          onHide={locRjctClose}
-        ></LocRjct>
-        <LocAcpt
-          show={this.state.locAcpt}
-          onHide={locAcptClose}
-        ></LocAcpt>
-        <Modal
-          size="sm"
-          {...this.props}
-          centered
-        >
-          <Tab.Container defaultActiveKey="location">
-            <Modal.Header style={{ background: styles.colors.primary, border: 'none' }}>
-              <div style={{ textAlign: 'right', width: '100%'}}>
-                <div ref={this.close} className='custom-close-wrap' onClick={ this.onClose.bind(this) }>
-                  <div className='custom-close-label'>close</div>
-                  <FontAwesomeIcon icon='times-circle' className='custom-close-icon'/>
+          <Modal
+            size="sm"
+            {...this.props}
+            centered
+          >
+            <Tab.Container defaultActiveKey="location">
+              <Modal.Header style={{ background: styles.colors.primary, border: 'none' }}>
+                <div style={{ textAlign: 'right', width: '100%'}}>
+                  <div ref={this.close} className='custom-close-wrap' onClick={ this.onClose.bind(this) }>
+                    <div className='custom-close-label'>close</div>
+                    <FontAwesomeIcon icon='times-circle' className='custom-close-icon'/>
+                  </div>
                 </div>
-              </div>
-            </Modal.Header>
-            <Modal.Body style={{ padding: 0, background: styles.colors.primary }}>
-              <Nav fill variant="pills">
-                <Nav.Item>
-                  <Nav.Link eventKey="location">
-                    <FontAwesomeIcon icon='map-marked-alt' className='nav-icon' />
-                    <div className='nav-label'>location</div>
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="details">
-                    <FontAwesomeIcon icon='info-circle' className='nav-icon' />
-                    <div className='nav-label'>info</div>
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="results">
-                    <FontAwesomeIcon icon='poll-h' className='nav-icon' />
-                    <div className='nav-label'>statistics</div>
-                  </Nav.Link>
-                </Nav.Item>
-              </Nav>
-              <Tab.Content>
-                <Tab.Pane eventKey="location" style={ styles.modalContentWrap }>
-                  {this.locationContents()}
-                </Tab.Pane>
-                <Tab.Pane eventKey="details" style={ styles.modalContentWrap }>
-                  {this.detailsContents()}
-                </Tab.Pane>
-                <Tab.Pane eventKey="results" style={ styles.modalContentWrap }>
-                  {this.resultsContents()}
-                </Tab.Pane>
-              </Tab.Content>
-            </Modal.Body>
-          </Tab.Container>
-        </Modal>
-        </div>
+              </Modal.Header>
+              <Modal.Body style={{ padding: 0, background: styles.colors.primary }}>
+                <Nav fill variant="pills">
+                  <Nav.Item>
+                    <Nav.Link eventKey="location">
+                      <FontAwesomeIcon icon='map-marked-alt' className='nav-icon' />
+                      <div className='nav-label'>location</div>
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="details">
+                      <FontAwesomeIcon icon='info-circle' className='nav-icon' />
+                      <div className='nav-label'>info</div>
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="results">
+                      <FontAwesomeIcon icon='poll-h' className='nav-icon' />
+                      <div className='nav-label'>statistics</div>
+                    </Nav.Link>
+                  </Nav.Item>
+                </Nav>
+                <Tab.Content>
+                  <Tab.Pane eventKey="location" style={ styles.modalContentWrap }>
+                    {this.locationContents()}
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="details" style={ styles.modalContentWrap }>
+                    {this.detailsContents()}
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="results" style={ styles.modalContentWrap }>
+                    {this.resultsContents()}
+                  </Tab.Pane>
+                </Tab.Content>
+              </Modal.Body>
+            </Tab.Container>
+          </Modal>
       );
     }
     else{
