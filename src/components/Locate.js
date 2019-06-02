@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import {db} from '../firebase/firebase.js';
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
-import ProgressBar from 'react-bootstrap/ProgressBar'
-import LocateMarker from '../components/LocateMarker.js';
-import CurPosMarker from '../components/CurPosMarker.js';
 import MapPage from '../MapPage.js'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AddBinInfo from './AddBinInfo.js';
 import { NavLink } from 'react-router-dom';
 import '../assets/scss/marker.scss';
@@ -41,8 +34,8 @@ export default class Locate extends Component {
           uid={this.props.uid}
         />
         <div className = 'center-crosshair'/>
-        <MapPage 
-          handleLocationPinButton = {this.handleLocationPinButton.bind(this)} 
+        <MapPage
+          handleLocationPinButton = {this.handleLocationPinButton.bind(this)}
           handleCenterForAddBin = {this.handleCenterForAddBin.bind(this)}
           isInLocatePage = {true}
         />

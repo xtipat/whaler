@@ -5,10 +5,9 @@ import LocateMarker from './components/LocateMarker.js';
 import CurPosMarker from './components/CurPosMarker.js';
 import Loader from './components/Loader.js'
 import { db } from './firebase/firebase.js';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SearchBox from './components/SearchBox.js'
-import HomeButton from './components/HomeButton.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './assets/scss/homeIcon.scss';
 import './assets/scss/_base.scss';

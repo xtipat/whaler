@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import {storeProducts, detailProduct, user_point} from "./data"
-import {firebase,db,auth } from './firebase/firebase';
-import AuthUserContext from './session/authUserContext';
+import {storeProducts, detailProduct} from "./data"
+import {firebase,db } from './firebase/firebase';
 
 const ProductContext = React.createContext();
 //Provider: Provide all the informaiton
@@ -24,12 +23,12 @@ class ProductProvider extends Component {
 	componentDidMount(){
 		this.setProducts();
 		//we need to change this value base on the use id
-			
+
 		firebase.auth().onAuthStateChanged(user => {
   		if (user) {
     		// User is signed in.
     		 this.setState(() => {
-    			
+
     			return {user_id: firebase.auth().currentUser.uid}
     		})
     		this.getUserPoint(firebase.auth().currentUser.uid);
@@ -40,7 +39,7 @@ class ProductProvider extends Component {
   		}
 		});
 
-		
+
 	}
 	//we need to initialize the product as empty string first because we want to copy not reference the real data
 	setProducts = () =>{
@@ -81,7 +80,7 @@ class ProductProvider extends Component {
 		product.total = price;
 
 		this.setState(() =>{
-			return {products: tempProducts, 
+			return {products: tempProducts,
 					cart: [...this.state.cart, product]}
 			},() => {console.log(this.state)})
 	}
@@ -101,33 +100,28 @@ class ProductProvider extends Component {
 		    uid: this.state.user_id
 		  });
 		this.setState(() => {
-			
+
 			return {modalOpen: false,user_point: remainPoints, modalOpenCongrat:true }
 		})
 	}
 	closeModalCongrat = (remainPoints,price, title) => {
-		console.log("Modal Congrat close")
-		console.log(price)
-		console.log(title)
 
 		this.setState(() => {
-			
+
 			return {modalOpenCongrat: false }
 		})
 	}
 	//this for click confirm in modal: should show the congratulation modal after
 	closeModal_cancel = (remainPoints) => {
 			this.setState(() => {
-			
+
 			return {modalOpen: false,user_point: remainPoints }
 		})
 	}
 
 	getUserPoint = id => {
-		console.log(id)
 		let ref = db.ref("users/"+id)
 		ref.on('value', snapshot =>{
-			console.log(snapshot.val().point)
 			const cur_point = snapshot.val().point
 			this.setState(() =>{
 				return {user_point: cur_point}
@@ -137,7 +131,6 @@ class ProductProvider extends Component {
 	getUserPoint_once = id => {
 		let ref = db.ref("users/"+id)
 		ref.once('value', snapshot =>{
-			console.log(snapshot.val().point)
 			const cur_point = snapshot.val().point
 			this.setState(() =>{
 				return {user_point: cur_point}
@@ -145,7 +138,7 @@ class ProductProvider extends Component {
 		});
 	}
 
-	
+
 	render() {
 		return (
 			<ProductContext.Provider value={{
@@ -158,12 +151,12 @@ class ProductProvider extends Component {
 				getUserPoint: this.getUserPoint,
 				getUserPoint_once: this.getUserPoint_once,
 
-				
+
 				closeModalCongrat: this.closeModalCongrat
 			}}>
 				{this.props.children}
 			</ProductContext.Provider>
-				
+
 		);
 	}
 }

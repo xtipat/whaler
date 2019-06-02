@@ -5,13 +5,13 @@ import {ProductConsumer} from '../context';
 
 export class Product extends Component {
 	render() {
-		const {id, title, img, price, inCart} = this.props.product;
+		const {id, title, img, price} = this.props.product;
 		return (
 
 			<ProductWrapper className="col-6 ">
 				<ProductConsumer>
 					{(value)=>(
-						<div className="card mb-2"  
+						<div className="card mb-2"
 							onClick={() =>
 							value.handleDetail(id)
 							}
@@ -22,7 +22,7 @@ export class Product extends Component {
 									<div
 										//this is for making the image bigger
 										className="img-container p-6"
-									>	
+									>
 										<img src={img} alt="product" className="card-img-top img-thumbnail img-responsive " />
 									</div>
 									{/*card footer */}
@@ -37,7 +37,7 @@ export class Product extends Component {
 									</div>
 								</div>
 							</Link>
-							
+
 						</div>
 					)}
 				</ProductConsumer>
@@ -76,7 +76,7 @@ const ProductWrapper = styled.div`
 	transform: translate(0,0);
 }
 .product_link, .product_link:hover {
-   text-decoration: none; 
+   text-decoration: none;
    background: rgba(247, 247, 247);
    color: black;
 

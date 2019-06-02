@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import Product from "./Product";
-import Product_pop from "./Product_pop";
 import Product_slide from "./Product_slide";
 import Title from "./Title";
-//load the data from file
 import {ProductConsumer} from "../context";
-//import '../assets/scss/redeem.scss';
-import AuthUserContext from '../session/authUserContext';
-import {firebase,db } from '../firebase/firebase';
 import styled from 'styled-components';
 
 

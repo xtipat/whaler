@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, View } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import {ProductConsumer} from "../context";
 import styled from 'styled-components';
 

@@ -62,7 +62,6 @@ class Profile extends React.Component {
     }
 
     else {
-      console.log(this.state.user.history)
       return(
         <div className='prof-outer-wrap'>
           <Row className='justify-content-center'>
@@ -72,7 +71,7 @@ class Profile extends React.Component {
                 <div className='first-section-wrap'>
                   <Row className='justify-content-center'>
                     <div className='prof-icon-container'>
-                      <img src={process.env.PUBLIC_URL + '/img/whaler_logo.png'} className='prof-img'/>
+                      <img src={process.env.PUBLIC_URL + '/img/whaler_logo.png'} alt='prof-pic' className='prof-img'/>
                     </div>
                   </Row>
                   <Row className='justify-content-center'>

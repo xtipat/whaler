@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import {ProductConsumer} from '../context';
 import {Link} from 'react-router-dom'
-import { Modal, Nav, Tab, Button, ProgressBar } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class ModalRedeem extends Component {
@@ -11,7 +11,6 @@ export default class ModalRedeem extends Component {
 			<ProductConsumer>
 				{(value) => {
 					const { modalOpenCongrat,closeModalCongrat} = value;
-					const {img, title, price} = value.modalProduct
 
 					if(!modalOpenCongrat){
 						//already open
@@ -19,7 +18,7 @@ export default class ModalRedeem extends Component {
 					}
 					else{
 						return(
-					
+
 						<ModalContainer>
 							<div className='row'>
 								<div id="modal" className="col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize p-5">
@@ -63,7 +62,7 @@ justify-content: center;
 	max-width: 90vw;
 }
 .redeem_link:hover{
-	text-decoration: none; 
+	text-decoration: none;
    background: none;
 }
 .icon-check{

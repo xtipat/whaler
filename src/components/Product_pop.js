@@ -7,7 +7,7 @@ import {ProductConsumer} from '../context';
 
 export class Product_pop extends Component {
 	render() {
-		const {id, title, img, price, inCart, popular} = this.props.product;
+		const {id, title, img, price} = this.props.product;
 
 			return (
 				<ProductWrapper className="col-12 mx-auto">
@@ -22,12 +22,12 @@ export class Product_pop extends Component {
 									<div className='reward-wrap'>
 										<div
 											className="img-container p-6"
-													
+
 										>
 											<img src={img} alt="product" className="card-img-top"/>
-												
+
 										</div>
-											
+
 
 										{/*card footer */}
 										<div className="card-footer d-flex justify-content-between">
@@ -83,7 +83,7 @@ const ProductWrapper = styled.div`
 	transform: translate(0,0);
 }
 .product_link, .product_link:hover {
-   text-decoration: none; 
+   text-decoration: none;
    background: rgba(247, 247, 247);
    color: black;
 

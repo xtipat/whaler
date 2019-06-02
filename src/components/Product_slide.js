@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import {ProductConsumer} from '../context';
 //sliding part
-import ReactDOM from "react-dom";
-import { Row, Col , Button, Carousel as RBCarousel} from 'react-bootstrap';
+import { Row, Col , Carousel as RBCarousel} from 'react-bootstrap';
 
 
 
@@ -44,8 +43,6 @@ export class Product_slide  extends React.PureComponent {
 	  };
 
 	render() {
-		    let { leftIcon, rightIcon } = this.state;
-			console.log(this.props.products[0])
 			const products = this.props.products
 
 			return (
