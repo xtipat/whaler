@@ -172,6 +172,11 @@ class MapPage extends Component {
         {this.markCurPos()}
         {this.markLocatePin()}
         </GoogleMapReact>
+        {window.location.pathname !== '/locate'? <div /> :
+          <div className='extend-label-wrap'>
+            <div className='extend-label-text'>Drag to move the pin</div>
+          </div>
+        }
         <div className='home-icon-container'  onClick={this.onClickHomeButton}>
           <FontAwesomeIcon  icon="location-arrow" className="home-icon" activeClassName='icon-active'/>
         </div>

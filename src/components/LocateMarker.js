@@ -10,7 +10,7 @@ export default class LocateMarker extends Component {
         <div className='locate-marker-container'
           onClick={this.props.handleLocationPinButton}
           >
-          <span className='locate-text'>Click Mark</span>
+          <span className='locate-text'>Click here to add bin</span>
           <FontAwesomeIcon icon="crosshairs"/>
         </div>
     );

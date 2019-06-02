@@ -26,15 +26,16 @@
 .back-button{
     position: absolute;
     border-color: aqua;
-    background-color: black;
+    background-color: $dark;
     color: black;
     z-index: 3;
     bottom: 0px;
     width: 100%;
     height: 60px;
-    font-family: $defaultfont;
+    font-family: $titleboldfont;
     font-size: 35px;
     color: white;
     left: 0;
-    padding: 0px
+    padding: 0px;
+    padding-top: 5px;
 }
