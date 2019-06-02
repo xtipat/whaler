@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { db, storage, firebaseConfig } from '../firebase/firebase.js';
+import { NavLink } from 'react-router-dom';
 import { Modal, Nav, Tab, Button, ProgressBar } from 'react-bootstrap';
 import MapPage from '../MapPage.js';
 import Loader from './Loader.js';
@@ -13,6 +14,7 @@ const styles = {
     background: 'white',
     width: '100%',
     padding: '20px',
+    textAlign: 'center'
   },
   colors: {
     primary: '#FEC93F'
@@ -56,13 +58,13 @@ export class DetRjct extends React.Component {
                 <Tab.Pane eventKey="details" style={ styles.modalContentWrap }>
                 Details of this bin were rejected.<br/>You earned 20 points!
                 <div>
-                <Button ref={this.locAcptBtn} variant="yellow" onClick={() => {
-                }}>
-                Redeem
-                </Button>
+                <NavLink to='/redeem'>
+                  <Button variant="yellow">Redeem</Button>
+                </NavLink>
                 <div className="divider"></div>
-                <Button ref={this.locAcptBtn} variant="yellow" onClick={() => {
-
+                <Button variant="black" onClick={() => {
+                  this.props.onHide();
+                  this.props.result();
                 }}>
                 View Result
                 </Button>
@@ -113,12 +115,13 @@ export class DetRjct extends React.Component {
                   <Tab.Pane eventKey="details" style={ styles.modalContentWrap }>
                   Details of this bin were accepted.<br/>You earned 20 points!
                   <div>
-                  <Button variant="yellow" onClick={() => {
-                  }}>
-                  Redeem
-                  </Button>
+                  <NavLink to='/redeem'>
+                    <Button variant="yellow">Redeem</Button>
+                  </NavLink>
                   <div className="divider"></div>
-                  <Button variant="yellow" onClick={() => {
+                  <Button variant="black" onClick={() => {
+                    this.props.onHide();
+                    this.props.result();
                   }}>
                   View Result
                   </Button>
@@ -169,14 +172,13 @@ export class LocRjct extends React.Component {
                     <Tab.Pane eventKey="details" style={ styles.modalContentWrap }>
                     Location of this bin were rejected.<br/>You earned 20 points!
                     <div>
-                    <Button variant="yellow" onClick={() => {
-
-                    }}>
-                    Redeem
-                    </Button>
+                    <NavLink to='/redeem'>
+                      <Button variant="yellow">Redeem</Button>
+                    </NavLink>
                     <div className="divider"></div>
-                    <Button variant="yellow" onClick={() => {
-
+                    <Button variant="black" onClick={()=>{
+                      this.props.onHide();
+                      this.props.next();
                     }}>
                     Next
                     </Button>
@@ -227,12 +229,13 @@ export class LocAcpt extends React.Component {
                       <Tab.Pane eventKey="details" style={ styles.modalContentWrap }>
                       Location of this bin were accepted.<br/>You earned 20 points!
                       <div>
-                      <Button variant="yellow" onClick={() => {
-                      }}>
-                      Redeem
-                      </Button>
+                      <NavLink to='/redeem'>
+                        <Button variant="yellow">Redeem</Button>
+                      </NavLink>
                       <div className="divider"></div>
-                      <Button variant="yellow" onClick={() => {
+                      <Button variant="black" onClick={() => {
+                        this.props.onHide();
+                        this.props.next();
                       }}>
                       Next
                       </Button>

@@ -39,7 +39,8 @@ export default class BinDetails extends React.Component {
       detRjct: false,
       detAcpt: false,
       locRjct: false,
-      locAcpt: false
+      locAcpt: false,
+      tab: 'location'
     };
     this.detAcptBtn = React.createRef();
     this.detRjctBtn = React.createRef();
@@ -166,16 +167,16 @@ export default class BinDetails extends React.Component {
 
   voteDet(){
     this.addBinVote();
-    this.detRjctBtn.current.setAttribute("disabled", true); 
+    this.detRjctBtn.current.setAttribute("disabled", true);
     this.detAcptBtn.current.setAttribute("disabled", true);
     db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'detVoted': true}).then(() => this.setState({voteClicked: true, hideDetBtn: true}));
   }
 
   voteLoc(){
     this.addBinVote();
-    this.locRjctBtn.current.setAttribute("disabled", true); 
+    this.locRjctBtn.current.setAttribute("disabled", true);
     this.locAcptBtn.current.setAttribute("disabled", true);
-    //this.setState({voteClicked: true}); 
+    //this.setState({voteClicked: true});
     db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'locaVoted': true}).then(() => this.setState({voteClicked: true, hideLocBtn: true}));
   }
 
@@ -324,12 +325,12 @@ export default class BinDetails extends React.Component {
   }
 
   disableDetVoteButtons(){
-    this.detRjctBtn.current.setAttribute("disabled", true); 
+    this.detRjctBtn.current.setAttribute("disabled", true);
     this.detAcptBtn.current.setAttribute("disabled", true);
   }
 
   disableLocVoteButtons(){
-    this.locRjctBtn.current.setAttribute("disabled", true); 
+    this.locRjctBtn.current.setAttribute("disabled", true);
     this.locAcptBtn.current.setAttribute("disabled", true);
   }
 
@@ -338,24 +339,30 @@ export default class BinDetails extends React.Component {
     let detAcptClose = () => {this.setState({ detRjct: false, voteClicked: false });}
     let locRjctClose = () => {this.setState({ locRjct: false, voteClicked: false });}
     let locAcptClose = () => {this.setState({ locAcpt: false, voteClicked: false });}
+    let next = () => {this.setState({tab: 'details'});}
+    let result = () => {this.setState({tab: 'results'});}
     if(this.state.voteClicked){
       return(
         <div>
           <DetRjct
             show={this.state.detRjct}
             onHide={detRjctClose}
+            result={result}
           ></DetRjct>
           <DetAcpt
             show={this.state.detAcpt}
             onHide={detAcptClose}
+            result={result}
           ></DetAcpt>
           <LocRjct
             show={this.state.locRjct}
             onHide={locRjctClose}
+            next={next}
           ></LocRjct>
           <LocAcpt
             show={this.state.locAcpt}
             onHide={locAcptClose}
+            next={next}
           ></LocAcpt>
         </div>
       );
@@ -367,7 +374,7 @@ export default class BinDetails extends React.Component {
             {...this.props}
             centered
           >
-            <Tab.Container defaultActiveKey="location">
+            <Tab.Container defaultActiveKey={this.state.tab}>
               <Modal.Header style={{ background: styles.colors.primary, border: 'none' }}>
                 <div style={{ textAlign: 'right', width: '100%'}}>
                   <div ref={this.close} className='custom-close-wrap' onClick={ this.onClose.bind(this) }>
