@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import BinMarker from './components/BinMarker.js';
+import LocateMarker from './components/LocateMarker.js';
+import CurPosMarker from './components/CurPosMarker.js';
 import Loader from './components/Loader.js'
 import { db } from './firebase/firebase.js';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import CurPosMarker from './components/CurPosMarker.js';
 import SearchBox from './components/SearchBox.js'
 import HomeButton from './components/HomeButton.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,6 +23,7 @@ class MapPage extends Component {
     },
     handleCenterForAddBin: () => {},
     zoom: 15,
+    isInLocatePage: false,
     exampleMapStyles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"color":"#000000"},{"lightness":13}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#144b53"},{"lightness":14},{"weight":1.4}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#08304b"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#0c4152"},{"lightness":5}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#0b434f"},{"lightness":25}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#0b3d51"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"}]},{"featureType":"transit","elementType":"all","stylers":[{"color":"#146474"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#021019"}]}]
   };
 
@@ -95,32 +97,19 @@ class MapPage extends Component {
     let markers = [];
     //console.log(this.state.markers)
     for(let i = 0;i<this.state.markers.length;i++){
-      if((this.state.markers[i].locationAccept>=threshold)&&(this.state.markers[i].detailAccept>=threshold)){
         markers.push(
           <BinMarker
             lat={this.state.markers[i].location.lat}
             lng={this.state.markers[i].location.lng}
             key={this.state.markers[i].key}
             fbkey={this.state.markers[i].key}
-            clickable = {false}
+            isAccepted = {(this.state.markers[i].locationAccept>=threshold)&&
+              (this.state.markers[i].detailAccept>=threshold)}
             uid={this.props.uid}
             icon="trash"
+            isClickable={!this.props.isInLocatePage}
           />
         );
-      }
-      else{
-        markers.push(
-          <BinMarker
-            lat={this.state.markers[i].location.lat}
-            lng={this.state.markers[i].location.lng}
-            key={this.state.markers[i].key}
-            fbkey={this.state.markers[i].key}
-            uid={this.props.uid}
-            clickable = {true}
-            icon="trash"
-          />
-        );
-      }
     }
     return markers
   }
@@ -131,6 +120,17 @@ class MapPage extends Component {
         lng={this.state.userLng}
       />
     );
+  }
+  markLocatePin(){
+    if(this.props.isInLocatePage){
+      return(
+        <LocateMarker
+          lat = {this.state.nowLat}
+          lng = {this.state.nowLng}
+          handleLocationPinButton = {this.props.handleLocationPinButton}
+        />
+      );
+    }
   }
   moveCenterTo(lat,lng){
     this.setState({lat: this.state.nowLat,lng: this.state.nowLng});
@@ -171,9 +171,10 @@ class MapPage extends Component {
         >
         {this.markAllBins()}
         {this.markCurPos()}
+        {this.markLocatePin()}
         </GoogleMapReact>
         <div className='home-icon-container'  onClick={this.onClickHomeButton}>
-          <FontAwesomeIcon  icon="home" className="home-icon" activeClassName='icon-active'/>
+          <FontAwesomeIcon  icon="location-arrow" className="home-icon" activeClassName='icon-active'/>
         </div>
       </div>
       );
