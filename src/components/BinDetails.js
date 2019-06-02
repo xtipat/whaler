@@ -45,6 +45,8 @@ export default class BinDetails extends React.Component {
     this.detRjctBtn = React.createRef();
     this.locAcptBtn = React.createRef();
     this.locRjctBtn = React.createRef();
+    this.disableDetVoteButtons.bind(this);
+    this.disableLocVoteButtons.bind(this);
   };
 
   fetchBinData(){
@@ -73,8 +75,7 @@ export default class BinDetails extends React.Component {
     });
   }
 
-  checkUser()
-  {
+  checkUser(){
     console.log("TEST");
     db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).once('value').then(snapshot => {
       let value = snapshot.val();
@@ -114,6 +115,7 @@ export default class BinDetails extends React.Component {
     });
 
   }
+
   addBinVote(){
     console.log("TEST");
     var userRef = db.ref(`/users/${this.props.uid}`).once('value').then( snapshot => {
@@ -126,11 +128,55 @@ export default class BinDetails extends React.Component {
       });
     });
   }
+
   componentDidUpdate(prevProps) {
     if(this.props.show !== prevProps.show){
       this.fetchBinData();
       this.checkUser();
     }
+  }
+
+  writeAllBinTypes(){
+    if(this.state.loaded == true){
+      let types = [];
+      for(let i = 0;i<this.state.binTypes.length;i++)
+      {
+        types.push(
+          <div className="tag-container">{this.state.binTypes[i]}</div>
+        );
+      }
+      return types
+    }
+  }
+
+  checkPicture(){
+    if(this.state.picLoaded == false)
+      return (
+        <div style={{ textAlign: 'center', borderRadius: '10px'}}>
+          <img src="http://placekitten.com/260/200"/>
+        </div>
+      )
+    else
+      return (
+        <div style={{ textAlign: 'center', borderRadius: '10px'}}>
+          <img src={this.state.binPicSrc} width='100%' height='100%'/>
+        </div>
+      )
+  }
+
+  voteDet(){
+    this.addBinVote();
+    this.detRjctBtn.current.setAttribute("disabled", true); 
+    this.detAcptBtn.current.setAttribute("disabled", true);
+    db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'detVoted': true}).then(() => this.setState({voteClicked: true, hideDetBtn: true}));
+  }
+
+  voteLoc(){
+    this.addBinVote();
+    this.locRjctBtn.current.setAttribute("disabled", true); 
+    this.locAcptBtn.current.setAttribute("disabled", true);
+    //this.setState({voteClicked: true}); 
+    db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'locaVoted': true}).then(() => this.setState({voteClicked: true, hideLocBtn: true}));
   }
 
   locationContents() {
@@ -192,49 +238,6 @@ export default class BinDetails extends React.Component {
         </div>
       </div>
     );
-  }
-  writeAllBinTypes(){
-    if(this.state.loaded == true){
-      let types = [];
-      for(let i = 0;i<this.state.binTypes.length;i++)
-      {
-        types.push(
-          <div className="tag-container">{this.state.binTypes[i]}</div>
-        );
-      }
-      return types
-    }
-  }
-
-  checkPicture(){
-    if(this.state.picLoaded == false)
-      return (
-        <div style={{ textAlign: 'center', borderRadius: '10px'}}>
-          <img src="http://placekitten.com/260/200"/>
-        </div>
-      )
-    else
-      return (
-        <div style={{ textAlign: 'center', borderRadius: '10px'}}>
-          <img src={this.state.binPicSrc} width='100%' height='100%'/>
-        </div>
-      )
-  }
-
-  voteDet(){
-    this.addBinVote();
-    this.detRjctBtn.current.setAttribute("disabled", true);
-    this.detAcptBtn.current.setAttribute("disabled", true);
-    this.setState({voteClicked: true});
-    db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'detVoted': true});
-  }
-
-  voteLoc(){
-    this.addBinVote();
-    this.locRjctBtn.current.setAttribute("disabled", true);
-    this.locAcptBtn.current.setAttribute("disabled", true);
-    this.setState({voteClicked: true}); 
-    db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'locaVoted': true});
   }
 
   detailsContents(){
@@ -312,17 +315,29 @@ export default class BinDetails extends React.Component {
       </div>
     );
   }
+
   onClose(){
     this.props.onHide();
     this.setState({
       loaded: false
     });
   }
+
+  disableDetVoteButtons(){
+    this.detRjctBtn.current.setAttribute("disabled", true); 
+    this.detAcptBtn.current.setAttribute("disabled", true);
+  }
+
+  disableLocVoteButtons(){
+    this.locRjctBtn.current.setAttribute("disabled", true); 
+    this.locAcptBtn.current.setAttribute("disabled", true);
+  }
+
   render() {
-    let detRjctClose = () => this.setState({ detRjct: false, voteClicked: false});
-    let detAcptClose = () => this.setState({ detRjct: false, voteClicked: false });
-    let locRjctClose = () => this.setState({ locRjct: false, voteClicked: false });
-    let locAcptClose = () => this.setState({ locAcpt: false, voteClicked: false });
+    let detRjctClose = () => {this.setState({ detRjct: false, voteClicked: false});}
+    let detAcptClose = () => {this.setState({ detRjct: false, voteClicked: false });}
+    let locRjctClose = () => {this.setState({ locRjct: false, voteClicked: false });}
+    let locAcptClose = () => {this.setState({ locAcpt: false, voteClicked: false });}
     if(this.state.voteClicked){
       return(
         <div>
@@ -345,7 +360,7 @@ export default class BinDetails extends React.Component {
         </div>
       );
     }
-    if(this.state.loaded && this.props.show && this.state.buttonLoaded){
+    else if(this.state.loaded && this.props.show && this.state.buttonLoaded){
       return (
           <Modal
             size="sm"
