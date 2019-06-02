@@ -63,8 +63,7 @@ export default class AddBinInfo extends Component {
         'point': points+100,
       });
     });
-    var newBin = db.ref(`/users/${this.props.uid}/binReactedWith/${newRef.key}`).push();
-    newBin.set({
+    var newBin = db.ref(`/users/${this.props.uid}/binReactedWith/${newRef.key}`).set({
       'locaVoted': true,
       'detVoted': true
     });

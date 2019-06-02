@@ -1,6 +1,6 @@
 @import './_base.scss';
 
-.bin-marker-clickable{
+.bin-marker-not-accepted{
   position: absolute;
   width: 40px;
   height: 40px;
@@ -17,7 +17,7 @@
   cursor: pointer;
 };
 
-.bin-marker-not-clickable{
+.bin-marker-accepted{
   position: absolute;
   width: 40px;
   height: 40px;
@@ -55,8 +55,6 @@
   position: absolute;
   width: 40px;
   height: 40px;
-  left: 46%;
-  top: 47%;
   z-index: 100;
 
   border-radius: 40px;
@@ -65,7 +63,7 @@
   align-self: auto;
   color: white;
   font-size: 30px;
-  padding: 4;
+  padding: 2px;
   &:hover{
     cursor: pointer;
   }
@@ -81,4 +79,28 @@
   height: 3em;
   z-index: 5;
   font-family: $boldfont;
+}
+
+.center-crosshair{
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: 52.1%;
+  left: 53.2%;
+  z-index: 101;
+
+  border-radius: 40px;
+  background-color: black;
+  border-color: white;
+  border-width: 10px;
+  text-align: center;
+  align-self: auto;
+}
+
+.un-clickable{
+  background: gray !important;
+  border: 5px solid gray !important;
+  &:hover{
+    cursor: -webkit-grab;
+  }
 }

@@ -230,3 +230,7 @@ input[type=password]:focus, textarea:focus {
 .custom-toast {
   font-family: $titlefont;
 }
+
+a:hover{
+  background-color: transparent !important;
+}

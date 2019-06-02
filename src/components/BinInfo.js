@@ -14,7 +14,6 @@ const styles = {
     width: '100%',
     padding: '20px',
   },
-
   colors: {
     primary: '#FEC93F'
   }
