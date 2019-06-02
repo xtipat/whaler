@@ -55,78 +55,83 @@ class Menubar extends React.Component {
   }
 
   render(){
-    return(
-      <div ref={this.setWrapperRef}>
-        <div className='menu-wrap'>
-          <Row className='justify-content-center'>
-            <Col className='icon-wrap'>
-              <NavLink exact to='/' className='icon-default' activeClassName='icon-active'>
-                <FontAwesomeIcon
-                  icon='map-marked-alt'
-                  onClick={ this.handleClose }
-                  />
-              </NavLink>
-            </Col>
-            <Col className='icon-wrap'>
-              <NavLink to='/explore' className='icon-default'activeClassName='icon-active'>
-                <FontAwesomeIcon
-                  icon='search'
-                  onClick={ this.handleClose }
-                  />
-              </NavLink>
-            </Col>
-            <Col xs={2}>
-            </Col>
-            <Col className='icon-wrap'>
-              <NavLink to='/redeem' className='icon-default' activeClassName='icon-active'>
-                <FontAwesomeIcon
-                  icon='gift'
-                  onClick={ this.handleClose }
-                  />
-              </NavLink>
-            </Col>
-            <Col className='icon-wrap'>
-              <NavLink to='/profile' className='icon-default' activeClassName='icon-active'>
-                <FontAwesomeIcon
-                  icon='user-circle'
-                  onClick={ this.handleClose }
-                  />
-              </NavLink>
-            </Col>
-          </Row>
+    if(window.location.pathname === '/locate'){
+      return(<div />)
+    }
+    else {
+      return(
+        <div ref={this.setWrapperRef}>
+          <div className='menu-wrap'>
+            <Row className='justify-content-center'>
+              <Col className='icon-wrap'>
+                <NavLink exact to='/' className='icon-default' activeClassName='icon-active'>
+                  <FontAwesomeIcon
+                    icon='map-marked-alt'
+                    onClick={ this.handleClose }
+                    />
+                </NavLink>
+              </Col>
+              <Col className='icon-wrap'>
+                <NavLink to='/explore' className='icon-default'activeClassName='icon-active'>
+                  <FontAwesomeIcon
+                    icon='search'
+                    onClick={ this.handleClose }
+                    />
+                </NavLink>
+              </Col>
+              <Col xs={2}>
+              </Col>
+              <Col className='icon-wrap'>
+                <NavLink to='/redeem' className='icon-default' activeClassName='icon-active'>
+                  <FontAwesomeIcon
+                    icon='gift'
+                    onClick={ this.handleClose }
+                    />
+                </NavLink>
+              </Col>
+              <Col className='icon-wrap'>
+                <NavLink to='/profile' className='icon-default' activeClassName='icon-active'>
+                  <FontAwesomeIcon
+                    icon='user-circle'
+                    onClick={ this.handleClose }
+                    />
+                </NavLink>
+              </Col>
+            </Row>
+          </div>
+          <div>
+            <Row className='justify-content-center'>
+              <Col xs={4} className='circle-wrap'>
+                <div className='plus-button-wrap' onClick={this.handlePlusClick}>
+                  <FontAwesomeIcon
+                    icon='plus-circle'
+                    className= {this.state.plusButtonClass}
+                    size='5x'/>
+                </div>
+                {
+                  this.state.plusButtonClass === 'plus-icon' ? <div />:
+                    <div>
+                      <Row className='justify-content-center'>
+                        <Col>
+                          <Zoom>
+                            <MenuHere onClick={ this.handleClose } uid = {this.props.auth.uid}/>
+                            <MenuLocate onClick={ this.handleClose } uid = {this.props.auth.uid}/>
+                          </Zoom>
+                        </Col>
+                      </Row>
+                      <Zoom>
+                        <div className='extend-label-wrap'>
+                          <div className='extend-label-text'>Add a new Bin</div>
+                        </div>
+                      </Zoom>
+                    </div>
+                }
+              </Col>
+            </Row>
+          </div>
         </div>
-        <div>
-          <Row className='justify-content-center'>
-            <Col xs={4} className='circle-wrap'>
-              <div className='plus-button-wrap' onClick={this.handlePlusClick}>
-                <FontAwesomeIcon
-                  icon='plus-circle'
-                  className= {this.state.plusButtonClass}
-                  size='5x'/>
-              </div>
-              {
-                this.state.plusButtonClass === 'plus-icon' ? <div />:
-                  <div>
-                    <Row className='justify-content-center'>
-                      <Col>
-                        <Zoom>
-                          <MenuHere onClick={ this.handleClose } uid = {this.props.auth.uid}/>
-                          <MenuLocate onClick={ this.handleClose } uid = {this.props.auth.uid}/>
-                        </Zoom>
-                      </Col>
-                    </Row>
-                    <Zoom>
-                      <div className='extend-label-wrap'>
-                        <div className='extend-label-text'>Add a new Bin</div>
-                      </div>
-                    </Zoom>
-                  </div>
-              }
-            </Col>
-          </Row>
-        </div>
-      </div>
-    )
+      )
+    }
   }
 }
 
