@@ -12,11 +12,10 @@ import {firebase,db } from './firebase/firebase';
 function Redeem() {
   return (
   	<div>           
-  			
+
 	 	   <ProductList/>
 	 </div>
   );
 }
 
 export default Redeem;
-

@@ -6,7 +6,7 @@ import Locate from './Locate.js';
 
 const styles = {
   exMenuM: {
-    transform: 'translate(20%, -80%)'
+    transform: 'translate(100%, -40%)'
   },
 };
 
@@ -28,7 +28,7 @@ export default class MenuLocate extends React.Component{
               icon='compass'
               className='extended-menu-icon'
             />
-          <div className='extended-menu-label'>locate</div>
+          <div className='extended-menu-label'>search<br/>area</div>
         </div>
         </NavLink>
       </div>

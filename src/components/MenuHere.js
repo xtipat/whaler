@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const styles = {
   exMenuL: {
-    transform: 'translate(-130%, 0)'
+    transform: 'translate(-80%, -40%)'
   },
 };
 
@@ -67,7 +67,7 @@ export default class MenuHere extends React.Component{
             icon='map-pin'
             className='extended-menu-icon'
           />
-          <div className='extended-menu-label'>here</div>
+        <div className='extended-menu-label'>at your<br />location</div>
         </div>
         <AddBinInfo
           show={this.state.modalShow}

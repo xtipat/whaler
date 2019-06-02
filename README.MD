@@ -39,16 +39,16 @@
   - [ ] ***!prioritize*** Add Modal after Add Bin (Buttons: OK/Redeem Your Point)
   - [ ] Change autocomplete tag
   - [ ] Make it so that tag is completed automatically when pressing submit *is this possible?*
-- [ ] Redeem-relevant
-  - [ ] ***!prioritize*** Add Modal after confirm redeem & show remaining points (Buttons: OK / Go to Redeem History)
-  - [ ] Make it so that rewards can be clicked through the whole box, not just images
-  - [ ] Change Layout of rewards
-- [ ] Profile-relevant
-  - [ ] ***!prioritize*** Redeem History
-- [ ] Menu-relevant
-  - [ ] ***!prioritize*** Change extended menu bar labels
-  - [ ] Get rid of cancel buttons
-  - [ ] Change color of plus buttons on menu bar extended
+- [x] Redeem-relevant
+  - [x] ***!prioritize*** Add Modal after confirm redeem & show remaining points (Buttons: OK / Go to Redeem History)
+  - [x] Make it so that rewards can be clicked through the whole box, not just images
+  - [x] Change Layout of rewards
+- [x] Profile-relevant
+  - [x] ***!prioritize*** Redeem History
+- [x] Menu-relevant
+  - [x] ***!prioritize*** Change extended menu bar labels
+  - [x] Get rid of cancel buttons
+  - [x] Change color of plus buttons on menu bar extended
 
 ## **Coding Guides**
 * This project is implemented with ReactJS framework with SASS/SCSS stylesheet. All the JavaScript file can be found in `/src/` folder, and assets such as fonts and third-party js/css are put in `/public/`. The base directory from here on will refer to `/src/`

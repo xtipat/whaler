@@ -26,12 +26,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import {
   faTrash, faTimesCircle, faCheckCircle, faMapMarkedAlt, faSearch, faGift,
   faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes, faCircleNotch,
-  faMale, faMapMarkerAlt, faInfoCircle, faPollH, faFish, faHeartBroken, faHome
+  faMale, faMapMarkerAlt, faInfoCircle, faPollH, faFish, faHeartBroken, faHome,
+  faCreditCard
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faTrash, faTimesCircle, faCheckCircle, faMapMarkedAlt, faSearch,
   faGift, faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes, faCircleNotch,
-  faMale, faMapMarkerAlt, faInfoCircle, faPollH, faFish, faHeartBroken, faHome);
+  faMale, faMapMarkerAlt, faInfoCircle, faPollH, faFish, faHeartBroken, faHome,
+  faCreditCard);
 
 class App extends React.Component {
   constructor(props){
@@ -85,7 +87,7 @@ class App extends React.Component {
             }
             }
             </AuthUserContext.Consumer>
-            
+
         </Row>
       </Container>
     );

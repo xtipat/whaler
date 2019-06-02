@@ -21,13 +21,13 @@ export class ProductList extends Component {
 				  	<ProductConsumer>
 
 							{(value)=>{
-						
+
 								//value.getUserPoint_once(firebase.auth().currentUser.uid)
 								return (<Title name="Redeem" title={value.user_point}/>)
 
 							}}
 					</ProductConsumer>
-				
+
 				<div className='redeem-wrap'>
 					<div className='popular-wrap'>
 						<div className='redeem-content-title'>Popular</div>
@@ -64,13 +64,13 @@ const ProductWrapper = styled.div`
   padding: 0 0 60px 0;
   overflow-y: scroll;
   overflow-x: hidden;
-  background-color:#E9E8E9;
+  background-color:'white';
 }
 .redeem-wrap{
-   background-color:#E9E8E9;
+   background-color:'white';
 }
 .more-wrap{
-	background-color:#E9E8E9;
+	background-color:'white';
 }
 .redeem-content-title{
   padding: 10px 0px 0px 0px;
@@ -79,5 +79,3 @@ const ProductWrapper = styled.div`
 `
 
 export default ProductList;
-
-

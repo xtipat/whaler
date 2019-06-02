@@ -8,12 +8,6 @@ import './assets/scss/menubar.scss';
 import MenuHere from './components/MenuHere.js'
 import MenuLocate from './components/MenuLocate.js'
 
-const styles = {
-  exMenuR: {
-    transform: 'translate(160%, 0)'
-  },
-};
-
 const Zoom = styled.div `animation: 0.3s ${keyframes `${zoomIn}`}`;
 class Menubar extends React.Component {
   constructor(props){
@@ -24,6 +18,8 @@ class Menubar extends React.Component {
 
     this.handlePlusClick = this.handlePlusClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.setWrapperRef = this.setWrapperRef.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
   }
 
   handlePlusClick(){
@@ -40,9 +36,27 @@ class Menubar extends React.Component {
     this.setState({ plusButtonClass: 'plus-icon'})
   }
 
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+
+  setWrapperRef(node) {
+    this.wrapperRef = node;
+  }
+
+  handleClickOutside(event) {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      this.handleClose()
+    }
+  }
+
   render(){
     return(
-      <div>
+      <div ref={this.setWrapperRef}>
         <div className='menu-wrap'>
           <Row className='justify-content-center'>
             <Col className='icon-wrap'>
@@ -92,23 +106,21 @@ class Menubar extends React.Component {
               </div>
               {
                 this.state.plusButtonClass === 'plus-icon' ? <div />:
-                  <Row className='justify-content-center'>
-                    <Col>
-                      <Zoom>
-                        <MenuHere onClick={ this.handleClose } uid = {this.props.auth.uid}/>
-                        <MenuLocate onClick={ this.handleClose } uid = {this.props.auth.uid}/>
-                        <div className='extended-menu-wrap'
-                          onClick={ this.handleClose }
-                          style={ styles.exMenuR }>
-                          <FontAwesomeIcon
-                            icon='times'
-                            className='cancel-icon'
-                            />
-                          <div className='cancel-label'>cancel</div>
-                        </div>
-                      </Zoom>
-                    </Col>
-                  </Row>
+                  <div>
+                    <Row className='justify-content-center'>
+                      <Col>
+                        <Zoom>
+                          <MenuHere onClick={ this.handleClose } uid = {this.props.auth.uid}/>
+                          <MenuLocate onClick={ this.handleClose } uid = {this.props.auth.uid}/>
+                        </Zoom>
+                      </Col>
+                    </Row>
+                    <Zoom>
+                      <div className='extend-label-wrap'>
+                        <div className='extend-label-text'>Add a new Bin</div>
+                      </div>
+                    </Zoom>
+                  </div>
               }
             </Col>
           </Row>

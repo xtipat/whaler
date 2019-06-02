@@ -102,6 +102,10 @@ body {
   margin-top: 15px;
   color: white;
 
+  &:hover {
+    outline: none !important;
+    outline-offset: none !important;
+  }
   &:focus {
     outline: none !important;
     outline-offset: none !important;
@@ -229,4 +233,11 @@ input[type=password]:focus, textarea:focus {
 
 .custom-toast {
   font-family: $titlefont;
+}
+
+a {
+  &:hover{
+    text-decoration: none;
+    background: none;
+  }
 }
