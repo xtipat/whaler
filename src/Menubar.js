@@ -120,8 +120,8 @@ class Menubar extends React.Component {
                         </Col>
                       </Row>
                       <Zoom>
-                        <div className='extend-label-wrap'>
-                          <div className='extend-label-text'>Add a new Bin</div>
+                        <div className='extend-label-wrap-menu'>
+                          <div className='extend-label-text-menu'>Add a new Bin</div>
                         </div>
                       </Zoom>
                     </div>
