@@ -50,7 +50,7 @@ class Menubar extends React.Component {
 
   handleClickOutside(event) {
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-      this.handleClose()
+      //this.handleClose()
     }
   }
 
