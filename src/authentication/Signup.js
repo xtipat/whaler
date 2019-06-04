@@ -19,21 +19,15 @@ const INITIAL_STATE = {
 class Signup extends React.Component {
   constructor(props){
     super(props);
-    this.state = { ... INITIAL_STATE };
-
+    this.state = { ...INITIAL_STATE };
   }
 
   handleSubmit = event => {
-    var date = {
-     day: new Date().getDate(),
-     month: (new Date().getMonth())+1,
-     year: new Date().getFullYear()
-    }
     auth.doCreateUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(authUser => {
         var date = {
             day: new Date().getDate(),
-           month: new Date().getMonth(),
+           month: new Date().getMonth()+1,
            year: new Date().getFullYear()
         }
         db.doCreateUser(authUser.user.uid, this.state.username, this.state.email, date)
@@ -62,7 +56,7 @@ class Signup extends React.Component {
       .required('Required')
       ,
       email: yup.string().email('Invalid Email').required('Required'),
-      password: yup.string() .min(6, 'should be at least 6 characters').required('Required'),
+      password: yup.string().min(6, 'should be at least 6 characters').required('Required'),
       passwordConfirm: yup.string()
       .oneOf([this.state.password], 'Passwords must match')
       .required('Required'),

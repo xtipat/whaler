@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types';
-import GoogleMapReact from 'google-map-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../assets/scss/searchBox.scss';
 

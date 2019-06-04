@@ -19,7 +19,6 @@ class BinMarker extends Component {
       this.checkUser();
   }
   checkUser(){
-      console.log("TEST");
       db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).once('value').then(snapshot => {
         let value = snapshot.val();
         if (value === null){
@@ -42,7 +41,7 @@ class BinMarker extends Component {
     let modalClose = () => this.setState({ modalShow: false });
     let onClickHandler = () => this.setState({ modalShow: true });
     let cssClickableClass = "";
-    if(this.props.isClickable == false) { onClickHandler = () => {}; cssClickableClass = " un-clickable";}
+    if(!this.props.isClickable) { onClickHandler = () => {}; cssClickableClass = " un-clickable";}
     if(this.props.isAccepted){
       return(
       <div>

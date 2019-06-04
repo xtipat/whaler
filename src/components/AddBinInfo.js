@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
 import {db, storage} from '../firebase/firebase.js';
-import MapPage from '../MapPage.js';
-import { Modal, Nav, Button } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import TagsInput from 'react-tagsinput'
 import 'react-tagsinput/react-tagsinput.css'
@@ -41,7 +39,6 @@ export default class AddBinInfo extends Component {
     this.typesHandle = this.typesHandle.bind(this);
     this.submitHandle = this.submitHandle.bind(this);
     this.autocompleteRenderInput = this.autocompleteRenderInput.bind(this);
-    console.log(this.props.uid);
   };
   writeToDatabase() {
     var newRef = db.ref('/bins/').push();
@@ -54,7 +51,7 @@ export default class AddBinInfo extends Component {
       'locationReject': 0,
       'types': this.state.tags
     });
-    var userRef = db.ref(`/users/${this.props.uid}`).once('value').then( snapshot => {
+    db.ref(`/users/${this.props.uid}`).once('value').then( snapshot => {
     	var value = snapshot.val();
     	var binsAdded = value.addedBinCount;
     	var points = value.point;
@@ -63,7 +60,7 @@ export default class AddBinInfo extends Component {
         'point': points+100,
       });
     });
-    var newBin = db.ref(`/users/${this.props.uid}/binReactedWith/${newRef.key}`).set({
+    db.ref(`/users/${this.props.uid}/binReactedWith/${newRef.key}`).set({
       'locaVoted': true,
       'detVoted': true
     });
@@ -92,7 +89,6 @@ export default class AddBinInfo extends Component {
   autocompleteRenderInput ({addTag, ...props}) {
     const handleOnChange = (e, {newValue, method}) => {
       if (method === 'enter') {
-      	console.log("AS")
         e.preventDefault()
       } else {
         props.onChange(e)
@@ -125,7 +121,7 @@ export default class AddBinInfo extends Component {
 
   checkImage(){
     if(this.state.picExists){
-      return(<img src={this.state.imgsrc} className="picframe" ref={this.myRef}/>);
+      return(<img src={this.state.imgsrc} alt='img-frame' className="picframe" ref={this.myRef}/>);
     }
     else{
       return(
@@ -163,7 +159,6 @@ export default class AddBinInfo extends Component {
   	}
   }
   handleCloseButton = () => {
-  	console.log("CLOSE");
   	this.setState({
   		picExists: false
   	});

@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import Product from "./Product";
-import Product_pop from "./Product_pop";
 import Product_slide from "./Product_slide";
 import Title from "./Title";
-//load the data from file
 import {ProductConsumer} from "../context";
-//import '../assets/scss/redeem.scss';
-import AuthUserContext from '../session/authUserContext';
-import {firebase,db } from '../firebase/firebase';
 import styled from 'styled-components';
 
 
@@ -21,13 +16,13 @@ export class ProductList extends Component {
 				  	<ProductConsumer>
 
 							{(value)=>{
-						
+
 								//value.getUserPoint_once(firebase.auth().currentUser.uid)
 								return (<Title name="Redeem" title={value.user_point}/>)
 
 							}}
 					</ProductConsumer>
-				
+
 				<div className='redeem-wrap'>
 					<div className='popular-wrap'>
 						<div className='redeem-content-title'>Popular</div>
@@ -64,13 +59,13 @@ const ProductWrapper = styled.div`
   padding: 0 0 60px 0;
   overflow-y: scroll;
   overflow-x: hidden;
-  background-color:#E9E8E9;
+  background-color:'white';
 }
 .redeem-wrap{
-   background-color:#E9E8E9;
+   background-color:'white';
 }
 .more-wrap{
-	background-color:#E9E8E9;
+	background-color:'white';
 }
 .redeem-content-title{
   padding: 10px 0px 0px 0px;
@@ -79,5 +74,3 @@ const ProductWrapper = styled.div`
 `
 
 export default ProductList;
-
-

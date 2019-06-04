@@ -27,13 +27,13 @@ import {
   faTrash, faTimesCircle, faCheckCircle, faMapMarkedAlt, faSearch, faGift,
   faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes, faCircleNotch,
   faMale, faMapMarkerAlt, faInfoCircle, faPollH, faFish, faHeartBroken, faLocationArrow,
-  faCrosshairs
+  faCrosshairs, faCreditCard
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faTrash, faTimesCircle, faCheckCircle, faMapMarkedAlt, faSearch,
   faGift, faUserCircle, faPlusCircle, faMapPin, faCompass, faTimes, faCircleNotch,
   faMale, faMapMarkerAlt, faInfoCircle, faPollH, faFish, faHeartBroken, faLocationArrow,
-  faCrosshairs);
+  faCrosshairs, faCreditCard);
 
 class App extends React.Component {
   constructor(props){
@@ -87,7 +87,7 @@ class App extends React.Component {
             }
             }
             </AuthUserContext.Consumer>
-            
+
         </Row>
       </Container>
     );

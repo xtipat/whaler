@@ -1,12 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import {ProductConsumer} from '../context';
 //sliding part
-import ReactDOM from "react-dom";
-import "react-bootstrap-carousel/dist/react-bootstrap-carousel.css";
-import RBCarousel from "react-bootstrap-carousel";
-import { Row, Col , Button} from 'react-bootstrap';
+import { Row, Col , Carousel as RBCarousel} from 'react-bootstrap';
 
 
 
@@ -46,14 +43,12 @@ export class Product_slide  extends React.PureComponent {
 	  };
 
 	render() {
-		    let { leftIcon, rightIcon } = this.state;
-			console.log(this.props.products[0])
 			const products = this.props.products
 
 			return (
 
 			<SlideContainer>
-			
+
 				<div className="container-fluid">
 			        <Row>
 			          <Col className="col-12 mx-auto" style={{ marginTop: 20 }}>
@@ -72,8 +67,8 @@ export class Product_slide  extends React.PureComponent {
 										}
 				              >
 				         		<Link className="product_link" to="/details">
-					              	<img src={products[0].img}  
-						              	 className="img-fluid " 
+					              	<img src={products[0].img}
+						              	 className="img-fluid "
 						              	 alt="product"
 
 						            />
@@ -86,7 +81,7 @@ export class Product_slide  extends React.PureComponent {
 											}
 					          >
 					          	<Link className="product_link" to="/details">
-					              	<img src={products[1].img}  
+					              	<img src={products[1].img}
 						              	 className="img-fluid " alt="product"
 						            />
 						        </Link>
@@ -96,10 +91,10 @@ export class Product_slide  extends React.PureComponent {
 			            )}
 	      				</ProductConsumer>
 			          </Col>
-		          
+
 		        </Row>
 		      </div>
-		    
+
 	      </SlideContainer>
 			);
 	}
@@ -118,5 +113,5 @@ const SlideContainer = styled.div`
   background-color:#E9E8E9;
 }
 
-   
+
 `

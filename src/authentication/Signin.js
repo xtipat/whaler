@@ -9,7 +9,6 @@ import '../assets/scss/auth.scss';
 const INITIAL_STATE = {
   email: '',
   password: '',
-  error: null,
 };
 
 class Signin extends React.Component {
@@ -44,7 +43,7 @@ class Signin extends React.Component {
   };
 
   render(){
-    const { email, password, error } = this.state;
+    const { email, password } = this.state;
     return(
       <div className='unauth-wrapper'>
         <Row className='justify-content-center' style={{ height: '100%' }}>

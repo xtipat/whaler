@@ -3,7 +3,7 @@ import {ProductConsumer} from "../context"
 import {Link} from "react-router-dom"
 import Title from "./Title";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Modal, Nav, Tab, Button, ProgressBar } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 
 export class Details extends Component {
@@ -20,7 +20,6 @@ export class Details extends Component {
 						info,
 						price,
 						title,
-						inCart
 					} = value.detailProduct;
 					const user_point = value.user_point
 					return(
@@ -83,12 +82,11 @@ export default Details;
 const DetailContainer = styled.div`
 
 .redeem_link:hover {
-   text-decoration: none; 
+   text-decoration: none;
    background: none;
 }
 .detail-wrap{
 	background-color:#E9E8E9;
 }
-   
-`
 
+`

@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { db, storage, firebaseConfig } from '../firebase/firebase.js';
 import { Modal, Nav, Tab, Button, ProgressBar } from 'react-bootstrap';
-import MapPage from '../MapPage.js';
 import BinMarker from './BinMarker.js';
 import GoogleMapReact from 'google-map-react';
 import Loader from './Loader.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ToastContainer, toast } from 'react-toastify';
 import firebase from "firebase/app";
 import { FirebaseDatabaseProvider, FirebaseDatabaseTransaction } from "@react-firebase/database";
 import '../assets/scss/modal.scss';
-import { threshold } from '../data.js'
 import {DetAcpt, DetRjct, LocRjct, LocAcpt} from './ModalVoted.js'
 
 
@@ -77,7 +74,6 @@ export default class BinDetails extends React.Component {
   }
 
   checkUser(){
-    console.log("TEST");
     db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).once('value').then(snapshot => {
       let value = snapshot.val();
       if (value === null){
@@ -118,8 +114,7 @@ export default class BinDetails extends React.Component {
   }
 
   addBinVote(){
-    console.log("TEST");
-    var userRef = db.ref(`/users/${this.props.uid}`).once('value').then( snapshot => {
+    db.ref(`/users/${this.props.uid}`).once('value').then( snapshot => {
       var value = snapshot.val();
       var binsVoted = value.votedBinCount;
       var points = value.point;
@@ -138,7 +133,7 @@ export default class BinDetails extends React.Component {
   }
 
   writeAllBinTypes(){
-    if(this.state.loaded == true){
+    if(this.state.loaded){
       let types = [];
       for(let i = 0;i<this.state.binTypes.length;i++)
       {
@@ -151,16 +146,16 @@ export default class BinDetails extends React.Component {
   }
 
   checkPicture(){
-    if(this.state.picLoaded == false)
+    if(!this.state.picLoaded)
       return (
         <div style={{ textAlign: 'center', borderRadius: '10px'}}>
-          <img src="http://placekitten.com/260/200"/>
+          <img src="http://placekitten.com/260/200" alt='mock-bin-pic'/>
         </div>
       )
     else
       return (
         <div style={{ textAlign: 'center', borderRadius: '10px'}}>
-          <img src={this.state.binPicSrc} width='100%' height='100%'/>
+          <img src={this.state.binPicSrc} alt='bin-pic' width='100%' height='100%'/>
         </div>
       )
   }

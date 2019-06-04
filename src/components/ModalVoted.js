@@ -1,12 +1,7 @@
-import React, { Component } from 'react';
-import { db, storage, firebaseConfig } from '../firebase/firebase.js';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Modal, Nav, Tab, Button, ProgressBar } from 'react-bootstrap';
-import MapPage from '../MapPage.js';
-import Loader from './Loader.js';
+import { Modal, Tab, Button} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import firebase from "firebase/app";
-import { FirebaseDatabaseProvider, FirebaseDatabaseTransaction } from "@react-firebase/database";
 import '../assets/scss/modal.scss';
 
 const styles = {

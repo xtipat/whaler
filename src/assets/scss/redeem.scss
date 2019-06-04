@@ -1,6 +1,5 @@
 @import './_base.scss';
 
-
 .redeem-outer-wrap {
   height: 100vh;
   overflow-y: scroll;
@@ -71,4 +70,8 @@
   font-size: 20px;
   margin: 5px 15px 10px 15px;
   color: $dark;
+}
+
+.card {
+  transition: all 0.2s ease-out;
 }

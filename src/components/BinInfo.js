@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
-import { db, storage, firebaseConfig } from '../firebase/firebase.js';
-import { Modal, Nav, Tab, Button, ProgressBar } from 'react-bootstrap';
-import MapPage from '../MapPage.js';
-import Loader from './Loader.js';
+import React from 'react';
+import { db, storage } from '../firebase/firebase.js';
+import { Modal,  Tab } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import firebase from "firebase/app";
-import { FirebaseDatabaseProvider, FirebaseDatabaseTransaction } from "@react-firebase/database";
+import Loader from './Loader.js';
 import '../assets/scss/modal.scss';
 
 const styles = {
@@ -51,13 +48,12 @@ export default class BinInfo extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    //console.log(this.state.show,prevProps.show);
     if(this.props.show !== prevProps.show)
       this.fetchBinData();
   }
 
   writeAllBinTypes(){
-    if(this.state.loaded == true){
+    if(this.state.loaded){
       let types = [];
       for(let i = 0;i<this.state.binTypes.length;i++)
       {
@@ -70,16 +66,16 @@ export default class BinInfo extends React.Component {
   }
 
   checkPicture(){
-    if(this.state.picLoaded == false)
+    if(!this.state.picLoaded)
       return (
         <div style={{ textAlign: 'center', borderRadius: '10px'}}>
-          <img src="http://placekitten.com/260/200"/>
+          <img src="http://placekitten.com/260/200" alt='mock-bin-pic '/>
         </div>
       )
     else
       return (
         <div style={{ textAlign: 'center', borderRadius: '10px'}}>
-          <img src={this.state.binPicSrc} width='100%' height='100%'/>
+          <img src={this.state.binPicSrc} alt='bin-pic' width='100%' height='100%'/>
         </div>
       )
   }

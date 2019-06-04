@@ -16,3 +16,6 @@ export const onceGetAllBin = () =>
 
 export const onceGetOneUser = (uid) =>
   db.ref(`users/${uid}`).once('value');
+
+export const getHistory = () =>
+  db.ref('redeem_hist').once('value')

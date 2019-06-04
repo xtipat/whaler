@@ -16,6 +16,7 @@ class Profile extends React.Component {
         email: 'example@mail.com',
         addedBinCount: 99,
         votedBinCount: 99,
+        history: []
       },
       loading: true,
     }
@@ -38,17 +39,24 @@ class Profile extends React.Component {
       point: snapshot.val().point,
       addedBinCount: snapshot.val().addedBinCount,
       votedBinCount: snapshot.val().votedBinCount,
-
+      history: []
     }
 
-    this.setState({user: user, loading: false });
+    db.getHistory().then(snapshot => {
+      snapshot.forEach((logEntry) => {
+        if(logEntry.val().uid === user.uid){
+          user.history.push(logEntry.val())
+        }
+      })
+      this.setState({user: user, loading: false })
+    }).catch((err)=> {
+      console.log("fetch history error",err);});
   }).catch((err)=> {
     console.log("fetch user error",err);});
 }
 
   render(){
     const { username, point, email, addedBinCount, votedBinCount } = this.state.user;
-    console.log(this.state.user)
     if(this.state.loading){
       return(<Loader />)
     }
@@ -63,7 +71,7 @@ class Profile extends React.Component {
                 <div className='first-section-wrap'>
                   <Row className='justify-content-center'>
                     <div className='prof-icon-container'>
-                      <img src={process.env.PUBLIC_URL + '/img/whaler_logo.png'} className='prof-img'/>
+                      <img src={process.env.PUBLIC_URL + '/img/whaler_logo.png'} alt='prof-pic' className='prof-img'/>
                     </div>
                   </Row>
                   <Row className='justify-content-center'>
@@ -120,6 +128,31 @@ class Profile extends React.Component {
                       <div className='content-text'>Bins Approved/Rejected</div>
                     </Col>
                   </Row>
+                </div>
+
+                <div className='section-wrap'>
+                  <Row>
+                    <Col>
+                      <div className='section-header'>Redeem History</div>
+                    </Col>
+                  </Row>
+                  {
+                    this.state.user.history.map((entry) =>
+                        <Row>
+                          <Col xs={2}>
+                            <div style={{ textAlign: 'middle'}}>
+                              <FontAwesomeIcon icon='credit-card'  className='stats-icon'/>
+                            </div>
+                          </Col>
+                          <Col>
+                            <div className='content-title' style={{ textTransform: 'capitalize' }}>{ entry.rewardName }</div>
+                            <div className='content-text'>Activate Code: 1234-5678-9689</div>
+                            <div className='content-unimportant'>-{entry.point_used}P</div>
+                          </Col>
+                        </Row>
+                    )
+                  }
+
                 </div>
 
                 <div style={{ margin: '0 30px'}}>

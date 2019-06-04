@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, View } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import {ProductConsumer} from "../context";
 import styled from 'styled-components';
 
@@ -16,12 +16,12 @@ export default function Title({name, title}){
 								<div className='redeem-title'>Redeem</div>
 							</Col>
 							<Col className='balance-wrap '>
-								<div className='balance-label'>balance: 
+								<div className='balance-label'>Balance:&nbsp;
 									<div className='balance'> {title} points</div>
 								</div>
-								
+
 							</Col>
-					
+
 						</Row>
 					</div>
 				)

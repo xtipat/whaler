@@ -73,11 +73,12 @@
   position: absolute;
   color: black;
   font-size: 12px;
-  top: -19px;
+  top: -25px;
   left: -20px;
   width: 80px;
   height: 3em;
   z-index: 5;
+  line-height: 12px;
   font-family: $boldfont;
 }
 
@@ -103,4 +104,18 @@
   &:hover{
     cursor: -webkit-grab;
   }
+}
+
+.extend-label-wrap {
+  background: transparent;
+  border-radius: 15px;
+  width: auto;
+  transform: translateY(-2500%);
+}
+
+.extend-label-text {
+  font-size: 18px;
+  color: $dark;
+  opacity: 1;
+  text-transform: lowercase;
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import {ProductConsumer} from '../context';
 import {Link} from 'react-router-dom'
-import { Modal, Nav, Tab, Button, ProgressBar } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
@@ -72,7 +72,7 @@ justify-content: center;
 	max-width: 90vw;
 }
 .redeem_link:hover{
-	text-decoration: none; 
+	text-decoration: none;
    background: none;
 }
 `
