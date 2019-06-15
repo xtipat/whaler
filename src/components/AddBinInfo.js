@@ -40,6 +40,7 @@ export default class AddBinInfo extends Component {
     this.submitHandle = this.submitHandle.bind(this);
     this.autocompleteRenderInput = this.autocompleteRenderInput.bind(this);
   };
+
   writeToDatabase() {
     var newRef = db.ref('/bins/').push();
     newRef.set(
@@ -102,10 +103,13 @@ export default class AddBinInfo extends Component {
       return state.type.toLowerCase().slice(0, inputLength) === inputValue
     })
 
+    suggestions.push({ type: inputValue})
+
     return (
       <Autosuggest
         ref={props.ref}
-        suggestions={suggestions}
+        suggestions={ suggestions }
+        highlightFirstSuggestion={ true }
         shouldRenderSuggestions={(value) => value && value.trim().length > 0}
         getSuggestionValue={(suggestion) => suggestion.type}
         renderSuggestion={(suggestion) => <span>{suggestion.type}</span>}
