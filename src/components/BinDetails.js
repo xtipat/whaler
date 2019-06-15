@@ -196,6 +196,9 @@ export default class BinDetails extends React.Component {
             />
           </GoogleMapReact>
         </div>
+        <div className='modal-content-text'>
+          Is there any bin at this location?
+        </div>
         <div disabled={this.state.hideLocBtn} style={{textAlign: "center"}}>
           <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
             <FirebaseDatabaseTransaction path={`bins/${this.props.fbkey}/locationAccept`}>
@@ -245,6 +248,9 @@ export default class BinDetails extends React.Component {
             <div className='tag-wrap'>
               {this.writeAllBinTypes()}
             </div>
+        </div>
+        <div className='modal-content-text'>
+          Are the image of the bin / bin types info correct?
         </div>
         <div style={{textAlign: "center"}}>
         <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
