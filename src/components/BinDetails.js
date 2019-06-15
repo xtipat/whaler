@@ -59,7 +59,7 @@ export default class BinDetails extends React.Component {
         binDetAcpt: bin.detailAccept,
         binDetRjct: bin.detailReject,
         loaded: true
-      }, ()=>this.calculatePercent());
+      }, () => this.calculatePercent());
     }
     );
     var strRef = storage.ref();
@@ -101,7 +101,7 @@ export default class BinDetails extends React.Component {
       this.setState({ binLocRjct: 0})
     if(this.state.binDetAcpt === undefined)
       this.setState({ binDetAcpt: 0})
-    if(this.state.binDetRjctAcpt === undefined)
+    if(this.state.binDetRjct === undefined)
       this.setState({ binDetRjct: 0})
 
     this.setState({
@@ -165,6 +165,7 @@ export default class BinDetails extends React.Component {
     this.detRjctBtn.current.setAttribute("disabled", true);
     this.detAcptBtn.current.setAttribute("disabled", true);
     db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'detVoted': true}).then(() => this.setState({voteClicked: true, hideDetBtn: true}));
+    this.fetchBinData();
   }
 
   voteLoc(){
@@ -173,6 +174,7 @@ export default class BinDetails extends React.Component {
     this.locAcptBtn.current.setAttribute("disabled", true);
     //this.setState({voteClicked: true});
     db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'locaVoted': true}).then(() => this.setState({voteClicked: true, hideLocBtn: true}));
+    this.fetchBinData();
   }
 
   locationContents() {
