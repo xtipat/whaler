@@ -50,7 +50,7 @@ class Menubar extends React.Component {
 
   handleClickOutside(event) {
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-      //this.handleClose()
+      this.handleClose()
     }
   }
 
@@ -114,7 +114,10 @@ class Menubar extends React.Component {
                       <Row className='justify-content-center'>
                         <Col>
                           <Zoom>
-                            <MenuHere onClick={ this.handleClose } uid = {this.props.auth.uid}/>
+                            <MenuHere
+                              handleClickOutside = { this.handleClickOutside }
+                              onClick={ this.handleClose }
+                              uid = {this.props.auth.uid}/>
                             <MenuLocate onClick={ this.handleClose } uid = {this.props.auth.uid}/>
                           </Zoom>
                         </Col>

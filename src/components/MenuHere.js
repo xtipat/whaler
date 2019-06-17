@@ -18,6 +18,7 @@ export default class MenuHere extends React.Component{
     this.state = {modalShow: false, locLoaded: false,error: false};
     this.checkModalShow = this.checkModalShow.bind(this)
   }
+
   getGeoLocation(){
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -40,11 +41,13 @@ export default class MenuHere extends React.Component{
   componentDidMount() {
     this.getGeoLocation();
   }
+
   checkModalShow(){
     if(this.state.locLoaded)
     {
       if(!this.state.error){
         this.setState({ modalShow: true });
+        document.removeEventListener('mousedown', this.props.handleClickOutside);
       }
       else{
         toast.error("Can't detect GPS");
@@ -55,13 +58,16 @@ export default class MenuHere extends React.Component{
     }
   }
   render(){
-    let modalClose = () => this.setState({ modalShow: false });
+    let modalClose = () => {
+      this.setState({ modalShow: false });
+      document.addEventListener('mousedown', this.props.handleClickOutside);
+    }
     return(
       <div>
         <div
         className='extended-menu-wrap'
         style={ styles.exMenuL }
-        onClick={this.checkModalShow}
+        onClick={ this.checkModalShow }
         >
           <FontAwesomeIcon
             icon='map-pin'
