@@ -1,12 +1,4 @@
 # **Whaler** - CS374 Project
-## **Update**
-* 19/05/20 Add Formik & Yup
-* 19/05/10 Add Live Demo Link
-* 19/05/09
-  * Remove Circular Action Button (Not compatible with react web)
-  * Add react-animations
-* 19/05/05 Add Circular Action Button Dependencies
-* 19/04/30 Initial Construction & add README.MD
 
 ## **Index**
 1. [Description](#description)
@@ -14,42 +6,18 @@
 3. [Coding Guides](#coding-guides)
 4. [Dev Instructions](#dev-instructions)
 5. [Appendix](#Appendix)
-6. [React Command Guide](#React-Command-Guide)
 
 ## **Description**
-![](https://img.shields.io/badge/status-work%20in%20progress-green.svg)
+Whaler is a crowdsourcing platform for collecting data about bins around the world. Our website allows members to submit records about bins that they know--location, types of bins, together with a photo of the bin as a supporting evidence--and let other members help verify the data with a voting system. We also reward contributors with points which could be redeemed for real-world prizes in form of gift cards. The implementation is done using React.js in JavaScript ES6 and SCSS, supplied by firebase backend. Whaler is primarily designed to be used with smartphones, but it could also work on latest version of PC browsers (Safari, Chrome) smoothly.
 
 **Codebase** : ![](https://img.shields.io/badge/npm-6.4.1-yellow.svg)
 ![](https://img.shields.io/badge/react-16.8.6-red.svg)
 ![](https://img.shields.io/badge/firebase-5.10.1-blue.svg)<br>
-**Live Demo** : https://whaler.netlify.com
+**Live Demo** : https://whaler.netlify.com ([mirror](https://whalerz.netlify.com))
 
 ## **Progress**
-### To-do List ***!important***
-- [ ] Map-relevant
-  - [ ] ***!prioritize*** locate mode interface.
-    - [ ] Use a page-wide 'Go back' bar to replace menu bar
-    - [ ] Get rid of other bin icons in locate mode
-  - [ ] Change Current Location Icon
-  - [ ] Change Home Icon to Crosshair or Navigation Arrow Icon
-  - [ ] Change Search Bar size
-- [ ] Modal-relevant
-  - [ ] ***!prioritize*** Add Label on vote
-  - [ ] ***!prioritize*** Add Modal after voting (Buttons: OK/Next -> OK/View Results)
-  - [ ] ***!prioritize*** Add Modal after Add Bin (Buttons: OK/Redeem Your Point)
-  - [ ] Change autocomplete tag
-  - [ ] Make it so that tag is completed automatically when pressing submit *is this possible?*
-- [x] Redeem-relevant
-  - [x] ***!prioritize*** Add Modal after confirm redeem & show remaining points (Buttons: OK / Go to Redeem History)
-  - [x] Make it so that rewards can be clicked through the whole box, not just images
-  - [x] Change Layout of rewards
-- [x] Profile-relevant
-  - [x] ***!prioritize*** Redeem History
-- [x] Menu-relevant
-  - [x] ***!prioritize*** Change extended menu bar labels
-  - [x] Get rid of cancel buttons
-  - [x] Change color of plus buttons on menu bar extended
-
+![](https://img.shields.io/badge/status-completed-green.svg)
+<br>as of 2019/06/18, this repository (including its mirror) will no longer be updated
 ## **Coding Guides**
 * This project is implemented with ReactJS framework with SASS/SCSS stylesheet. All the JavaScript file can be found in `/src/` folder, and assets such as fonts and third-party js/css are put in `/public/`. The base directory from here on will refer to `/src/`
 
@@ -87,8 +55,6 @@ Here, we are using **ReactJS** and **CSS/SCSS** stylesheet.
 
 6. Please create your own branch and use git PULL REQUEST instead of pushing to master. You can decide to merge it yourself if you have already test the code or are confident, but please keep buggy/unfinished to pull request until they are reviewed.
 
-7. **In the last, all the files in this repository will be packed using webpack to get `bundle.js` and `bundle.css`**, but we will wait until front-end and API are finished before packing.
-
 ## **Appendix**
 
 ### **Index**
@@ -118,59 +84,3 @@ you can also find the list in `package.json` file
 - **Default, Context Font**: [Open Sans](https://fonts.google.com/specimen/Open+Sans)
 
 ---
-
-## React Command Guide
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-### Available Scripts
-This is from the official README file. In the project directory, you can run:
-
-```bash
-npm start
-```
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-```bash
-npm test
-```
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-```bash
-npm run build
-```
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-```bash
-npm run eject
-```
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-Firebase introduction [Firebase Realtime Database](https://firebase.google.com/products/realtime-database/?authuser=0)
