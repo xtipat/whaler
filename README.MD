@@ -17,7 +17,9 @@ Whaler is a crowdsourcing platform for collecting data about bins around the wor
 
 ## **Progress**
 ![](https://img.shields.io/badge/status-completed-green.svg)
-<br>as of 2019/06/18, this repository (including its mirror) will no longer be updated
+
+<br>as of 2019/06/18, this repository (including its mirror) will no longer be updated.
+
 ## **Coding Guides**
 * This project is implemented with ReactJS framework with SASS/SCSS stylesheet. All the JavaScript file can be found in `/src/` folder, and assets such as fonts and third-party js/css are put in `/public/`. The base directory from here on will refer to `/src/`
 
