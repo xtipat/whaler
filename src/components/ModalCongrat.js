@@ -66,7 +66,7 @@ justify-content: center;
    background: none;
 }
 .icon-check{
-	color: green;
+	color: #FEC93F;
 	size: 10px
 }
 `

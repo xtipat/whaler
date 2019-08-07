@@ -235,6 +235,9 @@ input[type=password]:focus, textarea:focus {
   font-family: $titlefont;
 }
 
+button:disabled {
+  cursor: not-allowed !important;
+}
 a {
   &:hover{
     text-decoration: none;

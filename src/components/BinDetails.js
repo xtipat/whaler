@@ -59,7 +59,7 @@ export default class BinDetails extends React.Component {
         binDetAcpt: bin.detailAccept,
         binDetRjct: bin.detailReject,
         loaded: true
-      }, ()=>this.calculatePercent());
+      }, () => this.calculatePercent());
     }
     );
     var strRef = storage.ref();
@@ -101,7 +101,7 @@ export default class BinDetails extends React.Component {
       this.setState({ binLocRjct: 0})
     if(this.state.binDetAcpt === undefined)
       this.setState({ binDetAcpt: 0})
-    if(this.state.binDetRjctAcpt === undefined)
+    if(this.state.binDetRjct === undefined)
       this.setState({ binDetRjct: 0})
 
     this.setState({
@@ -165,6 +165,7 @@ export default class BinDetails extends React.Component {
     this.detRjctBtn.current.setAttribute("disabled", true);
     this.detAcptBtn.current.setAttribute("disabled", true);
     db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'detVoted': true}).then(() => this.setState({voteClicked: true, hideDetBtn: true}));
+    this.fetchBinData();
   }
 
   voteLoc(){
@@ -173,6 +174,7 @@ export default class BinDetails extends React.Component {
     this.locAcptBtn.current.setAttribute("disabled", true);
     //this.setState({voteClicked: true});
     db.ref(`/users/${this.props.uid}/binReactedWith/${this.props.fbkey}`).update({'locaVoted': true}).then(() => this.setState({voteClicked: true, hideLocBtn: true}));
+    this.fetchBinData();
   }
 
   locationContents() {
@@ -195,6 +197,9 @@ export default class BinDetails extends React.Component {
               icon={this.props.icon}
             />
           </GoogleMapReact>
+        </div>
+        <div className='modal-content-text'>
+          Is there any bin at this location?
         </div>
         <div disabled={this.state.hideLocBtn} style={{textAlign: "center"}}>
           <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
@@ -245,6 +250,9 @@ export default class BinDetails extends React.Component {
             <div className='tag-wrap'>
               {this.writeAllBinTypes()}
             </div>
+        </div>
+        <div className='modal-content-text'>
+          Are the image of the bin / bin types info correct?
         </div>
         <div style={{textAlign: "center"}}>
         <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
