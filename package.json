@@ -11,7 +11,7 @@
     "firebase": "^5.11.1",
     "formik": "^1.5.7",
     "google-map-react": "^1.1.4",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-animations": "^1.0.0",
